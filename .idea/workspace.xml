@@ -12,7 +12,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Excel Parser$main.coverage" NAME="main Coverage Results" MODIFIED="1441351378950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Excel Parser$main.coverage" NAME="main Coverage Results" MODIFIED="1441509396405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -29,7 +29,7 @@
       <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="29" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.29735234" vertical-offset="698" max-vertical-offset="1680">
+            <state line="100" column="21" selection-start="3128" selection-end="3128" vertical-scroll-proportion="0.35413644" vertical-offset="1256" max-vertical-offset="3540">
               <folding />
             </state>
           </provider>
@@ -38,7 +38,7 @@
       <file leaf-file-name="this_is_it.csv" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/this_is_it.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1459" column="36" selection-start="327828" selection-end="327828" vertical-scroll-proportion="0.0" vertical-offset="2415" max-vertical-offset="22185">
+            <state line="11651" column="36" selection-start="2617287" selection-end="2617287" vertical-scroll-proportion="0.0" vertical-offset="155295" max-vertical-offset="175065">
               <folding />
             </state>
           </provider>
@@ -65,10 +65,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="30" />
-    <option name="y" value="90" />
-    <option name="width" value="1872" />
-    <option name="height" value="1079" />
+    <option name="x" value="1920" />
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1177" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -341,7 +341,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="30" y="90" width="1872" height="1079" extended-state="0" />
+    <frame x="1920" y="23" width="1920" height="1177" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -349,11 +349,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970297" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -402,7 +402,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/this_is_it.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1459" column="36" selection-start="327828" selection-end="327828" vertical-scroll-proportion="0.0" vertical-offset="2415" max-vertical-offset="22185">
+        <state line="11651" column="36" selection-start="2617287" selection-end="2617287" vertical-scroll-proportion="0.0" vertical-offset="155295" max-vertical-offset="175065">
           <folding />
         </state>
       </provider>
@@ -439,7 +439,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="29" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.29735234" vertical-offset="698" max-vertical-offset="1680">
+        <state line="100" column="21" selection-start="3128" selection-end="3128" vertical-scroll-proportion="0.35413644" vertical-offset="1256" max-vertical-offset="3540">
           <folding />
         </state>
       </provider>

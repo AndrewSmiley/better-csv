@@ -1,0 +1,420 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Here's the updated parts
+Found in Sandy, but no info for: 9321M30P04
+Found in Sandy, but no info for: 9321M30P04
+Found in Sandy, but no info for: 9899556-844
+Found in Sandy, but no info for: 4013084-882P03
+Found in Sandy, but no info for: 17A166-023P01
+Found in Sandy, but no info for: 17A148-540P01
+Found in Sandy, but no info for: 17A166-114P01
+Found in Sandy, but no info for: 17A166-029P01
+Found in Sandy, but no info for: 17A166-366P01
+Found in Sandy, but no info for: 17A190-317P01
+Found in Sandy, but no info for: 17A148-732P03
+Found in Sandy, but no info for: 17A166-969G02
+Found in Sandy, but no info for: 17A166-969G02
+Found in Welded ring: 9977013-126P01. Values Inserted: Alloy: INC 718 Weight: 21.57 Spec: B50TF15 CL-A, ID: 173
+Found in Welded ring: 9977013-126P01. Values Inserted: Alloy: INC 718 Weight: 21.57 Spec: B50TF15 CL-A, ID: 174
+Found in Welded ring: 9977013-733P02. Values Inserted: Alloy: INC 718 Weight: 56.14 Spec: B50TF15 CL-A, ID: 175
+Found in Welded ring: 17A166-036P01. Values Inserted: Alloy: 188 Weight: 11.81 Spec: B50TF74 CL-A, ID: 183
+Found in Welded ring: 17A148-539P01. Values Inserted: Alloy: 188 Weight: 29.94 Spec: B50TF74 CL-A, ID: 184
+Found in Sandy, but no info for: 4013522-333P01
+Found in Sandy, but no info for: 4013522-333P01
+Found in Welded ring: 2070M48P01. Values Inserted: Alloy: INC 718 Weight: 11.16 Spec: B50TF15 CL-F, ID: 476
+Found Firth Rixson 4013522-314P01. Values inserted: Billet Diameter: 8 Alloy: 718R Weight: 358.0 Spec: C50TF37 ID:539
+Found Firth Rixson 1963M16P01. Values inserted: Billet Diameter: 7 Alloy: 17.4PH Weight: 33.9 Spec: AMS 5643 ID:560
+Found Firth Rixson 2301M66P01. Values inserted: Billet Diameter: 6 Alloy: 718 Weight: 70.0 Spec: B50TF15 ID:567
+Found Firth Rixson 4013536-295P01. Values inserted: Billet Diameter: 6 Alloy: 440 Weight: 36.0 Spec: AMS 5630 ID:569
+Found Firth Rixson 2311M71G01. Values inserted: Billet Diameter: 8 Alloy: 17.4PH Weight: 67.0 Spec: AMS 5643 ID:600
+Found Firth Rixson 2311M72G01. Values inserted: Billet Diameter: 8 Alloy: 17.4PH Weight: 78.0 Spec: AMS 5643 ID:602
+Found Firth Rixson 1814M24P01. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 132.0 Spec: B50TF15 ID:614
+Found Firth Rixson 1814M24P02. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 103.1 Spec: B50TF15 ID:615
+Found Firth Rixson 1814M24P01. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 132.0 Spec: B50TF15 ID:616
+Found Firth Rixson 1814M24P02. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 103.1 Spec: B50TF15 ID:617
+Found Firth Rixson 1814M24P01. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 132.0 Spec: B50TF15 ID:618
+Found Firth Rixson 1814M24P02. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 103.1 Spec: B50TF15 ID:619
+Found in Sandy, but no info for: 2321M90G02
+Found in Sandy, but no info for: 2321M91G04
+Found in Sandy, but no info for: 2321M92G04
+Found in Sandy, but no info for: 2321M93G04
+Found in Sandy, but no info for: 2321M94G04
+Found in Sandy, but no info for: L61427P01
+Found in Sandy, but no info for: L61437P01
+Found in Sandy, but no info for: 1782M21P01
+Found in Sandy, but no info for: 5036T93G03
+Found in Sandy, but no info for: 1873M75
+Found in Welded ring: 4013522-239P03. Values Inserted: Alloy: INC 718 Weight: 83.27 Spec: B50TF15 CL-D, ID: 745
+Found in Welded ring: 4013522-239P03. Values Inserted: Alloy: INC 718 Weight: 83.27 Spec: B50TF15 CL-D, ID: 746
+Found Firth Rixson 1317M81G01. Values inserted: Billet Diameter: 12 Alloy: 2618 Weight: 12.9 Spec: AMS 4132 ID:878
+Found Firth Rixson 17A166-141P01. Values inserted: Billet Diameter: 4 Alloy: 718 Weight: 4.8 Spec: B50TF15 ID:889
+Found Firth Rixson 9732M38P03. Values inserted: Billet Diameter: 4 Alloy: 8740 Weight: 7.1 Spec: AMS 6322 ID:909
+Found Firth Rixson 1963M16P01. Values inserted: Billet Diameter: 7 Alloy: 17.4PH Weight: 33.9 Spec: AMS 5643 ID:936
+Found Firth Rixson 1963M16P01. Values inserted: Billet Diameter: 7 Alloy: 17.4PH Weight: 33.9 Spec: AMS 5643 ID:937
+Found Firth Rixson 1963M21G01. Values inserted: Billet Diameter: 4 Alloy: 17.4PH Weight: 32.2 Spec: AMS 5643 ID:947
+Found Firth Rixson 9228M94P03. Values inserted: Billet Diameter: 3 Alloy: M250 Weight: 8.9 Spec: B50TF95 ID:950
+Found Firth Rixson 9899539-426P04. Values inserted: Billet Diameter: 6.5 Alloy: 6061 Weight: 26.0 Spec: AMS 4127 ID:987
+Found Firth Rixson 4064T17P02. Values inserted: Billet Diameter: 6 Alloy: Ti 6-4 Weight: 31.2 Spec: AMS 4928 ID:1006
+Found Firth Rixson 2061M13P01. Values inserted: Billet Diameter: 6 Alloy: 909 Weight: 38.0 Spec: C50TF95 ID:1033
+Found Firth Rixson 9977013-241P01. Values inserted: Billet Diameter: 8 Alloy: 909 Weight: 76.5 Spec: C50TF95 ID:1050
+Found Firth Rixson 9977011-211P01. Values inserted: Billet Diameter: 8 Alloy: 903 Weight: 56.7 Spec: B50TF151 ID:1054
+Found Firth Rixson 9977013-242P01. Values inserted: Billet Diameter: 8 Alloy: 718R Weight: 98.0 Spec: C50TF37 ID:1064
+Found Firth Rixson 1288M41G05. Values inserted: Billet Diameter: 8 Alloy: 718 Weight: 211.7 Spec: B50TF15 ID:1087
+Found in Sandy, but no info for: L61437P01
+Found in Sandy, but no info for: 1283M23
+Found in Sandy, but no info for: 6072T77P01
+Found in Sandy, but no info for: 9295M30G06
+Found in Sandy, but no info for: 9295M30G06
+Found in Sandy, but no info for: 1333M65G02
+Found in Sandy, but no info for: 1333M65G03
+Found in Sandy, but no info for: 1333M65G06
+Found in Sandy, but no info for: 1333M65G07
+Found in Sandy, but no info for: 1333M65G07
+Found in Sandy, but no info for: 5114T51
+Found in Sandy, but no info for: 5114T51
+Found in Sandy, but no info for: 9295M30G05
+Found in Sandy, but no info for: 9295M30G06
+Found in Sandy, but no info for: 1333M65G03
+Found in Sandy, but no info for: 1333M65G02
+Found in Sandy, but no info for: 9644M33P04
+Found in Sandy, but no info for: 1333M65G01
+Found in Sandy, but no info for: 5036T93G03
+Found in Sandy, but no info for: 6040T22P01
+Found in Sandy, but no info for: 5031T94
+Found in Sandy, but no info for: 9295M30G05
+Found in Sandy, but no info for: 9295M30G05
+Found in Sandy, but no info for: 2509M66
+Found in Sandy, but no info for: 17A101-661P01
+Found in Sandy, but no info for: 2082M63G01
+Found in Sandy, but no info for: 2082M63G01
+Found in Sandy, but no info for: 6056T57P01
+Found in Sandy, but no info for: 17A166-783
+Found in Sandy, but no info for: 126
+Found in Sandy, but no info for: 150
+Found in Mountain Top: 160, values injected: Alloy R-41, Weight: 28.6, ID: 1241
+Found in Sandy, but no info for: 9977011-671P02
+Found in Sandy, but no info for: 9661M15P04
+Found in Sandy, but no info for: L47479P02
+Found in Sandy, but no info for: L14423P07
+Found in Sandy, but no info for: 9527M71P02
+Found in Sandy, but no info for: 1668M81P02
+Found in Sandy, but no info for: L57300P01
+Found in Sandy, but no info for: 17A137-915P01
+Found in Sandy, but no info for: 4013196-044P02
+Found in Sandy, but no info for: 1284M83G08
+Found in Sandy, but no info for: 1284M83G07
+Found in Sandy, but no info for: 4017T37P02
+Found in Sandy, but no info for: 17A190-342P01
+Found Firth Rixson 4013522-314P01. Values inserted: Billet Diameter: 8 Alloy: 718R Weight: 358.0 Spec: C50TF37 ID:1424
+Found in Sandy, but no info for: L47479P02

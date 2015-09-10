@@ -30,15 +30,15 @@ leap_tracker_welded_ring_update=get_lists(get_lines(open("leap_tracker_welded_ri
 suzhou_master=get_lists(get_lines(open("suzou_master.csv").read()))
 master_copy_lines = []
 m_found = 0
-for m in mountain_top:
-    found = False
-    for l in master_copy:
-        if m[0] in l[1] or m[0] in l[10]:
-            found = True
-            m_found = m_found+1
-            break
-
-    print ("found %s " % m[0] if found else "not found %s" % m[0])
+# for m in mountain_top:
+#     found = False
+#     for l in master_copy:
+#         if m[0] in l[1] or m[0] in l[10]:
+#             found = True
+#             m_found = m_found+1
+#             break
+#
+#     print ("found %s " % m[0] if found else "not found %s" % m[0])
 
 # counter = 0
 # for line in firth_rixon[0]:
@@ -173,6 +173,7 @@ for line in master_copy:
                             updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format("(PN: %s PT %s" % (line[1],line[10]), m[3], m[5], line[0]))
                             mountain_top_count = mountain_top_count+1
                             found_parts=found_parts +1
+                            m_found = m_found +1
                             found_part=True
                             found=True
                             #only alloy and weight are available from this one
@@ -311,8 +312,29 @@ print "Total parts found: %s/%s" % (found_parts, unfound_parts)
 print "Mountain Top found: %s/%s" % (m_found, len(mountain_top))
 
 
+updated= get_lists(get_lines(open("this_is_it.csv").read()))
+#here's an example of bubble sort, kind of
+changed_row_count = 0
+updates=[]
+for u in updated:
+    # print ("checking updates")
+    for l in master_copy:
+        if u[0] == l[0]:
+            if u[15] != l[15] or u[18] != l[18] or u[16] != l[16] or u[19] != l[19]:
+                updates.append("Changes detected in row %s. Values changed- Billet Diameter: %s=>%s, Alloy: %s=>%s, Weight: %s=>%s, Spec: %s=>%s" % (u[0], l[15], u[15], l[18],u[18], l[16], u[16], l[19], u[19]))
+                changed_row_count = changed_row_count+1
+            #billet diameter
+            # line[15]= f[14]
+            #alloy
+            # line[18] = f[12]
+            #weight
+            # line[16] = f[15]
+            #spec
+            # line[19]=/ f[13]
 
 
 
     # print "".join(line)
 
+for p in updates:
+    print  p

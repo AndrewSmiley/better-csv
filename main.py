@@ -48,6 +48,7 @@ updated_parts=[]
 mountain_top_count = 0
 firth_rixon_count = 0
 welded_ring_count = 0
+unfound_parts = 0
 for line in master_copy:
     # print "working a line"
     # p = Part()
@@ -90,13 +91,14 @@ for line in master_copy:
 
         #so now we can search for the part number
         found = False
-        if (line[16] == '0' or line[16] == '') and (line[15] =='0' or line[15] == '') and (line[18] =='0' or line[18] == ''):
+        if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
             # print ("we found firth rixson with missing data")
             for f in firth_rixon:
                 #        f[6]
                 if line[10] in f[16] and line [10] != '' and len(line[10]) > 2:
                     updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
                     found = True
+                    firth_rixon_count = firth_rixon_count +1
                     #billet diameter
                     line[15]= f[14]
                     #alloy
@@ -118,13 +120,14 @@ for line in master_copy:
             continue
 
     elif "Welded_Ring" == line[12]:
-        if (line[16] == '0' or line[16] == '') and (line[15] =='0' or line[15] == '') and (line[18] =='0' or line[18] == ''):
+        if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
             # print("We found welded_ring with missing data")
             found=False
             for w in welded_ring:
                 if line[10] in w[1] and line [10] != '' and len(line[10]) > 2:
                     updated_parts.append("Found in Welded ring: {0}. Values Inserted: Alloy: {1} Weight: {2} Spec: {3}, ID: {4}".format(line[10], w[8], w[6], w[9], line[0]))
                     found=True
+                    welded_ring_count = welded_ring_count +1
                     #alloy
                     line[18]=w[8]
                     #weight
@@ -142,7 +145,7 @@ for line in master_copy:
     else:
         #this will help us search for parts in the other files, regardless of supplier
         found = False
-        if (line[16] == '0' or line[16] == '') and (line[15] =='0' or line[15] == '') and (line[18] =='0' or line[18] == ''):
+        if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
             if not found:
                 # print
                 found_part = False
@@ -160,7 +163,7 @@ for line in master_copy:
                     #         break
                     if len(line[10]) >= 4:
                         if (line[10] in m[0] and line [10] != '') or (line[1] in m[0] and line [1] != '') :
-                            updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[10], m[3], m[5], line[0]))
+                            updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format("(PN: %s PT %s" % (line[1],line[10]), m[3], m[5], line[0]))
                             mountain_top_count = mountain_top_count+1
                             found_part=True
                             found=True
@@ -268,7 +271,8 @@ for line in master_copy:
 
 
 
-
+            if not found:
+                unfound_parts = unfound_parts +1
         master_copy_lines.append(line)
         continue
 print("Here's the updated parts")
@@ -288,6 +292,7 @@ hs.close()
 print "Mountain Top count: %s" % mountain_top_count
 print "Firth Rixson count: %s" % firth_rixon_count
 print "Welded Ring count: %s" %welded_ring_count
+print "Total parts found: %s/%s" % (str(welded_ring_count+firth_rixon_count+mountain_top_count), unfound_parts)
 
 
 

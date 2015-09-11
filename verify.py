@@ -1,6 +1,5 @@
 __author__ = 'Andrew'
 from main import get_lines,get_lists
-print "FUCK FUCK"
 updated= get_lists(get_lines(open("this_is_it.csv").read()))
 master_copy = get_lists(get_lines(open("master_sheet.csv").read()))
 #here's an example of bubble sort, kind of
@@ -28,3 +27,4 @@ for u in updated:
 
 for p in updates:
     print  p
+print changed_row_count

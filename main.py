@@ -27,7 +27,9 @@ sandy= get_lists(get_lines(open("sandy.csv").read()))
 suzhou= get_lists(get_lines(open("suzhou.csv").read()))
 leap_tracker=get_lists(get_lines(open("leap_tracker.csv").read()))
 leap_tracker_welded_ring_update=get_lists(get_lines(open("leap_tracker_welded_ring_update.csv").read()))
-suzhou_master=get_lists(get_lines(open("suzou_master.csv").read()))
+# suzhou_master=get_lists(get_lines(open("suzou_master.csv").read()))
+suzhou_min= get_lists(get_lines(open("suzhou_min.csv").read()))
+tei= get_lists(get_lines(open("tei.csv").read()))
 master_copy_lines = []
 m_found = 0
 # for m in mountain_top:
@@ -50,8 +52,17 @@ mountain_top_count = 0
 firth_rixon_count = 0
 welded_ring_count = 0
 unfound_parts = 0
+leap_tracker_welded_ring_update_count = 0
+leap_tracker_count =0
+suzhou_count = 0
+suzhou_min_count=0
+tei_count=0
 found_parts =0
+total_parts=0
+print("Here's the updated parts")
+
 for line in master_copy:
+    total_parts = total_parts +1
     # print "working a line"
     # p = Part()
     # p.id = line[0]
@@ -98,7 +109,7 @@ for line in master_copy:
             # print ("we found firth rixson with missing data")
             for f in firth_rixon:
                 #        f[6]
-                if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2):
+                if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
                     updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
                     found = True
                     firth_rixon_count = firth_rixon_count +1
@@ -115,8 +126,8 @@ for line in master_copy:
                 else:
                     continue
 
-           # if found:
-                # print "we found info for part number {0}".format(line[1])
+                    # if found:
+                    # print "we found info for part number {0}".format(line[1])
             master_copy_lines.append(line)
             continue
         else:
@@ -129,7 +140,7 @@ for line in master_copy:
             # print("We found welded_ring with missing data")
             found=False
             for w in welded_ring:
-                if (line[10] in w[1] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[1] and line [1] != '' and len(line[1]) > 2):
+                if (line[10] in w[1] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[1] and line [1] != '' and len(line[1]) > 2) or (line[10] in w[2] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[2] and line [1] != '' and len(line[1]) > 2):
                     updated_parts.append("Found in Welded ring: {0}. Values Inserted: Alloy: {1} Weight: {2} Spec: {3}, ID: {4}".format(line[10], w[8], w[6], w[9], line[0]))
                     found=True
                     welded_ring_count = welded_ring_count +1
@@ -180,16 +191,16 @@ for line in master_copy:
                             line[18]=m[3]
                             line[16]=m[5]
                             break
-                    # else:
-                    #     if line[1] in m[1] and line [10] != '' and len(line[1]) > 2:
-                    #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[1], m[3], m[5], line[0]))
-                    #         found_part=True
-                    #         found=True
-                    #         #only alloy and weight are available from this one
-                    #         line[18]=m[3]
-                    #         line[16]=m[5]
-                    #         break
-                # if found_part
+                            # else:
+                            #     if line[1] in m[1] and line [10] != '' and len(line[1]) > 2:
+                            #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[1], m[3], m[5], line[0]))
+                            #         found_part=True
+                            #         found=True
+                            #         #only alloy and weight are available from this one
+                            #         line[18]=m[3]
+                            #         line[16]=m[5]
+                            #         break
+                            # if found_part
 
             #checking CFW now
             if not found:
@@ -238,6 +249,7 @@ for line in master_copy:
                         found=True
                         found_parts=found_parts +1
                         updated_parts.append("Found in Suzhou, but no info for:  {0}".format(line[10]))
+                        suzhou_count = suzhou_count+1
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -247,11 +259,12 @@ for line in master_copy:
                 found_part=False
                 # print "checking leap tracker for part %s" % line[1]
                 for c in leap_tracker:
-                    if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
+                    if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[3] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[3] and line [1] != '' and len(line[1]) > 4):
                         found_part=True
                         found=True
                         found_parts=found_parts +1
                         updated_parts.append("Found in leap tracker, but no info for:  {0}".format(line[10]))
+                        leap_tracker_count = leap_tracker_count+1
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -260,11 +273,12 @@ for line in master_copy:
                 found_part=False
                 # print "checking leap tracker welded ring update for part %s" % line[1]
                 for c in leap_tracker_welded_ring_update:
-                    if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
+                    if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[2] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[2] and line [1] != '' and len(line[1]) > 4):
                         found_part=True
                         found=True
                         found_parts=found_parts +1
                         updated_parts.append("Found in leap tracker welded ring update, but no info for:  {0}".format(line[10]))
+                        leap_tracker_welded_ring_update_count = leap_tracker_welded_ring_update_count +1
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -273,25 +287,38 @@ for line in master_copy:
             if not found:
                 found_part=False
                 # print "checking leap tracker welded ring update for part %s" % line[1]
-                for c in suzhou_master:
+                for c in suzhou_min:
                     if (line[10] in c[0] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[0] and line [1] != '' and len(line[1]) > 4):
                         found_part=True
                         found=True
                         found_parts=found_parts +1
                         updated_parts.append("Found in GE Suzhou master from minneapolis, but no info for:  {0}".format(line[10]))
+                        suzhou_min_count = suzhou_min_count +1
+                        # line[18]=c[2]
+                        # line[19]=c[3]
+                        # line[16]=c[5]
+                        break
+
+            if not found:
+                found_part=False
+                # print "checking leap tracker welded ring update for part %s" % line[1]
+                for c in tei:
+                    if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
+                        found_part=True
+                        found=True
+                        found_parts=found_parts +1
+                        updated_parts.append("Found in TEI from minneapolis, but no info for:  {0}".format(line[10]))
+                        tei_count = tei_count+1
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
                         break
 
 
-
             if not found:
                 unfound_parts = unfound_parts +1
         master_copy_lines.append(line)
         continue
-print("Here's the updated parts")
-
 for part in updated_parts:
     print(part)
 
@@ -307,34 +334,38 @@ hs.close()
 print "Mountain Top count: %s" % mountain_top_count
 print "Firth Rixson count: %s" % firth_rixon_count
 print "Welded Ring count: %s" %welded_ring_count
-print "Total parts found: %s/%s" % (found_parts, unfound_parts)
+print "Leap tracker count: %s" %leap_tracker_count
+print "Leap Tracker Welded ring count: %s " % leap_tracker_welded_ring_update_count
+print "Mountain Top count: %s/%s" % (m_found, len(mountain_top))
+print "Suzhou count: %s" % suzhou_count
+print "Suzhou Minneapolis count: %s" % suzhou_min_count
+print "TEI count: %s" % tei_count
+print "Total parts found: %s/%s" % (found_parts, total_parts)
 
-print "Mountain Top found: %s/%s" % (m_found, len(mountain_top))
 
-
-updated= get_lists(get_lines(open("this_is_it.csv").read()))
+# updated= get_lists(get_lines(open("this_is_it.csv").read()))
 #here's an example of bubble sort, kind of
-changed_row_count = 0
-updates=[]
-for u in updated:
-    # print ("checking updates")
-    for l in master_copy:
-        if u[0] == l[0]:
-            if u[15] != l[15] or u[18] != l[18] or u[16] != l[16] or u[19] != l[19]:
-                updates.append("Changes detected in row %s. Values changed- Billet Diameter: %s=>%s, Alloy: %s=>%s, Weight: %s=>%s, Spec: %s=>%s" % (u[0], l[15], u[15], l[18],u[18], l[16], u[16], l[19], u[19]))
-                changed_row_count = changed_row_count+1
-            #billet diameter
-            # line[15]= f[14]
-            #alloy
-            # line[18] = f[12]
-            #weight
-            # line[16] = f[15]
-            #spec
-            # line[19]=/ f[13]
-
-
-
-    # print "".join(line)
-
-for p in updates:
-    print  p
+# changed_row_count = 0
+# updates=[]
+# for u in updated:
+#     # print ("checking updates")
+#     for l in master_copy:
+#         if u[0] == l[0]:
+#             if u[15] != l[15] or u[18] != l[18] or u[16] != l[16] or u[19] != l[19]:
+#                 updates.append("Changes detected in row %s. Values changed- Billet Diameter: %s=>%s, Alloy: %s=>%s, Weight: %s=>%s, Spec: %s=>%s" % (u[0], l[15], u[15], l[18],u[18], l[16], u[16], l[19], u[19]))
+#                 changed_row_count = changed_row_count+1
+#             #billet diameter
+#             # line[15]= f[14]
+#             #alloy
+#             # line[18] = f[12]
+#             #weight
+#             # line[16] = f[15]
+#             #spec
+#             # line[19]=/ f[13]
+#
+#
+#
+#     # print "".join(line)
+#
+# for p in updates:
+#     print  p

@@ -1,7 +1,7 @@
 __author__ = 'Andrew'
 from main import get_lines,get_lists
-updated= get_lists(get_lines(open("this_is_it.csv").read()))
-master_copy = get_lists(get_lines(open("master_sheet.csv").read()))
+updated= get_lists(get_lines(open("this_is_it_2.csv").read()))
+master_copy = get_lists(get_lines(open("this_is_it.csv").read()))
 #here's an example of bubble sort, kind of
 changed_row_count = 0
 updates=[]

@@ -265,6 +265,7 @@ for line in master_copy:
                         found_parts=found_parts +1
                         updated_parts.append("Found in leap tracker, but no info for:  {0}".format(line[10]))
                         leap_tracker_count = leap_tracker_count+1
+                        line[19] = c[9]
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -279,6 +280,8 @@ for line in master_copy:
                         found_parts=found_parts +1
                         updated_parts.append("Found in leap tracker welded ring update, but no info for:  {0}".format(line[10]))
                         leap_tracker_welded_ring_update_count = leap_tracker_welded_ring_update_count +1
+                        line[16] = c[17]
+                        line[19] = c[8]
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -306,9 +309,9 @@ for line in master_copy:
                     if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
                         found_part=True
                         found=True
-                        found_parts=found_parts +1
+                        found_parts=found_parts + 1
                         updated_parts.append("Found in TEI from minneapolis, but no info for:  {0}".format(line[10]))
-                        tei_count = tei_count+1
+                        tei_count = tei_count + 1
                         # line[18]=c[2]
                         # line[19]=c[3]
                         # line[16]=c[5]
@@ -319,10 +322,10 @@ for line in master_copy:
                 unfound_parts = unfound_parts +1
         master_copy_lines.append(line)
         continue
-for part in updated_parts:
-    print(part)
+# for part in updated_parts:
+#     print(part)
 
-hs = open("this_is_it.csv","w")
+hs = open("this_is_it_2.csv","w")
 for line in master_copy_lines:
     hs.write(",".join(line)+"\r")
 

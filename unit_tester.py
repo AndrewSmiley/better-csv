@@ -45,6 +45,10 @@ class ParseTestCases(unittest.TestCase):
         self.assertEqual(len(get_lists(["\" $(3,562.86)\",\"$174,565.86\",\"Liming new source\",\"sympathetic, never let it show the way i feel i do \",\"data\",\"fuck\",\"balls\""])[0]), 7)
     def test_14(self):
         self.assertEqual(len(get_lists([",,,,,,,"])[0]), 8)
+    def test_15(self):
+        self.assertEqual(len(get_lists(["\n,\n,\n,\n,\n,\n,\n,\n"])[0]), 8)
+    def test_16(self):
+        self.assertEqual(len(get_lists(["\r,\r,\r,\r,\r,\r,\r,\r"])[0]), 8)
 
 if __name__ == '__main__':
     unittest.main()

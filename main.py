@@ -1,51 +1,7 @@
 __author__ = 'pridemai'
 from parts import Part
+from parse_functions import *
 import csv
-
-
-def get_lines(str):
-    return str.split("\r")
-
-
-def get_lists(lines):
-    arrays = []
-    for string in lines:
-        line = []
-        if "\"" in string:
-            last_position = 0
-            while string[last_position:len(string)].find(",") != -1:
-                comma_pos = string[last_position:len(string)].find(",")
-                if last_position == 0:
-                    print(string[last_position:comma_pos])
-                if last_position < len(string):
-                    if string[last_position + comma_pos + 1] == '\"':
-                        #begin processing for qoute
-                        line.append(string[last_position:comma_pos + last_position:])
-                        open_qoute_pos = last_position + comma_pos + 1
-                        close_qoute_pos = string[open_qoute_pos + 1:len(string)].find('\"')
-                        line.append(string[open_qoute_pos:(close_qoute_pos + 2) + open_qoute_pos])
-                        last_position = open_qoute_pos + close_qoute_pos + 2
-
-                        if string[last_position] != ",":
-                            print ("whoa something is fucky on line %s" % line)
-                        else:
-                            #just so we start at at the character after the comma
-                            last_position = last_position + 1
-                            # print string[open_qoute_pos:close_qoute_pos+open_qoute_pos+2]
-                    else:
-                        # print "found comma at position %s" % str(last_position+comma_pos+1)
-                        line.append(string[last_position:comma_pos + last_position])
-                        # string = string[string.find(",")+1:]
-                        #because we want to start the search after the comma
-                        last_position = last_position + (comma_pos + 1)
-            line.append(string[last_position:len(string)])
-            arrays.append(line)
-        else:
-            arrays.append(string.split(","))
-
-
-
-    return arrays
 
 
 #here's the shit
@@ -56,7 +12,7 @@ firth_rixon = get_lists(get_lines(open("firth_rixon.csv").read()))
 welded_ring = get_lists(get_lines(open("welded_ring.csv").read()))
 mountain_top= get_lists(get_lines(open("mountain_top.csv").read()))
 cfw = get_lists(get_lines(open("cfw.csv").read()))
-sandy= get_lists(get_lines(open("sandy.csv").read()))
+# sandy= get_lists(get_lines(open("sandy.csv").read()))
 suzhou= get_lists(get_lines(open("suzhou.csv").read()))
 leap_tracker=get_lists(get_lines(open("leap_tracker.csv").read()))
 leap_tracker_welded_ring_update=get_lists(get_lines(open("leap_tracker_welded_ring_update.csv").read()))
@@ -92,39 +48,49 @@ suzhou_min_count=0
 tei_count=0
 found_parts =0
 total_parts=0
+lt = []
+for l in leap_tracker:
+    if l[1] + "/"+l[3] not in lt:
+        lt.append(l[1]+"/"+l[3])
+
+print len(lt)
+
 
 leap_tracker_found_parts= []
 for m in master_copy:
+    # print "master copy %s" %m[0]
     found = False
+    # if not found:
+    #     for l in leap_tracker:
+    #         # print "leap tracker welded ring %s" %l[0]
+    #         # if m[1] in l[1]+"/"+l[3] or m[10] in l[1]+"/"+l[3] and (len(l[1]) > 4 and len(l[3]) > 4):
+    #         if search([m[1], m[10]], [l[1],l[3]]):
+    #         # if (m[1] in l[1]) or  (m[10] in l[1]) or (m[1] in l[3]) or  (m[10] in l[3]):
+    #             leap_tracker_found_parts.append("Found leap tracker part: query %s,%s in %s" % (m[1],m[10],l[1]+"/"+l[3]))
+    #             # found = True
+    #             break
     if not found:
         for l in leap_tracker_welded_ring_update:
-            if (m[1] in l[1]) or  (m[11] in l[1]) or (m[1] in l[2]) or  (m[11] in l[2]):
-                leap_tracker_found_parts.append("Found leap tracker welded ring part: %s" % m[1])
+            if search([m[1], m[10]], [l[1],l[2]]):
+                leap_tracker_found_parts.append("Found leap tracker part: query %s,%s in %s" % (m[1],m[10],l[1]+"/"+l[2]))
                 # found = True
                 break
-    if not found:
-        for l in leap_tracker_welded_ring_update:
-            if (m[1] in l[1]) or  (m[11] in l[1]) or (m[1] in l[3]) or  (m[11] in l[3]):
-                leap_tracker_found_parts.append("Found leap tracker part: %s" % m[1])
-                # found = True
-                break
-
-
+#
+#
 for lt in leap_tracker_found_parts:
     print (lt)
-# leap_tracker_parts = []
-# print "Trying to find leap tracker welded ring update"
+print(len(leap_tracker_found_parts))
+#leap_tracker_parts = []
+#print "Trying to find leap tracker welded ring update"
 # for l in leap_tracker_welded_ring_update:
+#
 #     for m in master_copy:
 #         # if (l[1] in m[1]) or  (l[1] in m[10]) or (l[2] in m[1]) or  (l[2] in m[10]):
 #         if (m[1] in l[1]) or  (m[10] in l[1]) or (m[1] in l[2]) or  (m[10] in l[2]):
 #             leap_tracker_parts.append("Found leap tracker welded ring part: %s" % m[1])
-#
-# for l in leap_tracker:
-#     for m in master_copy:
-#         # if (l[1] in m[1]) or  (l[1] in m[10]) or (l[2] in m[1]) or  (l[2] in m[10]):
-#         if (m[1] in l[1]) or  (m[10] in l[1]) or (m[1] in l[2]) or  (m[10] in l[2]):
-#             leap_tracker_parts.append("Found leap tracker part: %s" % m[1])
+
+
+
 #
 # for lp in leap_tracker_parts:
 #     print lp
@@ -330,7 +296,7 @@ for lt in leap_tracker_found_parts:
 #                 found_part=False
 #                 # print "checking leap tracker for part %s" % line[1]
 #                 for c in leap_tracker:
-#                     if (m[1] in c[1]) or  (m[10] in c[1]) or (m[1] in c[2]) or  (m[10] in c[2]):
+#                     if (line[1] in c[1]) or  ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[3]) or ((line[10] in c[3]) and len(line[10])>4):
 #                     # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[3] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[3] and line [1] != '' and len(line[1]) > 4):
 #                         found_part=True
 #                         found=True
@@ -346,7 +312,7 @@ for lt in leap_tracker_found_parts:
 #                 found_part=False
 #                 # print "checking leap tracker welded ring update for part %s" % line[1]
 #                 for c in leap_tracker_welded_ring_update:
-#                     if (m[1] in c[1]) or  (m[10] in c[1]) or (m[1] in c[2]) or  (m[10] in c[2]):
+#                     if (line[1] in c[1]) or ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[2]) or  (line[10] in c[2] and len(line[10])>4):
 #                     # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[2] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[2] and line [1] != '' and len(line[1]) > 4):
 #                         found_part=True
 #                         found=True

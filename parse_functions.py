@@ -1,5 +1,29 @@
 __author__ = 'pridemai'
 
+
+
+
+def search(search_terms, search_values):
+    valid_search_terms=[]
+    valid_search_values=[]
+    for s in search_terms:
+        if len(s) > 4:
+            valid_search_terms.append(s)
+    for s in search_values:
+        if len(s) > 4:
+            valid_search_values.append(s)
+
+    if len(valid_search_terms) > 0 and len(valid_search_values) > 0:
+        #really want to get away from using
+        for search_term in valid_search_terms:
+            for search_value in search_values:
+                if search_term in search_value:
+                    return True
+
+
+    return False
+
+
 def get_lines(str):
     return str.split("\r")
 
@@ -93,9 +117,14 @@ def get_lists(lines):
         else:
             #print ("nothing to do")
             arrays.append(string.split(","))
+            should_get_last = False
+            continue
         if should_get_last:
             line.append(string[last_position:len(string)])
         arrays.append(line)
+
+
+
     return  arrays
 
 # def get_lists(lines):

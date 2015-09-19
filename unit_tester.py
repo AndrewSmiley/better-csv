@@ -2,7 +2,7 @@
 #Embedded file name: /Volumes/Untitled/Excel Parser/unit_tester.py
 __author__ = 'pridemai'
 import unittest
-from parse_functions import get_lists
+from parse_functions import get_lists, search
 
 class ParseTestCases(unittest.TestCase):
 
@@ -49,7 +49,16 @@ class ParseTestCases(unittest.TestCase):
         self.assertEqual(len(get_lists(["\n,\n,\n,\n,\n,\n,\n,\n"])[0]), 8)
     def test_16(self):
         self.assertEqual(len(get_lists(["\r,\r,\r,\r,\r,\r,\r,\r"])[0]), 8)
-
+    def test_17(self):
+        self.assertEqual(search(["2463M43P05","2463M43P05"], ["2463M43P05","2463M43P05"]),True)
+    def test_18(self):
+        self.assertEqual(search(["2463M43P05",""], ["2463M43P05-AS02","2463M43P05JEKQ"]),True)
+    def test_19(self):
+        self.assertEqual(search(["",""], ["2463M43P05-AS02","2463M43P05JEKQ"]),False)
+    def test_20(self):
+        self.assertEqual(search(["2463M43P05",""], ["",""]),False)
+    def test_21(self):
+        self.assertEqual(search([" ","2463M43P05"], [" "," "]),False)
 if __name__ == '__main__':
     unittest.main()
 

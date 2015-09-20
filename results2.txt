@@ -1,0 +1,11 @@
+Firth Rixson count: 496
+Welded Ring count: 51
+Leap tracker count: 74
+Leap Tracker Welded ring count: 0 
+CFW count: 41
+Mountain Top count: 129
+Suzhou count: 9
+Suzhou Minneapolis count: 0
+TEI count: 5
+Total parts not found: 668/1473
+Total parts found: 805/1473

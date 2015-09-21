@@ -21,6 +21,18 @@ leap_tracker_welded_ring_update=better_csv.get_lists(better_csv.get_lines(open("
 # suzhou_master=get_lists(get_lines(open("suzou_master.csv").read()))
 suzhou_min= better_csv.get_lists(better_csv.get_lines(open("suzhou_min.csv").read()))
 tei= better_csv.get_lists(better_csv.get_lines(open("tei.csv").read()))
+#all the new stuff 9/21
+cfw_lta = better_csv.get_lists(better_csv.get_lines(open("cfw_lta.csv").read()))
+firth_rixson2 = better_csv.get_lists(better_csv.get_lines(open("firth_rixson2.csv").read()))
+frisa_lta= better_csv.get_lists(better_csv.get_lines(open("frisa_lta.csv").read()))
+ge_lta= better_csv.get_lists(better_csv.get_lines(open("ge_lta.csv").read()))
+leap_and_passport1= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings1.csv").read()))
+leap_and_passport2= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings2.csv").read()))
+leap_and_passport3= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings3.csv").read()))
+leap_tracker2= better_csv.get_lists(better_csv.get_lines(open("leap_tracker2.csv").read()))
+leap_tracker3= better_csv.get_lists(better_csv.get_lines(open("leap_tracker3.csv").read()))
+mountain_top2= better_csv.get_lists(better_csv.get_lines(open("mountain_top2.csv").read()))
+welded_ring2= better_csv.get_lists(better_csv.get_lines(open("welded_ring2.csv").read()))
 master_copy_lines = []
 m_found = 0
 # for m in mountain_top:

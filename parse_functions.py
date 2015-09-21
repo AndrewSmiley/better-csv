@@ -109,8 +109,8 @@ class BetterCSV:
 
         return False
 
-    def get_lines(self,text_string, delimeter):
-        return text_string.split(delimeter)
+    def get_lines(self,text_string):
+        return text_string.split("\r")
 
     # string = "\" $(3,562.86)\",\"$174,565.86\",,,Liming new source,\"sympathetic, never let it show the way i feel i do \",data,,,\"fuck\",balls"
     def get_lists(self,lines):

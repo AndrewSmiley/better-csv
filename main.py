@@ -167,8 +167,232 @@ for line in master_copy:
         #so now we can search for the part number
     found = False
     # if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
+    if not found:
+        for f in firth_rixon:
+            #        f[6]
+            # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+            if better_csv.search([line[1],line[10]], [f[16],f[17]]) or better_csv.search([f[16],f[17]],[line[1],line[10]]):
+                updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+                found = True
+                firth_rixon_count = firth_rixon_count +1
+                found_parts=found_parts +1
+                #billet diameter
+                line[15]= f[14]
+                #alloy
+                line[18] = f[12]
+                #weight
+                line[16] = f[15]
+                #spec
+                line[19]= f[13]
+                master_copy_lines.append(line)
+                break
+            else:
+                continue
 
-    # print ("we found firth rixson with missing data")
+                    # if found:
+                    # print "we found info for part number {0}".format(line[1])
+
+
+        #if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
+        # if True:
+        # print("We found welded_ring with missing data")
+    if not found:    # found=False
+        for w in welded_ring:
+            # if (line[10] in w[1] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[1] and line [1] != '' and len(line[1]) > 2) or (line[10] in w[2] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[2] and line [1] != '' and len(line[1]) > 2):
+            if better_csv.search([line[1],line[10]], [w[1],w[2]]) or better_csv.search([w[1],w[2]],[line[1],line[10]]):
+                updated_parts.append("Found in Welded ring: {0}. Values Inserted: Alloy: {1} Weight: {2} Spec: {3}, ID: {4}".format(line[10], w[8], w[6], w[9], line[0]))
+                found=True
+                welded_ring_count = welded_ring_count +1
+                found_parts=found_parts +1
+                #alloy
+                line[18]=w[8]
+                #weight
+                line[16]=w[6]
+                #spec
+                line[19]=w[9]
+                master_copy_lines.append(line)
+                break
+            # if found:
+            #     print("We found data for part {0}".format(line[1]))
+
+
+
+
+    if not found:
+
+        #if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
+
+        # print
+        if not found:
+            found_part = False
+            #checking the mountain top CSV
+            # print "checking mountain top for part %s" % line[1]
+            for mt in mountain_top:
+
+                # if line[10] in m[1] and line [10] != '' and len(line[10]) > 2:
+                #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[10], m[3], m[5], line[0]))
+                #         found_part=True
+                #         found=True
+                #         #only alloy and weight are available from this one
+                #         line[18]=m[3]
+                #         line[16]=m[5]
+                #         break
+
+                # if (line[10] in m[0] and line [10] != '') or (line[1] in m[0] and line [1] != '') :
+                if better_csv.search([line[1],line[10]], [mt[0]]) or better_csv.search([mt[0]],[line[1],line[10]]):
+                    updated_parts.append(
+                        "Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(
+                            "(PN: %s PT %s" % (line[1], line[10]), mt[3], mt[5], line[0]))
+                    mountain_top_count = mountain_top_count + 1
+                    found_parts = found_parts + 1
+                    m_found = m_found + 1
+                    found_part = True
+                    found = True
+                    #only alloy and weight are available from this one
+                    line[18] = mt[3]
+                    line[16] = mt[5]
+                    master_copy_lines.append(line)
+                    break
+                    # else:
+                    #     if line[1] in m[1] and line [10] != '' and len(line[1]) > 2:
+                    #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[1], m[3], m[5], line[0]))
+                    #         found_part=True
+                    #         found=True
+                    #         #only alloy and weight are available from this one
+                    #         line[18]=m[3]
+                    #         line[16]=m[5]
+                    #         break
+                    # if found_part
+
+                    #checking CFW now
+
+        if not found:
+            found_part = False
+            # print "checking CFW for part %s" % line[1]
+            for c in cfw:
+                # if line[10] in c[1] and line [10] != '' and len(line[10]) > 2:
+                if better_csv.search([line[1],line[10]], [c[0]]) or better_csv.search([c[0]],[line[1],line[10]]):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append(
+                        "Found in CFW {0}. Values inserted: Alloy {1}, Spec {2}, Weight {3}, ID: {4}".format(line[10],
+                                                                                                             c[2], c[3],
+                                                                                                             c[5],
+                                                                                                             line[0]))
+                    cfw_count = cfw_count + 1
+                    line[18] = c[2]
+                    line[19] = c[3]
+                    line[16] = c[5]
+                    master_copy_lines.append(line)
+                    break
+                    # if not found:
+                    #     found_part=False
+                    #     # print "checking SANDY for part %s" % line[1]
+                    #     for c in sandy:
+                    #         if line[10] in c[1] and line [10] != '' and len(line[10]) > 2:
+                    #             found_part=True
+                    #             found=True
+                    #             updated_parts.append("Found in Sandy, but no info for: {0}".format(line[10]))
+                    #             # line[18]=c[2]
+                    #             # line[19]=c[3]
+                    #             # line[16]=c[5]
+                    #             break
+
+        if not found:
+            found_part = False
+            # print "checking suzhou for part %s" % line[1]
+            for s in suzhou:
+                # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
+                if better_csv.search([line[1],line[10]], [s[0],s[6]]) or better_csv.search([s[0],s[6]],[line[1],line[10]]):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append("Found in Suzhou, but no info for:  {0}".format(line[10]))
+                    suzhou_count = suzhou_count + 1
+                    master_copy_lines.append(line)
+                    # line[18]=c[2]
+                    # line[19]=c[3]
+                    # line[16]=c[5]
+                    break
+
+        if not found:
+            found_part = False
+            # print "checking leap tracker for part %s" % line[1]
+            for l in leap_tracker:
+                if better_csv.search([line[1],line[10]], [l[1],l[3]]) or better_csv.search([l[1],l[3]], [line[1],line[10]]):
+                    # if (line[1] in c[1]) or  ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[3]) or ((line[10] in c[3]) and len(line[10])>4):
+                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[3] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[3] and line [1] != '' and len(line[1]) > 4):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append("Found in leap tracker, but no info for:  {0}".format(line[10]))
+                    leap_tracker_count = leap_tracker_count + 1
+                    line[19] = l[9]
+                    master_copy_lines.append(line)
+                    # line[18]=c[2]
+                    # line[19]=c[3]
+                    # line[16]=c[5]
+                    break
+
+        if not found:
+            found_part = False
+            # print "checking leap tracker welded ring update for part %s" % line[1]
+            for l in leap_tracker_welded_ring_update:
+                if better_csv.search([line[1],line[10]], [l[1],l[2]]) or better_csv.search([l[1],l[2]], [line[1],line[10]]):
+                    # if (line[1] in c[1]) or ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[2]) or  (line[10] in c[2] and len(line[10])>4):
+                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[2] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[2] and line [1] != '' and len(line[1]) > 4):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append(
+                        "Found in leap tracker welded ring update, but no info for:  {0}".format(line[10]))
+                    leap_tracker_welded_ring_update_count = leap_tracker_welded_ring_update_count + 1
+                    line[16] = l[17]
+                    line[19] = l[8]
+                    master_copy_lines.append(line)
+                    # line[18]=c[2]
+                    # line[19]=c[3]
+                    # line[16]=c[5]
+                    break
+
+        if not found:
+            found_part = False
+            # print "checking leap tracker welded ring update for part %s" % line[1]
+            for l in suzhou_min:
+                if better_csv.search([line[1],line[10]], [l[0],l[6]]) or better_csv.search([l[0],l[6]],[line[1],line[10]]):
+                    # if (line[10] in c[0] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[0] and line [1] != '' and len(line[1]) > 4):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append(
+                        "Found in GE Suzhou master from minneapolis, but no info for:  {0}".format(line[10]))
+                    suzhou_min_count = suzhou_min_count + 1
+                    master_copy_lines.append(line)
+                    # line[18]=c[2]
+                    # line[19]=c[3]
+                    # line[16]=c[5]
+                    break
+
+        if not found:
+            found_part = False
+            # print "checking leap tracker welded ring update for part %s" % line[1]
+            for l in tei:
+                if better_csv.search([line[1],line[10]], [l[1],l[8]]) or better_csv.search([l[1],l[8]],[line[1],line[10]] ):
+                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
+                    found_part = True
+                    found = True
+                    found_parts = found_parts + 1
+                    updated_parts.append("Found in TEI from minneapolis, but no info for:  {0}".format(line[10]))
+                    tei_count = tei_count + 1
+                    master_copy_lines.append(line)
+                    # line[18]=c[2]
+                    # line[19]=c[3]
+                    # line[16]=c[5]
+                    break
+
+
+            # print ("we found firth rixson with missing data")
     if not found:
         for c in cfw_lta:
             #        f[6]
@@ -399,230 +623,6 @@ for line in master_copy:
             else:
                 continue
     if not found:
-        for f in firth_rixon:
-            #        f[6]
-            # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
-            if better_csv.search([line[1],line[10]], [f[16],f[17]]) or better_csv.search([f[16],f[17]],[line[1],line[10]]):
-                updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
-                found = True
-                firth_rixon_count = firth_rixon_count +1
-                found_parts=found_parts +1
-                #billet diameter
-                line[15]= f[14]
-                #alloy
-                line[18] = f[12]
-                #weight
-                line[16] = f[15]
-                #spec
-                line[19]= f[13]
-                master_copy_lines.append(line)
-                break
-            else:
-                continue
-
-                    # if found:
-                    # print "we found info for part number {0}".format(line[1])
-
-
-        #if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
-        # if True:
-        # print("We found welded_ring with missing data")
-    if not found:    # found=False
-        for w in welded_ring:
-            # if (line[10] in w[1] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[1] and line [1] != '' and len(line[1]) > 2) or (line[10] in w[2] and line [10] != '' and len(line[10]) > 2) or (line[1] in w[2] and line [1] != '' and len(line[1]) > 2):
-            if better_csv.search([line[1],line[10]], [w[1],w[2]]) or better_csv.search([w[1],w[2]],[line[1],line[10]]):
-                updated_parts.append("Found in Welded ring: {0}. Values Inserted: Alloy: {1} Weight: {2} Spec: {3}, ID: {4}".format(line[10], w[8], w[6], w[9], line[0]))
-                found=True
-                welded_ring_count = welded_ring_count +1
-                found_parts=found_parts +1
-                #alloy
-                line[18]=w[8]
-                #weight
-                line[16]=w[6]
-                #spec
-                line[19]=w[9]
-                master_copy_lines.append(line)
-                break
-            # if found:
-            #     print("We found data for part {0}".format(line[1]))
-
-
-
-
-    if not found:
-
-        #if (line[16] == '0' or line[16] == '' or line[16] == '#N/A') and (line[15] =='0' or line[15] == ''  or line[15] == '#N/A') and (line[18] =='0' or line[18] == ''  or line[18] == '#N/A'):
-
-        # print
-        if not found:
-            found_part = False
-            #checking the mountain top CSV
-            # print "checking mountain top for part %s" % line[1]
-            for mt in mountain_top:
-
-                # if line[10] in m[1] and line [10] != '' and len(line[10]) > 2:
-                #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[10], m[3], m[5], line[0]))
-                #         found_part=True
-                #         found=True
-                #         #only alloy and weight are available from this one
-                #         line[18]=m[3]
-                #         line[16]=m[5]
-                #         break
-
-                # if (line[10] in m[0] and line [10] != '') or (line[1] in m[0] and line [1] != '') :
-                if better_csv.search([line[1],line[10]], [mt[0]]) or better_csv.search([mt[0]],[line[1],line[10]]):
-                    updated_parts.append(
-                        "Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(
-                            "(PN: %s PT %s" % (line[1], line[10]), mt[3], mt[5], line[0]))
-                    mountain_top_count = mountain_top_count + 1
-                    found_parts = found_parts + 1
-                    m_found = m_found + 1
-                    found_part = True
-                    found = True
-                    #only alloy and weight are available from this one
-                    line[18] = mt[3]
-                    line[16] = mt[5]
-                    master_copy_lines.append(line)
-                    break
-                    # else:
-                    #     if line[1] in m[1] and line [10] != '' and len(line[1]) > 2:
-                    #         updated_parts.append("Found in Mountain Top: {0}, values injected: Alloy {1}, Weight: {2}, ID: {3}".format(line[1], m[3], m[5], line[0]))
-                    #         found_part=True
-                    #         found=True
-                    #         #only alloy and weight are available from this one
-                    #         line[18]=m[3]
-                    #         line[16]=m[5]
-                    #         break
-                    # if found_part
-
-                    #checking CFW now
-
-        if not found:
-            found_part = False
-            # print "checking CFW for part %s" % line[1]
-            for c in cfw:
-                # if line[10] in c[1] and line [10] != '' and len(line[10]) > 2:
-                if better_csv.search([line[1],line[10]], [c[0]]) or better_csv.search([c[0]],[line[1],line[10]]):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append(
-                        "Found in CFW {0}. Values inserted: Alloy {1}, Spec {2}, Weight {3}, ID: {4}".format(line[10],
-                                                                                                             c[2], c[3],
-                                                                                                             c[5],
-                                                                                                             line[0]))
-                    cfw_count = cfw_count + 1
-                    line[18] = c[2]
-                    line[19] = c[3]
-                    line[16] = c[5]
-                    master_copy_lines.append(line)
-                    break
-                    # if not found:
-                    #     found_part=False
-                    #     # print "checking SANDY for part %s" % line[1]
-                    #     for c in sandy:
-                    #         if line[10] in c[1] and line [10] != '' and len(line[10]) > 2:
-                    #             found_part=True
-                    #             found=True
-                    #             updated_parts.append("Found in Sandy, but no info for: {0}".format(line[10]))
-                    #             # line[18]=c[2]
-                    #             # line[19]=c[3]
-                    #             # line[16]=c[5]
-                    #             break
-
-        if not found:
-            found_part = False
-            # print "checking suzhou for part %s" % line[1]
-            for s in suzhou:
-                # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
-                if better_csv.search([line[1],line[10]], [s[0],s[6]]) or better_csv.search([s[0],s[6]],[line[1],line[10]]):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append("Found in Suzhou, but no info for:  {0}".format(line[10]))
-                    suzhou_count = suzhou_count + 1
-                    master_copy_lines.append(line)
-                    # line[18]=c[2]
-                    # line[19]=c[3]
-                    # line[16]=c[5]
-                    break
-
-        if not found:
-            found_part = False
-            # print "checking leap tracker for part %s" % line[1]
-            for l in leap_tracker:
-                if better_csv.search([line[1],line[10]], [l[1],l[3]]) or better_csv.search([l[1],l[3]], [line[1],line[10]]):
-                    # if (line[1] in c[1]) or  ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[3]) or ((line[10] in c[3]) and len(line[10])>4):
-                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[3] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[3] and line [1] != '' and len(line[1]) > 4):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append("Found in leap tracker, but no info for:  {0}".format(line[10]))
-                    leap_tracker_count = leap_tracker_count + 1
-                    line[19] = l[9]
-                    master_copy_lines.append(line)
-                    # line[18]=c[2]
-                    # line[19]=c[3]
-                    # line[16]=c[5]
-                    break
-
-        if not found:
-            found_part = False
-            # print "checking leap tracker welded ring update for part %s" % line[1]
-            for l in leap_tracker_welded_ring_update:
-                if better_csv.search([line[1],line[10]], [l[1],l[2]]) or better_csv.search([l[1],l[2]], [line[1],line[10]]):
-                    # if (line[1] in c[1]) or ((line[10] in c[1]) and len(line[10])>4) or (line[1] in c[2]) or  (line[10] in c[2] and len(line[10])>4):
-                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4) or (line[10] in c[2] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[2] and line [1] != '' and len(line[1]) > 4):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append(
-                        "Found in leap tracker welded ring update, but no info for:  {0}".format(line[10]))
-                    leap_tracker_welded_ring_update_count = leap_tracker_welded_ring_update_count + 1
-                    line[16] = l[17]
-                    line[19] = l[8]
-                    master_copy_lines.append(line)
-                    # line[18]=c[2]
-                    # line[19]=c[3]
-                    # line[16]=c[5]
-                    break
-
-        if not found:
-            found_part = False
-            # print "checking leap tracker welded ring update for part %s" % line[1]
-            for l in suzhou_min:
-                if better_csv.search([line[1],line[10]], [l[0],l[6]]) or better_csv.search([l[0],l[6]],[line[1],line[10]]):
-                    # if (line[10] in c[0] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[0] and line [1] != '' and len(line[1]) > 4):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append(
-                        "Found in GE Suzhou master from minneapolis, but no info for:  {0}".format(line[10]))
-                    suzhou_min_count = suzhou_min_count + 1
-                    master_copy_lines.append(line)
-                    # line[18]=c[2]
-                    # line[19]=c[3]
-                    # line[16]=c[5]
-                    break
-
-        if not found:
-            found_part = False
-            # print "checking leap tracker welded ring update for part %s" % line[1]
-            for l in tei:
-                if better_csv.search([line[1],line[10]], [l[1],l[8]]) or better_csv.search([l[1],l[8]],[line[1],line[10]] ):
-                    # if (line[10] in c[1] and line [10] != '' and len(line[10]) > 4) or (line[1] in c[1] and line [1] != '' and len(line[1]) > 4):
-                    found_part = True
-                    found = True
-                    found_parts = found_parts + 1
-                    updated_parts.append("Found in TEI from minneapolis, but no info for:  {0}".format(line[10]))
-                    tei_count = tei_count + 1
-                    master_copy_lines.append(line)
-                    # line[18]=c[2]
-                    # line[19]=c[3]
-                    # line[16]=c[5]
-                    break
-
-    if not found:
         unfound_parts = unfound_parts + 1
         master_copy_lines.append(line)
     # master_copy_lines.append(line)
@@ -637,8 +637,6 @@ for line in master_copy_lines:
 hs.close()
 
     # print ",".join(line)
-
-
 print "Firth Rixson count: %s" % firth_rixon_count
 print "Welded Ring count: %s" %welded_ring_count
 print "Leap tracker count: %s" %leap_tracker_count
@@ -648,8 +646,19 @@ print "Mountain Top count: %s" % m_found
 print "Suzhou count: %s" % suzhou_count
 print "Suzhou Minneapolis count: %s" % suzhou_min_count
 print "TEI count: %s" % tei_count
+print "CFW LTA: %s" % cfw_lta_count
+print "Firth Rixson 2: %s" % firth_rixson2_count
+print "Frisa LTA: %s" % frisa_lta_count
+print "GE LTA: %s" % ge_lta_count
+print "Leap Passport Sheet 1: %s" % leap_and_passport1_count
+print "Leap Passport Sheet 2: %s" % leap_and_passport2_count
+print "Leap Passport Sheet 3: %s" % leap_and_passport3_count
+print "Leap Tracker 2: %s" % leap_tracker2_count
+print "Leap Tracker 3: %s" % leap_tracker3_count
+print "Mountain Top 2: %s" % mountain_top2_count
+print "Welded Ring Count: %s" % welded_ring2_count
 print "Total parts not found: %s/%s" % (unfound_parts, total_parts)
-print "Total parts found: %s/%s" % (found_parts, total_parts)
+# print "Total parts found: %s/%s" % (found_parts, total_parts)
 
 
 # updated= get_lists(get_lines(open("this_is_it.csv").read()))

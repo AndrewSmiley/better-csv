@@ -1,7 +1,7 @@
 __author__ = 'Andrew'
 from parse_functions import BetterCSV
 better_csv = BetterCSV()
-updated= better_csv.get_lists(better_csv.get_lines(open("this_is_it_5.csv").read()))
+updated= better_csv.get_lists(better_csv.get_lines(open("this_is_it_2.csv").read()))
 master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_updated_data.csv").read()))
 #here's an example of bubble sort, kind of
 """

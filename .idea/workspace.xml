@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e396e359-a964-496f-9069-9d74b9314ad3" name="Default" comment="Updated Unit tests; Added search function&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Excel Parser.iml" afterPath="$PROJECT_DIR$/.idea/Excel Parser.iml" />
+    <list default="true" id="e396e359-a964-496f-9069-9d74b9314ad3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuck2.txt" afterPath="$PROJECT_DIR$/fuck2.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parse_functions.py" afterPath="$PROJECT_DIR$/parse_functions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tester.py" afterPath="$PROJECT_DIR$/tester.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tester2.py" afterPath="$PROJECT_DIR$/tester2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/this_is_it_2.csv" afterPath="$PROJECT_DIR$/this_is_it_2.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/this_is_it_6.csv" afterPath="$PROJECT_DIR$/this_is_it_6.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verify.py" afterPath="$PROJECT_DIR$/verify.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Excel Parser.iws" />
@@ -22,10 +25,10 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Excel Parser$mapsapi.coverage" NAME="mapsapi Coverage Results" MODIFIED="1442456604943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Excel Parser$Unittests_in_unit_tester.coverage" NAME="Unittests in unit_tester Coverage Results" MODIFIED="1442802556128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Excel Parser$verify.coverage" NAME="verify Coverage Results" MODIFIED="1442806521710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Excel Parser$main.coverage" NAME="main Coverage Results" MODIFIED="1442803447901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Excel Parser$tester2.coverage" NAME="tester2 Coverage Results" MODIFIED="1442877505462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Excel Parser$tester.coverage" NAME="tester Coverage Results" MODIFIED="1442806386024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Excel Parser$verify.coverage" NAME="verify Coverage Results" MODIFIED="1442881761779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Excel Parser$main.coverage" NAME="main Coverage Results" MODIFIED="1442881373999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Excel Parser$tester2.coverage" NAME="tester2 Coverage Results" MODIFIED="1442884467693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Excel Parser$tester.coverage" NAME="tester Coverage Results" MODIFIED="1442884104720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -38,25 +41,37 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="ge_lta.csv" pinned="false" current="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/ge_lta.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <file leaf-file-name="firth_rixson2.csv" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/firth_rixson2.csv">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="424.44446" vertical-offset="11460" max-vertical-offset="12450">
+                <provider editor-type-id="text-editor">
+                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="3780" max-vertical-offset="12420">
                     <folding />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="leap_and_passport_rings1.csv" pinned="false" current="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/leap_and_passport_rings1.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <file leaf-file-name="frisa_lta.csv" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/frisa_lta.csv">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="122" column="108" selection-start="26747" selection-end="26747" vertical-scroll-proportion="1.6226416" vertical-offset="1916" max-vertical-offset="2880">
+                <provider editor-type-id="text-editor">
+                  <state line="12" column="74" selection-start="2379" selection-end="2379" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="ge_lta.csv" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/ge_lta.csv">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                  <state />
+                </provider>
+                <provider editor-type-id="text-editor">
+                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="11460" max-vertical-offset="12450">
                     <folding />
                   </state>
                 </provider>
@@ -64,11 +79,11 @@
             </file>
             <file leaf-file-name="leap_and_passport_rings2.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/leap_and_passport_rings2.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="130" column="143" selection-start="19700" selection-end="19700" vertical-scroll-proportion="-2.0731707" vertical-offset="1780" max-vertical-offset="2715">
+                <provider editor-type-id="text-editor">
+                  <state line="130" column="143" selection-start="19700" selection-end="19700" vertical-scroll-proportion="0.0" vertical-offset="1725" max-vertical-offset="2715">
                     <folding />
                   </state>
                 </provider>
@@ -76,11 +91,11 @@
             </file>
             <file leaf-file-name="leap_and_passport_rings3.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/leap_and_passport_rings3.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="165">
+                <provider editor-type-id="text-editor">
+                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
                     <folding />
                   </state>
                 </provider>
@@ -88,11 +103,11 @@
             </file>
             <file leaf-file-name="leap_tracker2.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/leap_tracker2.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="574" column="26" selection-start="85747" selection-end="85747" vertical-scroll-proportion="-10.54717" vertical-offset="8051" max-vertical-offset="13800">
+                <provider editor-type-id="text-editor">
+                  <state line="574" column="26" selection-start="85747" selection-end="85747" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13800">
                     <folding />
                   </state>
                 </provider>
@@ -100,11 +115,11 @@
             </file>
             <file leaf-file-name="leap_tracker3.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/leap_tracker3.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="615">
+                <provider editor-type-id="text-editor">
+                  <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
                     <folding />
                   </state>
                 </provider>
@@ -112,23 +127,32 @@
             </file>
             <file leaf-file-name="mountain_top2.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/mountain_top2.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="272" column="73" selection-start="39251" selection-end="39251" vertical-scroll-proportion="-13.814815" vertical-offset="3707" max-vertical-offset="4710">
+                <provider editor-type-id="text-editor">
+                  <state line="272" column="73" selection-start="39251" selection-end="39251" vertical-scroll-proportion="0.0" vertical-offset="3707" max-vertical-offset="4710">
                     <folding />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="welded_ring2.csv" pinned="false" current="false" current-in-tab="true">
+            <file leaf-file-name="welded_ring2.csv" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/welded_ring2.csv">
-                <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+                <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
                   <state />
                 </provider>
+                <provider editor-type-id="text-editor">
+                  <state line="5" column="135" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2100">
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="tester.py" pinned="false" current="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/tester.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="101" column="91" selection-start="14528" selection-end="14528" vertical-scroll-proportion="0.38683948" vertical-offset="1127" max-vertical-offset="2130">
+                  <state line="717" column="33" selection-start="30750" selection-end="30750" vertical-scroll-proportion="0.86725664" vertical-offset="9858" max-vertical-offset="11775">
                     <folding />
                   </state>
                 </provider>
@@ -148,7 +172,7 @@
       <file leaf-file-name="parse_functions.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parse_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="36" selection-start="4026" selection-end="4026" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3780">
+            <state line="120" column="0" selection-start="4317" selection-end="4317" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3885">
               <folding />
             </state>
           </provider>
@@ -157,16 +181,49 @@
       <file leaf-file-name="tester2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tester2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="441" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+            <state line="18" column="23" selection-start="1490" selection-end="1490" vertical-scroll-proportion="0.0" vertical-offset="241" max-vertical-offset="1185">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="this_is_it_6.csv" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/this_is_it_6.csv">
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state line="1447" column="52" selection-start="340382" selection-end="340382" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="22170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="37" selection-start="1861" selection-end="1861" vertical-scroll-proportion="0.6213018" vertical-offset="0" max-vertical-offset="6645">
+            <state line="668" column="8" selection-start="32833" selection-end="32833" vertical-scroll-proportion="0.0" vertical-offset="9479" max-vertical-offset="10380">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="verify.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/verify.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="26" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="this_is_it_2.csv" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/this_is_it_2.csv">
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="797.62964" vertical-offset="21536" max-vertical-offset="22185">
               <folding />
             </state>
           </provider>
@@ -192,14 +249,18 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/parse_functions.py" />
         <option value="$PROJECT_DIR$/cfw_lta.csv" />
         <option value="$PROJECT_DIR$/frisa_lta.csv" />
         <option value="$PROJECT_DIR$/leap_and_passport_rings1.csv" />
         <option value="$PROJECT_DIR$/leap_and_passport_rings2.csv" />
         <option value="$PROJECT_DIR$/leap_tracker2.csv" />
-        <option value="$PROJECT_DIR$/tester2.py" />
+        <option value="$PROJECT_DIR$/welded_ring2.csv" />
+        <option value="$PROJECT_DIR$/parse_functions.py" />
+        <option value="$PROJECT_DIR$/verify.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/tester.py" />
+        <option value="$PROJECT_DIR$/this_is_it_6.csv" />
+        <option value="$PROJECT_DIR$/tester2.py" />
       </list>
     </option>
   </component>
@@ -548,8 +609,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.tester2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.verify" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tester" />
+        <item index="1" class="java.lang.String" itemvalue="Python.tester" />
+        <item index="2" class="java.lang.String" itemvalue="Python.verify" />
         <item index="3" class="java.lang.String" itemvalue="Python.main" />
         <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in unit_tester" />
       </list>
@@ -596,13 +657,18 @@
       <created>1442783241165</created>
       <updated>1442783241166</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="after adding new files&#10;">
+      <created>1442879911876</created>
+      <updated>1442879911876</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="23" width="1920" height="1177" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976654" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -612,13 +678,12 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41509435" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976654" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35288808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35288808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -643,7 +708,8 @@
     <MESSAGE value="Updated Unit tests; Added search function&#10;" />
     <MESSAGE value="Added some files and stuff. Before pulling in new data&#10;" />
     <MESSAGE value="Added function to fetch rows as a dict" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added function to fetch rows as a dict" />
+    <MESSAGE value="after adding new files&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="after adding new files&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -654,7 +720,7 @@
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="48" />
+      <option name="time" value="49" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -673,12 +739,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firth_rixson2.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+    <entry file="file://$PROJECT_DIR$/firth_rixon.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="255.55556" vertical-offset="6900" max-vertical-offset="12420">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12450">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings1.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="122" column="108" selection-start="26747" selection-end="26747" vertical-scroll-proportion="0.0" vertical-offset="1890" max-vertical-offset="2880">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings2.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="130" column="143" selection-start="19700" selection-end="19700" vertical-scroll-proportion="0.0" vertical-offset="1725" max-vertical-offset="2715">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/leap_tracker2.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="574" column="26" selection-start="85747" selection-end="85747" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings3.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/leap_tracker3.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mountain_top2.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="272" column="73" selection-start="39251" selection-end="39251" vertical-scroll-proportion="0.0" vertical-offset="3707" max-vertical-offset="4710">
           <folding />
         </state>
       </provider>
@@ -694,102 +820,86 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ge_lta.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="424.44446" vertical-offset="11460" max-vertical-offset="12450">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings1.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="108" selection-start="26747" selection-end="26747" vertical-scroll-proportion="1.6226416" vertical-offset="1916" max-vertical-offset="2880">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings2.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="143" selection-start="19700" selection-end="19700" vertical-scroll-proportion="-2.0731707" vertical-offset="1780" max-vertical-offset="2715">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leap_and_passport_rings3.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leap_tracker2.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="574" column="26" selection-start="85747" selection-end="85747" vertical-scroll-proportion="-10.54717" vertical-offset="8051" max-vertical-offset="13800">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leap_tracker3.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mountain_top2.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="272" column="73" selection-start="39251" selection-end="39251" vertical-scroll-proportion="-13.814815" vertical-offset="3707" max-vertical-offset="4710">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="11460" max-vertical-offset="12450">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/welded_ring2.csv">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="91" selection-start="14528" selection-end="14528" vertical-scroll-proportion="0.38683948" vertical-offset="1127" max-vertical-offset="2130">
+      <provider editor-type-id="text-editor">
+        <state line="5" column="135" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2100">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tester2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="441" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+    <entry file="file://$PROJECT_DIR$/firth_rixson2.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="3780" max-vertical-offset="12420">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parse_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="36" selection-start="4026" selection-end="4026" vertical-scroll-proportion="0.0" vertical-offset="1395" max-vertical-offset="3780">
+        <state line="120" column="0" selection-start="4317" selection-end="4317" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3885">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/this_is_it_2.csv">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="797.62964" vertical-offset="21536" max-vertical-offset="22185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="26" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="37" selection-start="1861" selection-end="1861" vertical-scroll-proportion="0.6213018" vertical-offset="0" max-vertical-offset="6645">
+        <state line="668" column="8" selection-start="32833" selection-end="32833" vertical-scroll-proportion="0.0" vertical-offset="9479" max-vertical-offset="10380">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="23" selection-start="1490" selection-end="1490" vertical-scroll-proportion="0.0" vertical-offset="241" max-vertical-offset="1185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="717" column="33" selection-start="30750" selection-end="30750" vertical-scroll-proportion="0.86725664" vertical-offset="9858" max-vertical-offset="11775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/this_is_it_6.csv">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="1447" column="52" selection-start="340382" selection-end="340382" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="22170">
           <folding />
         </state>
       </provider>

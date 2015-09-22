@@ -2,7 +2,7 @@ __author__ = 'pridemai'
 from parse_functions import BetterCSV
 better_csv = BetterCSV()
 # master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("master_copy_new_data.csv").read()))
-master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("this_is_it_5.csv").read()))
+master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("this_is_it_6.csv").read()))
 # master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_new.csv").read()))
 fuck=better_csv.get_lines(open("fuck.txt").read())
 cfw_lta = better_csv.get_lists(better_csv.get_lines(open("cfw_lta.csv").read()))
@@ -31,23 +31,24 @@ engine_program = line[7]
 engine_model = line[8]
 flash_welding_permitted = line[20]
 """
-# bad_count =0
-# for m in master_copy_new_data:
-#
-#     if m[15]=="#N/A" and m[16]=="#N/A" and m[17]=="#N/A" and m[18]=="#N/A" :# and m[19]=="#N/A":
-#         for f in fuck:
-#             if " "+m[0]+" " in f:
-#                 print f
-#                 bad_count=bad_count+1
-#                 break
-#     elif m[15]=="0" and m[16]=="0" and m[17]=="0" and m[18]=="0" :#and m[19]=="0":
-#         for f in fuck:
-#             if " "+m[0]+" " in f:
-#                 print f
-#                 bad_count=bad_count+1
-#                 break
-#
-# print bad_count
+bad_count =0
+for m in master_copy_new_data:
+
+    if m[15]=="#N/A" and m[16]=="#N/A" and m[17]=="#N/A" and m[18]=="#N/A" :# and m[19]=="#N/A":
+        for f in fuck:
+            if " "+m[0]+" " in f:
+                print f
+                bad_count=bad_count+1
+                break
+    elif m[15]=="0" and m[16]=="0" and m[17]=="0" and m[18]=="0" :#and m[19]=="0":
+        for f in fuck:
+            if " "+m[0]+" " in f:
+                print f
+                bad_count=bad_count+1
+                break
+
+
+print bad_count
 # master_copy_updated_lines=[]
 # for line in master_copy:
 #     for line_new_data in master_copy_new_data:

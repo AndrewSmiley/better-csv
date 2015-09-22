@@ -24,6 +24,19 @@ suzhou_min= better_csv.get_lists(better_csv.get_lines(open("suzhou_min.csv").rea
 tei= better_csv.get_lists(better_csv.get_lines(open("tei.csv").read()))
 sandy = better_csv.get_lists(better_csv.get_lines(open("sandy.csv").read()))
 
+
+#all the new stuff 9/21
+cfw_lta = better_csv.get_lists(better_csv.get_lines(open("cfw_lta.csv").read()))
+firth_rixson2 = better_csv.get_lists(better_csv.get_lines(open("firth_rixson2.csv").read()))
+frisa_lta= better_csv.get_lists(better_csv.get_lines(open("frisa_lta.csv").read()))
+ge_lta= better_csv.get_lists(better_csv.get_lines(open("ge_lta.csv").read()))
+leap_and_passport1= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings1.csv").read()))
+leap_and_passport2= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings2.csv").read()))
+leap_and_passport3= better_csv.get_lists(better_csv.get_lines(open("leap_and_passport_rings3.csv").read()))
+leap_tracker2= better_csv.get_lists(better_csv.get_lines(open("leap_tracker2.csv").read()))
+leap_tracker3= better_csv.get_lists(better_csv.get_lines(open("leap_tracker3.csv").read()))
+mountain_top2= better_csv.get_lists(better_csv.get_lines(open("mountain_top2.csv").read()))
+welded_ring2= better_csv.get_lists(better_csv.get_lines(open("welded_ring2.csv").read()))
 # firth_rixon=(better_csv.get_lines(open("firth_rixon.csv").read()))
 # welded_ring = (better_csv.get_lines(open("welded_ring.csv").read()))
 # mountain_top= (better_csv.get_lines(open("mountain_top.csv").read()))
@@ -132,6 +145,17 @@ suzhou_min_found = 0
 tei_found=0
 discrepancy_count = 0
 sandy_found=0
+cfw_lta_count =0
+firth_rixson2_count=0
+frisa_lta_count=0
+ge_lta_count =0
+leap_and_passport1_count=0
+leap_and_passport2_count=0
+leap_and_passport3_count=0
+leap_tracker2_count=0
+leap_tracker3_count=0
+mountain_top2_count=0
+welded_ring2_count=0
 master_copy_lines=[]
 changed_rows=[]
 not_found_count = 0
@@ -414,6 +438,270 @@ for line in master_copy:
             break
     if not found:
         master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for c in cfw_lta:
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1],line[10]], [c[0]]) or better_csv.search([c[0]],[line[1],line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            cfw_lta_count = cfw_lta_count+1
+            # found_parts=found_parts +1
+            #billet diameter
+            line[7] = c[1]
+            #alloy
+            line[18] = c[2]
+            #spec
+            line[19]= c[3]
+            #weight
+            line[16] = c[5]
+            #yield
+            line[14]=c[7]
+
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found=False
+    for f in firth_rixson2:
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1],line[10]], [f[15],f[16],f[17],f[18]]) or better_csv.search([f[15],f[16],f[17],f[18]],[line[1],line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            firth_rixson2_count=firth_rixson2_count+1
+            # found_parts=found_parts +1
+            line[31]=f[10]
+            #alloy
+            line[18] = f[11]
+            #spec
+            line[19]= f[12]
+            line[15]=f[13]
+            line[7]=f[14]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+
+for line in master_copy:
+    found = False
+    for f in frisa_lta:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [f[2], f[3]]) or better_csv.search([f[2], f[3]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            frisa_lta_count = frisa_lta_count + 1
+            # found_parts = found_parts + 1
+            line[7] = f[6]
+            line[18] = f[9]
+            line[19] = f[11]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for g in ge_lta:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [g[16]]) or better_csv.search([g[16]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            ge_lta_count = ge_lta_count + 1
+            # found_parts = found_parts + 1
+            line[31] = g[11]
+            line[18] = g[12]
+            line[19] = g[13]
+            line[15] = g[14]
+            line[7] = g[15]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for l in leap_and_passport1:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [l[22], l[4]]) or better_csv.search([l[22], l[4]],
+                                                                                      [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            leap_and_passport1_count = leap_and_passport1_count + 1
+            # found_parts = found_parts + 1
+            line[7] = l[0]
+            line[18] = l[8]
+            line[16] = l[10]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for l in leap_and_passport2:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [l[19], l[4]]) or better_csv.search([l[19], l[4]],
+                                                                                      [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            leap_and_passport2_count = leap_and_passport2_count + 1
+            # found_parts = found_parts + 1
+            line[7] = l[0]
+            line[18] = l[7]
+            line[16] = l[9]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for l in leap_and_passport3:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [l[1]]) or better_csv.search([l[1]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            leap_and_passport3_count = leap_and_passport3_count + 1
+            # found_parts = found_parts + 1
+            # line[7]=l[0]
+            # line[18]=l[7]
+            # line[16]=l[9]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for l in leap_tracker2:
+         #        f[6]
+         # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+         if better_csv.search([line[1], line[10]], [l[1], l[3]]) or better_csv.search([l[1], l[3]],
+                                                                                      [line[1], line[10]]):
+             # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+             found = True
+             # firth_rixon_count = firth_rixon_count +1
+             leap_tracker2_count = leap_tracker2_count + 1
+             # found_parts = found_parts + 1
+             line[4] = l[2]
+             line[31] = l[8]
+             line[19] = l[9]
+             line[7] = l[30]
+             master_copy_lines.append(line)
+             break
+         else:
+             continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for l in leap_tracker3:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [l[0], l[1]]) or better_csv.search([l[0], l[1]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            leap_tracker3_count = leap_tracker3_count + 1
+            # found_parts = found_parts + 1
+            # line[4]=l[2]
+            # line[31]=l[8]
+            # line[19]=l[9]
+            # line[7]=l[30]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for m in mountain_top2:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [m[0]]) or better_csv.search([m[0]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            mountain_top2_count = mountain_top2_count + 1
+            # found_parts = found_parts + 1
+            line[7] = m[1]
+            line[18] = m[3]
+            line[17] = 'lbs'
+            line[16] = m[5]
+            line[14] = '1=' + m[7]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for w in welded_ring2:
+        #        f[6]
+        # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
+        if better_csv.search([line[1], line[10]], [w[1], w[2]]) or better_csv.search([w[1], w[2]], [line[1], line[10]]):
+            # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
+            found = True
+            # firth_rixon_count = firth_rixon_count +1
+            welded_ring2_count = welded_ring2_count + 1
+            # found_parts = found_parts + 1
+            line[7] = w[5]
+            line[16] = w[6]
+            line[18] = w[8]
+            line[19] = w[9]
+            master_copy_lines.append(line)
+            break
+        else:
+            continue
+    if not found:
+        master_copy_lines.append(line)
 
 print "Firth Rixson: %s" % firth_rixon_found
 print "Welded Ring: %s" % welded_ring_found
@@ -424,8 +712,19 @@ print "Leap tracker: %s" % leap_tracker_found
 print "Leap tracker welded ring update: %s" % leap_tracker_welded_ring_update_found
 print "Suzhou Min: %s" % suzhou_min_found
 print "TEI: %s" % tei_found
+print "CFW LTA: %s" % cfw_lta_count
+print "Firth Rixson 2: %s" % firth_rixson2_count
+print "Frisa LTA: %s" % frisa_lta_count
+print "GE LTA: %s" % ge_lta_count
+print "Leap Passport Sheet 1: %s" % leap_and_passport1_count
+print "Leap Passport Sheet 2: %s" % leap_and_passport2_count
+print "Leap Passport Sheet 3: %s" % leap_and_passport3_count
+print "Leap Tracker 2: %s" % leap_tracker2_count
+print "Leap Tracker 3: %s" % leap_tracker3_count
+print "Mountain Top 2: %s" % mountain_top2_count
+print "Welded Ring Count: %s" % welded_ring2_count
 # print "Sandy: %s" % sandy_found
-print "Total: %s" %sum([firth_rixon_found,welded_ring_found,mountain_top_found,cfw_found,suzhou_found,leap_tracker_found,leap_tracker_welded_ring_update_found,suzhou_min_found,tei_found])
+# print "Total: %s" %sum([firth_rixon_found,welded_ring_found,mountain_top_found,cfw_found,suzhou_found,leap_tracker_found,leap_tracker_welded_ring_update_found,suzhou_min_found,tei_found])
 
 
 hs = open("this_is_it_6.csv","w")

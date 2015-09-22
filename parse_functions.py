@@ -32,6 +32,7 @@ class BetterCSV:
             s = s.replace(")"," ")
             s = s.replace(","," ")
             s = s.replace(":"," ")
+            s = s.replace("/"," ")
             # s = self.make_parseable(s, {"/": " ", "(":" ",")":" ",",":" "})
             if len(s) > 4 and any(char.isdigit() for char in s):
                 if "/" in s:
@@ -63,6 +64,12 @@ class BetterCSV:
                     valid_search_terms.append(s.replace(" ",""))
         for s in search_values:
             # s = self.make_parseable(s, {"/": " ", "(":" ",")":" "})
+            s = s.replace("("," ")
+            s = s.replace(")"," ")
+            s = s.replace(")"," ")
+            s = s.replace(","," ")
+            s = s.replace(":"," ")
+            s = s.replace("/"," ")
             if len(s) > 4 and any(char.isdigit() for char in s):
                 if "/" in s:
                     new = s.split("/")
@@ -96,7 +103,7 @@ class BetterCSV:
         if len(valid_search_terms) > 0 and len(valid_search_values) > 0:
             #really want to get away from using
             for search_term in valid_search_terms:
-                for search_value in search_values:
+                for search_value in valid_search_values:
                     if search_term in search_value:
                         print "Match Found: %s in %s" % (search_term,search_value)
                         return True

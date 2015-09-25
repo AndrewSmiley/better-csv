@@ -105,7 +105,7 @@ class BetterCSV:
             for search_term in valid_search_terms:
                 for search_value in valid_search_values:
                     if search_term in search_value:
-                        print "Match Found: %s in %s" % (search_term,search_value)
+                        # print "Match Found: %s in %s" % (search_term,search_value)
                         return True
             # print "No valid search terms :("
             # for search_value in valid_search_values:

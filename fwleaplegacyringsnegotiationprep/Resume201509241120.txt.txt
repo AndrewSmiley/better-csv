@@ -1,0 +1,30 @@
+Andrew Smiley  
+WORK EXPERIENCE 
+ 2014-12- - Present Software Engineer at PCMS Datafit
+Engineering and testing Java-based retail management and point-of-sale software; Java EE development and deployment on both Tomcat and IBM Websphere; Management of IBM DB2 and Oracle databases; Version control with Mercurial ; Scripting with Groovy and Python; Use of automated build tools including TeamCity, Jenkins, Gradle and Maven; 
+ 2012-12- - 2014-11- Developer at University of Cincinnati- College of Design, Architecture, Art and Planning
+Enterprise web development with Django/Python and PHP. Planning and Implementation of server architecture with Windows and Linux Systems, as well as Amazon Web Services. Linux administration including Apache management. MySQL & SQL Server database management. Version control using Git. Virtualization with Hyper-V and vCenter. 
+ 2011-4- - 2012-12- Barista at Starbucks 
+  
+  
+SKILLS AND SPECIALTIES 
+, Amazon Web Services (AWS), Docker, Python, iOS, Apache, Nginx, MySQL, Git, Github API, Xcode, iOS development, Django, Java, 3-Tier Architecture, Android Development, Eclipse, Microsoft SQL Server, PHP, ORM, Object Oriented Design, Linux System Administration, Unix Shell Scripting, Windows System Administration, Cocoa, OS X Administration, Computer Hardware, DB2, C++, Gunicorn, Supervisor, Facebook Graph API, Android Studio, Fabric, CocoaPods, RhodeCode, Kallithea, Unity, Illustrator, Photoshop, Service Oriented Architecture Design, Mercurial, TeamCity 
+  
+  
+EDUCATION 
+2010 - 2015 University of Cincinnati
+Software Application Development
+Bachelor of Applied Science (BASc) 
+  
+  
+LANGUAGES 
+- English (Native or bilingual proficiency)
+- Spanish (Limited working proficiency)
+ 
+  
+  
+RECOMMENDATIONS 
+Adam Curtis
+education "Andrew is a creative, diligent young man who can be trusted to accomplish his affairs with the highest professional and moral standard." 
+  
+ 

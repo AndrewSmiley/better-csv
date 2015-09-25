@@ -463,7 +463,7 @@ for line in master_copy:
         for g in ge_lta:
             #        f[6]
             # if (line[10] in f[16] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[16] and line [1] != '' and len(line[1]) > 2) or (line[10] in f[17] and line [10] != '' and len(line[10]) > 2) or (line[1] in f[17] and line [1] != '' and len(line[1]) > 2):
-            if better_csv.search([line[1],line[10]], [g[16]]) or better_csv.search([g[16]],[line[1],line[10]]):
+            if better_csv.search([line[1],line[10]], [g[16],g[17],g[18]]) or better_csv.search([g[16],g[17],g[18]],[line[1],line[10]]):
                 # updated_parts.append("Found Firth Rixson {0}. Values inserted: Billet Diameter: {1} Alloy: {2} Weight: {3} Spec: {4} ID:{5}".format(line[10], f[14], f[12], f[15],f[13], line[0]))
                 found = True
                 # firth_rixon_count = firth_rixon_count +1

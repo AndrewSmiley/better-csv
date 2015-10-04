@@ -37,6 +37,8 @@ leap_tracker2= better_csv.get_lists(better_csv.get_lines(open("leap_tracker2.csv
 welded_ring2= better_csv.get_lists(better_csv.get_lines(open("welded_ring2.csv").read()))
 leap_tracker3= better_csv.get_lists(better_csv.get_lines(open("leap_tracker3.csv").read()))
 mountain_top2= better_csv.get_lists(better_csv.get_lines(open("mountain_top2.csv").read()))
+raw_qpe= better_csv.get_lists(better_csv.get_lines(open("raw_qpe.csv").read()))
+print "files loaded"
 # firth_rixon=(better_csv.get_lines(open("firth_rixon.csv").read()))
 # welded_ring = (better_csv.get_lines(open("welded_ring.csv").read()))
 # mountain_top= (better_csv.get_lines(open("mountain_top.csv").read()))
@@ -157,6 +159,7 @@ leap_tracker3_count=0
 mountain_top2_count=0
 welded_ring2_count=0
 master_copy_lines=[]
+raw_qpe_count = 0
 changed_rows=[]
 not_found_count = 0
 for line in master_copy:
@@ -225,6 +228,22 @@ engine_program = line[7]
 engine_model = line[8]
 flash_welding_permitted = line[20]
 """
+
+
+
+master_copy = master_copy_lines
+master_copy_lines = []
+for line in master_copy:
+    found = False
+    for r in raw_qpe:
+        if better_csv.search([line[1],line[10]], [r[0]]) or better_csv.search([r[0]],[line[1],line[10]]):
+            raw_qpe_count = raw_qpe_count +1
+            line[4]=r[6]
+            found = True
+            master_copy_lines.append(line)
+            break
+    if not found:
+        master_copy_lines.append(line)
 # master_copy = master_copy_lines
 # master_copy_lines = []
 # for line in master_copy:
@@ -704,6 +723,7 @@ for line in master_copy:
     if not found:
         master_copy_lines.append(line)
 
+print "Raw QPE: %s" % raw_qpe_count
 print "Firth Rixson: %s" % firth_rixon_found
 print "Welded Ring: %s" % welded_ring_found
 print "Mountain Top: %s" % mountain_top_found
@@ -728,7 +748,7 @@ print "Welded Ring Count: %s" % welded_ring2_count
 # print "Total: %s" %sum([firth_rixon_found,welded_ring_found,mountain_top_found,cfw_found,suzhou_found,leap_tracker_found,leap_tracker_welded_ring_update_found,suzhou_min_found,tei_found])
 
 
-hs = open("this_is_it_6.csv","w")
+hs = open("this_is_it_094220152303.csv","w")
 for mline in master_copy_lines:
     hs.write(",".join(mline)+"\r")
 

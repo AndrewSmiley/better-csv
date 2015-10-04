@@ -2,7 +2,7 @@ __author__ = 'pridemai'
 from parse_functions import BetterCSV
 better_csv = BetterCSV()
 # master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("master_copy_new_data.csv").read()))
-master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("this_is_it_6.csv").read()))
+master_copy_new_data = better_csv.get_lists(better_csv.get_lines(open("this_is_it_094220152303.csv").read()))
 # master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_new.csv").read()))
 fuck=better_csv.get_lines(open("fuck.txt").read())
 cfw_lta = better_csv.get_lists(better_csv.get_lines(open("cfw_lta.csv").read()))

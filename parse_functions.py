@@ -23,7 +23,9 @@ class BetterCSV:
         f.close()
         return values
 
-    def search(self,search_terms, search_values):
+
+
+    def search(self,search_terms, search_values,threshold=0):
         valid_search_terms=[]
         valid_search_values=[]
         for s in search_terms:
@@ -102,11 +104,28 @@ class BetterCSV:
 
         if len(valid_search_terms) > 0 and len(valid_search_values) > 0:
             #really want to get away from using
-            for search_term in valid_search_terms:
-                for search_value in valid_search_values:
-                    if search_term in search_value:
-                        # print "Match Found: %s in %s" % (search_term,search_value)
-                        return True
+            if threshold != 0:
+                from_end=0
+                while from_end <= threshold:
+                    for search_term in valid_search_terms:
+                        if from_end <= 0:
+                            from_end = from_end+1
+                            for search_value in valid_search_values:
+                                if search_term in search_value:
+                                    # print "Match Found: %s in %s" % (search_term,search_value)
+                                    return True
+                        else:
+                            from_end = from_end+1
+                            for search_value in valid_search_values:
+                                if search_term[:from_end*-1] in search_value:
+                                    # print "Match Found: %s in %s" % (search_term,search_value)
+                                    return True
+            else:
+                for search_term in valid_search_terms:
+                    for search_value in valid_search_values:
+                        if search_term in search_value:
+                            # print "Match Found: %s in %s" % (search_term,search_value)
+                            return True
             # print "No valid search terms :("
             # for search_value in valid_search_values:
             #     for search_term in valid_search_terms:

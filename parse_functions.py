@@ -136,7 +136,7 @@ class BetterCSV:
         return False
 
     def get_lines(self,text_string):
-        return text_string.split("\r")
+        return text_string.split("\r") if len(text_string.split("\r")) > 1 else text_string.split("\n") if len(text_string.split("\n")) > 1 else text_string.split("\r\n")
 
     # string = "\" $(3,562.86)\",\"$174,565.86\",,,Liming new source,\"sympathetic, never let it show the way i feel i do \",data,,,\"fuck\",balls"
     def get_lists(self,lines):

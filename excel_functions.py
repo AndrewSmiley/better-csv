@@ -65,8 +65,8 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
                 data_args.append(d[column])
             if better_csv.search(master_args, data_args) :
                 line = update_row(line, d, column_mapping)
-
                 found_count = found_count + 1
+                break
         new_master.append(line)
 
     print "%s count: %s" % (filname, found_count)

@@ -3,13 +3,9 @@ import sys
 sys.path.insert(0, './better-csv')
 from parse_functions  import BetterCSV
 
-def update_row(master_row, data_row, master_row_columns, data_row_columns):
-    iterator = 0
-    if len(master_row_columns) != len(data_row_columns):
-        print("Invalid row count on row: {0} \nCannot upate row data for this column".format(master_row))
-        return master_row
-    while iterator < len(master_row_columns):
-        master_row[master_row_columns[iterator]] = data_row[data_row_columns[iterator]]
+def update_row(master_row, data_row, column_mapping):
+    for key,value in column_mapping.iteritems():
+        master_row[key]=data_row[value]
     return master_row
 
 
@@ -44,22 +40,36 @@ def update_row(master_row, data_row, master_row_columns, data_row_columns):
  :param data_search_columns:
  :return:
 """
-def iterate(master_copy,data_copy, master_search_columns, data_search_columns, master_data_columns, data_columns, filname="N/A"):
+def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
+    """
+    Function to do stuff
+    :param master_copy:
+    :param data_copy:
+    :param master_search_columns:
+    :param data_search_columns:
+    :param master_data_columns:
+    :param data_columns:
+    :param filname:
+    :return:
+    """
     better_csv = BetterCSV()
     new_master = []
     found_count = 0
     for line in master_copy:
+        master_args=[]
         for column in master_search_columns:
             master_args.append(line[column])
         for d in data_copy:
             data_args =[]
-            master_args=[]
             for column in data_search_columns:
                 data_args.append(d[column])
-            if better_csv.search(master_args, data_args):
-                line = update_row(line, d, master_data_columns,data_columns)
+            if better_csv.search(master_args, data_args) :
+                line = update_row(line, d, column_mapping)
+
                 found_count = found_count + 1
         new_master.append(line)
+
+    print "%s count: %s" % (filname, found_count)
     return new_master
 
 

@@ -57,7 +57,9 @@ print "loaded leap weekly updates"
 print "files loaded"
 master_copy = iterate(master_copy, afsrr_leap_tracker, [1,10], [1,3], {4:2,15:9,19:12,31:18,7:19}, "AFSRR Leap")
 master_copy = iterate(master_copy, fontana, [1,10],[1,3],{4:2,15:6,31:8,19:9,7:16}, "Fontana")
-master_copy = iterate(master_copy, frisa_leap_rings_tracker, [])
+master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {4:3,15:5,31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
+master_copy = iterate(master_copy, frisa_leap_rings_tracker, [1,10], [1,2], {4:3,31:4,19:5, 7:6}, "Frisa leap rings tracker")
+master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {4:3, 15:5, 31:7,19:8,7:9,16:17,14:25})
 # master_copy = iterate(master_copy, firth_rixon, [1,10],[16,17],{18:12, 16:15,19:13,31:11},"Firth Rixson")
 # master_copy = iterate(master_copy,welded_ring,[1,10],[1,2],{18:8,16:6,19:9,7:5}, "Welded Ring 1")
 # # master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6},"Raw QPE")

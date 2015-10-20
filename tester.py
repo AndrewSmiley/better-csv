@@ -3,7 +3,7 @@ import csv,sys
 from parse_functions import BetterCSV
 from excel_functions import iterate
 better_csv=BetterCSV()
-master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_updated_data.csv").read()))
+master_copy = better_csv.get_lists(better_csv.get_lines(open("master_test.csv").read()))
 # master_copy_lines=[]
 # for line in master_copy:
 #     if len(line) < 32:
@@ -56,32 +56,33 @@ leap_weekly_updates=better_csv.get_lists(better_csv.get_lines(open("leap_weekly_
 print "loaded leap weekly updates"
 print "files loaded"
 master_copy = iterate(master_copy, afsrr_leap_tracker, [1,10], [1,3], {4:2,15:9,19:12,31:18,7:19}, "AFSRR Leap")
-master_copy = iterate(master_copy, fontana, [1,10],[1,3],{4:2,15:6,31:8,19:9,7:16}, "Fontana")
-master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {4:3,15:5,31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
+master_copy = iterate(master_copy, fontana, [1,10],[1,3],{4:2,31:8,19:9,7:16}, "Fontana")
+master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {4:3,31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
 master_copy = iterate(master_copy, frisa_leap_rings_tracker, [1,10], [1,2], {4:3,31:4,19:5, 7:6}, "Frisa leap rings tracker")
-master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {4:3, 15:5, 31:7,19:8,7:9,16:17,14:25})
-# master_copy = iterate(master_copy, firth_rixon, [1,10],[16,17],{18:12, 16:15,19:13,31:11},"Firth Rixson")
-# master_copy = iterate(master_copy,welded_ring,[1,10],[1,2],{18:8,16:6,19:9,7:5}, "Welded Ring 1")
-# # master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6},"Raw QPE")
-# master_copy = iterate(master_copy,sandy, [1,10],[1,8],{7:6,11:9,14:12}, "Sandy's Data")
-# master_copy = iterate(master_copy,mountain_top, [1,10],[0], {18:3,16:5,7:1}, "Mountain Top")
-# master_copy = iterate(master_copy,cfw,[1,10],[0], {7:1, 18:2, 19:3, 15:4, 16:5, 14:7}, "CFW 1")
-# master_copy = iterate(master_copy,suzhou,[1,10],[0,6], {7:4,11:7,14:10}, "Suzhou 1")
-# master_copy = iterate(master_copy,leap_tracker,[1,10],[1,3], {4:2,31:8,19:9,7:30}, "LEAP tracker 1")
-# master_copy = iterate(master_copy, leap_tracker_welded_ring_update,[1,10],[1,2],{16:17,19:8,31:7,7:9,14:25}, "LEAP welded ring update")
-# master_copy = iterate(master_copy,tei,[1,10],[1,8],{7:6,11:9,14:12}, "TEI")
-# master_copy = iterate(master_copy,cfw_lta,[1,10],[0], {7:1,18:2,19:3,16:5,14:7}, "CFW LTA")
-# master_copy = iterate(master_copy, firth_rixson2, [1,10],[15,16,17,18], {31:10,18:11,19:12,15:13,7:14}, "Firth Rixson 2")
-# master_copy = iterate(master_copy,frisa_lta,[1,10],[2,3], {7:6,18:9,19:11}, "Frisa LTA")
-# master_copy = iterate(master_copy,ge_lta, [1,10],[16,17,18], {31:11,18:12,19:13,15:14,7:15}, "GE LTA")
-# master_copy = iterate(master_copy,leap_and_passport1, [1,10], [22, 4], { 7:0,18:8,16:10}, "Leap Passport 1")
-# master_copy = iterate(master_copy, leap_and_passport2, [1,10],[19,4], {7:0, 18:7,16:9}, "Leap Passport 2")
-# master_copy = iterate(master_copy,leap_and_passport3, [1,10], [1], {7:0, 18:7,16:9}, "Leap Passport 3")
-# master_copy = iterate(master_copy,leap_tracker2, [1,10], [1,3], {4:2,31:8, 19:9, 7:30}, "Leap Tracker 2")
-# master_copy = iterate(master_copy, leap_tracker3, [1,10], [0,1], {}, "Leap Tracker 3")
-# master_copy = iterate(master_copy, mountain_top2, [1,10], [0], {7:1, 18:3,16:5, 14:7}, "Mountain Top 2")
-# master_copy = iterate(master_copy, welded_ring2, [1,10], [1,2], {7:5, 16:6, 18:8, 19:9}, "Welded Ring 2")
-# master_copy = iterate(master_copy,ge_lta2, [1,10],[1,2], {2:3, 18:7, 16:9, 19:8, 7:13, 15:5}, "GE LTA 2")
+master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {4:3,31:7,19:8,7:9,16:17,14:25})
+master_copy = iterate(master_copy, leap_weekly_updates, [1,10], [1,2], {4:3,31:7, 19:8, 16:17})
+master_copy = iterate(master_copy, firth_rixon, [1,10],[16,17],{18:12, 16:15,19:13,31:11},"Firth Rixson")
+master_copy = iterate(master_copy,welded_ring,[1,10],[1,2],{18:8,16:6,19:9,7:5}, "Welded Ring 1")
+master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6},"Raw QPE")
+master_copy = iterate(master_copy,sandy, [1,10],[1,8],{7:6,11:9,14:12}, "Sandy's Data")
+master_copy = iterate(master_copy,mountain_top, [1,10],[0], {18:3,16:5,7:1}, "Mountain Top")
+master_copy = iterate(master_copy,cfw,[1,10],[0], {7:1, 18:2, 19:3, 15:4, 16:5, 14:7}, "CFW 1")
+master_copy = iterate(master_copy,suzhou,[1,10],[0,6], {7:4,11:7,14:10}, "Suzhou 1")
+master_copy = iterate(master_copy,leap_tracker,[1,10],[1,3], {4:2,31:8,19:9,7:30}, "LEAP tracker 1")
+master_copy = iterate(master_copy, leap_tracker_welded_ring_update,[1,10],[1,2],{16:17,19:8,31:7,7:9,14:25}, "LEAP welded ring update")
+master_copy = iterate(master_copy,tei,[1,10],[1,8],{7:6,11:9,14:12}, "TEI")
+master_copy = iterate(master_copy,cfw_lta,[1,10],[0], {7:1,18:2,19:3,16:5,14:7}, "CFW LTA")
+master_copy = iterate(master_copy, firth_rixson2, [1,10],[15,16,17,18], {31:10,18:11,19:12,15:13,7:14}, "Firth Rixson 2")
+master_copy = iterate(master_copy,frisa_lta,[1,10],[2,3], {7:6,18:9,19:11}, "Frisa LTA")
+master_copy = iterate(master_copy,ge_lta, [1,10],[16,17,18], {31:11,18:12,19:13,15:14,7:15}, "GE LTA")
+master_copy = iterate(master_copy,leap_and_passport1, [1,10], [22, 4], { 7:0,18:8,16:10}, "Leap Passport 1")
+master_copy = iterate(master_copy, leap_and_passport2, [1,10],[19,4], {7:0, 18:7,16:9}, "Leap Passport 2")
+master_copy = iterate(master_copy,leap_and_passport3, [1,10], [1], {7:0, 18:7,16:9}, "Leap Passport 3")
+master_copy = iterate(master_copy,leap_tracker2, [1,10], [1,3], {4:2,31:8, 19:9, 7:30}, "Leap Tracker 2")
+master_copy = iterate(master_copy, leap_tracker3, [1,10], [0,1], {}, "Leap Tracker 3")
+master_copy = iterate(master_copy, mountain_top2, [1,10], [0], {7:1, 18:3,16:5, 14:7}, "Mountain Top 2")
+master_copy = iterate(master_copy, welded_ring2, [1,10], [1,2], {7:5, 16:6, 18:8, 19:9}, "Welded Ring 2")
+master_copy = iterate(master_copy,ge_lta2, [1,10],[1,2], {2:3, 18:7, 16:9, 19:8, 7:13, 15:5}, "GE LTA 2")
 """
 billet_diameter = line[15]
 yield_value = line[14]
@@ -125,18 +126,12 @@ flash_welding_permitted = line[20]
 # print "Total: %s" %sum([firth_rixon_found,welded_ring_found,mountain_top_found,cfw_found,suzhou_found,leap_tracker_found,leap_tracker_welded_ring_update_found,suzhou_min_found,tei_found])
 
 
-hs = open("this_is_it_1006.csv","w")
+hs = open("this_is_it_1019.csv","w")
 for mline in master_copy:
     hs.write(",".join(mline)+"\r")
 
 hs.close()
 
-hs = open("fuck2.txt","w")
-for f in fuck:
-    # hs.write(",".join(mline)+"\r")
-    hs.write(f+"\r")
-
-hs.close()
 """
 Ignore this
 """

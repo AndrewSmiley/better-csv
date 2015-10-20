@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <h4>Select the files you would like to run against</h4>
-<form action="{% url "run_batch" %}" method="post">
+<form action="{% url "run_batch" %}" method="post">{% csrf_token %}
     {%  for file in filenames %}
-        <input type="checkbox" name="filename" value="{{ file.filename }}"> {{ file.filename }}<br>
+        <input type="checkbox" name="filenames" value="{{ file.filename }}"> {{ file.filename }}<br>
     {% endfor %}
     <br>
     <input type="submit" value="Run">

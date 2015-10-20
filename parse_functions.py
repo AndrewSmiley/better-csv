@@ -120,6 +120,11 @@ class BetterCSV:
                                     return True
             else:
                 for search_term in valid_search_terms:
+                    # try:
+                    #     valid_search_values.index(search_term)
+                    #     return True
+                    # except:
+                    #     return False
                     for search_value in valid_search_values:
                         if search_term in search_value:
                             # print "Match Found: %s in %s" % (search_term,search_value)
@@ -140,6 +145,7 @@ class BetterCSV:
     def get_lists(self,lines):
         arrays = []
         for string in lines:
+            # print string
             should_get_last = True
             last_position = 0
             line = []
@@ -223,11 +229,13 @@ class BetterCSV:
                             # line.append(string[last_position:len(string)])
                     # arrays.append(line)
             else:
+                # print string
                 #print ("nothing to do")
                 arrays.append(string.split(","))
                 should_get_last = False
                 continue
             if should_get_last:
+                # print string
                 line.append(string[last_position:len(string)])
             arrays.append(line)
 

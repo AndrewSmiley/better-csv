@@ -12,7 +12,13 @@ class ColumnMapping(models.Model):
     master_column_name = models.CharField(max_length=70, default="N/A")
     source_column_id = models.IntegerField(null=False)
     source_column_name = models.CharField(max_length=70, default="N/A")
-    file_id = models.ForeignKey(File, null=False)
+    datafile = models.ForeignKey(File, null=False)
     def __unicode__(self):
         return self.master_column_name if self.master_column_name != "N/A" else str(self.master_column_id)
+class SearchColumn(models.Model):
+    column_id = models.IntegerField()
+    datafile = models.ForeignKey(File, null=False)
+    column_name = models.CharField(max_length=70, default="N/A")
 
+    def __unicode__(self):
+        return  self.column_name if self.column_name != "N/A" else str(self.column_id)

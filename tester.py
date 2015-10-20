@@ -2,8 +2,9 @@ __author__ = 'pridemai'
 import csv,sys
 from parse_functions import BetterCSV
 from excel_functions import iterate
+import time
 better_csv=BetterCSV()
-master_copy = better_csv.get_lists(better_csv.get_lines(open("master_test.csv").read()))
+master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_updated_data.csv").read()))
 # master_copy_lines=[]
 # for line in master_copy:
 #     if len(line) < 32:
@@ -13,6 +14,7 @@ master_copy = better_csv.get_lists(better_csv.get_lines(open("master_test.csv").
 # hs = open("master_copy_new.csv","w")
 # for line in master_copy_lines:
 #     hs.write(",".join(line)+"\r")
+start=time.time()
 fuck=[]
 firth_rixon=better_csv.get_lists(better_csv.get_lines(open("firth_rixon.csv").read()))
 welded_ring = better_csv.get_lists(better_csv.get_lines(open("welded_ring.csv").read()))
@@ -55,6 +57,7 @@ print "loaded leap program updates"
 leap_weekly_updates=better_csv.get_lists(better_csv.get_lines(open("leap_weekly_updates.csv").read()))
 print "loaded leap weekly updates"
 print "files loaded"
+master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6, 3:2},"Raw QPE")
 master_copy = iterate(master_copy, afsrr_leap_tracker, [1,10], [1,3], {4:2,15:9,19:12,31:18,7:19}, "AFSRR Leap")
 master_copy = iterate(master_copy, fontana, [1,10],[1,3],{4:2,31:8,19:9,7:16}, "Fontana")
 master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {4:3,31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
@@ -63,7 +66,6 @@ master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {4:3,31:
 master_copy = iterate(master_copy, leap_weekly_updates, [1,10], [1,2], {4:3,31:7, 19:8, 16:17})
 master_copy = iterate(master_copy, firth_rixon, [1,10],[16,17],{18:12, 16:15,19:13,31:11},"Firth Rixson")
 master_copy = iterate(master_copy,welded_ring,[1,10],[1,2],{18:8,16:6,19:9,7:5}, "Welded Ring 1")
-master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6},"Raw QPE")
 master_copy = iterate(master_copy,sandy, [1,10],[1,8],{7:6,11:9,14:12}, "Sandy's Data")
 master_copy = iterate(master_copy,mountain_top, [1,10],[0], {18:3,16:5,7:1}, "Mountain Top")
 master_copy = iterate(master_copy,cfw,[1,10],[0], {7:1, 18:2, 19:3, 15:4, 16:5, 14:7}, "CFW 1")
@@ -132,6 +134,8 @@ for mline in master_copy:
 
 hs.close()
 
+end = time.time()
+print end-start
 """
 Ignore this
 """

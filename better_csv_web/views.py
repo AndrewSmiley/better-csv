@@ -13,7 +13,10 @@ def batch_selection(request):
     pass
 
 def run_batch(request):
-    return render(request, "Working")
+    results = execute(request)
+    return render(request, "results.html",{
+            "results": results
+    })
 
 def file_upload(request):
     if request.method == 'POST':

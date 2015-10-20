@@ -56,6 +56,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
     new_master = []
     found_count = 0
     for line in master_copy:
+        # print line[0]
         master_args=[]
         for column in master_search_columns:
             master_args.append(line[column])

@@ -3,6 +3,8 @@ from models import File,ColumnMapping,SearchColumn
 from better_csv_web.settings import *
 import traceback
 import time
+from os import listdir
+from os.path import isfile, join
 from parse_functions import BetterCSV
 DATA_DIR = "/data/"
 MASTERS_DIR = "/masters/"
@@ -75,17 +77,6 @@ def update_row(master_row, data_row, column_mapping):
     return master_row
 
 def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
-    """
-    Function to do stuff
-    :param master_copy:
-    :param data_copy:
-    :param master_search_columns:
-    :param data_search_columns:
-    :param master_data_columns:
-    :param data_columns:
-    :param filname:
-    :return:
-    """
     better_csv = BetterCSV()
     new_master = []
     found_count = 0
@@ -103,3 +94,10 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
                 break
         new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count)}
+
+def get_result_files():
+
+    return [ f for f in listdir(BASE_DIR+MASTERS_DIR) if isfile(join(BASE_DIR+MASTERS_DIR,f)) ]
+
+def get_file(filepath, filename):
+    return open(filepath+filename)

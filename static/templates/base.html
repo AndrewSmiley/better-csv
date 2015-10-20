@@ -6,8 +6,11 @@
     <title></title>
 </head>
 <body>
-<a href="{% url "index" %}">Home</a>   <a href="/admin">Administration</a>    <a href="{% url "batch_selection" %}">Run a batch</a>
+<a href="{% url "index" %}">Home</a>
+<a href="/admin">Administration</a>
+<a href="{% url "batch_selection" %}">Run a batch</a>
 <a href="{% url "file_upload" %}">Upload a File</a>
+<a href="{% url "download_list" %}">Download Results</a>
   {% block content %}
   {% endblock %}
 </body>

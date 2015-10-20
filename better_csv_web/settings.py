@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'better_csv_web'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'generic_django_project.urls'
+ROOT_URLCONF = 'better_csv_web.urls'
 
-WSGI_APPLICATION = 'generic_django_project.wsgi.application'
+WSGI_APPLICATION = 'better_csv_web.wsgi.application'
 
 
 # Database

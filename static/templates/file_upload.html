@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>Upload a new file</h3>
+    <p><b>{{ message }}</b></p>
+<form action="{% url "file_upload" %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="file" name="csv"><br>
+    <input type="checkbox" name="is_master" value="is_master"> Is Master File?<br>
+    <input type="submit" value="Upload">
+</form>
+{% endblock %}

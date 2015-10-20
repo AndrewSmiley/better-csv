@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href="{% url "index" %}">Home</a>   <a href="/admin">Administration</a>    <a href="{% url "batch_selection" %}">Run a batch</a>
+<a href="{% url "file_upload" %}">Upload a File</a>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

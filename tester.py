@@ -58,12 +58,14 @@ leap_weekly_updates=better_csv.get_lists(better_csv.get_lines(open("leap_weekly_
 print "loaded leap weekly updates"
 print "files loaded"
 master_copy = iterate(master_copy, raw_qpe,[1,10],[0],{4:6, 3:2},"Raw QPE")
-master_copy = iterate(master_copy, afsrr_leap_tracker, [1,10], [1,3], {4:2,15:9,19:12,31:18,7:19}, "AFSRR Leap")
+
+master_copy = iterate(master_copy, afsrr_leap_tracker, [1,10], [1,3], {4:2,19:12,31:18,7:19}, "AFSRR Leap")
 master_copy = iterate(master_copy, fontana, [1,10],[1,3],{4:2,31:8,19:9,7:16}, "Fontana")
-master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {4:3,31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
-master_copy = iterate(master_copy, frisa_leap_rings_tracker, [1,10], [1,2], {4:3,31:4,19:5, 7:6}, "Frisa leap rings tracker")
-master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {4:3,31:7,19:8,7:9,16:17,14:25})
-master_copy = iterate(master_copy, leap_weekly_updates, [1,10], [1,2], {4:3,31:7, 19:8, 16:17})
+master_copy = iterate(master_copy, ge_leap_lta_tracker, [1,10], [1,2], {31:7,19:8,16:9,7:13}, "GE Leap LTA tracker")
+master_copy = iterate(master_copy, frisa_leap_rings_tracker, [1,10], [1,2], {2:3,31:4,19:5, 7:6}, "Frisa leap rings tracker")
+master_copy = iterate(master_copy, leap_program_updates, [1,10], [1,2], {31:7,19:8,7:9,16:17,14:25})
+master_copy = iterate(master_copy, leap_weekly_updates, [1,10], [1,2], {31:7, 19:8, 16:17})
+
 master_copy = iterate(master_copy, firth_rixon, [1,10],[16,17],{18:12, 16:15,19:13,31:11},"Firth Rixson")
 master_copy = iterate(master_copy,welded_ring,[1,10],[1,2],{18:8,16:6,19:9,7:5}, "Welded Ring 1")
 master_copy = iterate(master_copy,sandy, [1,10],[1,8],{7:6,11:9,14:12}, "Sandy's Data")
@@ -128,7 +130,7 @@ flash_welding_permitted = line[20]
 # print "Total: %s" %sum([firth_rixon_found,welded_ring_found,mountain_top_found,cfw_found,suzhou_found,leap_tracker_found,leap_tracker_welded_ring_update_found,suzhou_min_found,tei_found])
 
 
-hs = open("this_is_it_1019.csv","w")
+hs = open("this_is_it_101.csv","w")
 for mline in master_copy:
     hs.write(",".join(mline)+"\r")
 

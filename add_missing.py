@@ -25,7 +25,7 @@ def iterate(sandy,master, input_file, master_columns, input_columns, input_parts
             new_line = ['']*32
             new_line[0]=str(last_id)
             while i < len(master_columns):
-                new_line[master_columns[i]]=row[input_columns[i]]
+                new_line[master_columns[i]]=row[input_columns[i]] if " " not in row[input_columns[i]] else "\"%s\"" % (row[input_columns[i]])
                 i = i+1
             print "Adding new line with ID %s" % str(last_id)
             new_lines.append(new_line)
@@ -40,7 +40,7 @@ def iterate(sandy,master, input_file, master_columns, input_columns, input_parts
 
 
 better_csv=BetterCSV()
-master_copy = better_csv.get_lists(better_csv.get_lines(open("this_is_it_094220152303.csv").read()))
+master_copy = better_csv.get_lists(better_csv.get_lines(open("master_test.csv").read()))
 firth_rixon=better_csv.get_lists(better_csv.get_lines(open("firth_rixon.csv").read()))
 welded_ring = better_csv.get_lists(better_csv.get_lines(open("welded_ring.csv").read()))
 mountain_top= better_csv.get_lists(better_csv.get_lines(open("mountain_top.csv").read()))
@@ -62,7 +62,20 @@ leap_tracker2= better_csv.get_lists(better_csv.get_lines(open("leap_tracker2.csv
 welded_ring2= better_csv.get_lists(better_csv.get_lines(open("welded_ring2.csv").read()))
 leap_tracker3= better_csv.get_lists(better_csv.get_lines(open("leap_tracker3.csv").read()))
 mountain_top2= better_csv.get_lists(better_csv.get_lines(open("mountain_top2.csv").read()))
-
+raw_qpe= better_csv.get_lists(better_csv.get_lines(open("raw_qpe.csv").read()))
+afsrr_leap_tracker= better_csv.get_lists(better_csv.get_lines(open("afsrr_leap_tracker.csv").read()))
+print "loaded afsrr"
+fontana= better_csv.get_lists(better_csv.get_lines(open("fontana.csv").read()))
+print "loaded fontana"
+frisa_leap_rings_tracker= better_csv.get_lists(better_csv.get_lines(open("frisa_leap_rings_tracker.csv").read()))
+print "loaded frisa leap"
+ge_leap_lta_tracker=better_csv.get_lists(better_csv.get_lines(open("ge_leap_lta_tracker.csv").read()))
+print "loaded ge lta leap"
+leap_program_updates=better_csv.get_lists(better_csv.get_lines(open("leap_program_updates.csv").read()))
+print "loaded leap program updates"
+leap_weekly_updates=better_csv.get_lists(better_csv.get_lines(open("leap_weekly_updates.csv").read()))
+print "loaded leap weekly updates"
+print "files loaded"
 iterate(sandy,master_copy,firth_rixon,[1,2,15,16,19,26,28,10],[16,19,14,15,13,8,38,17],[16,17,18],master_copy[len(master_copy)-1][0])
 iterate(sandy,master_copy,welded_ring,[1,6,7,16,18,19,10],[1,0,5,6,8,9,2],[1,2],new_lines[len(new_lines)-1][0])
 iterate(sandy,master_copy,mountain_top,[1,7,18,16,14],[0,1,3,5,7],[0],new_lines[len(new_lines)-1][0])
@@ -83,6 +96,16 @@ iterate(sandy,master_copy,leap_tracker2,[1,4,2,31,19,7,28,10],[1,2,4,8,9,30,36,3
 iterate(sandy,master_copy,leap_tracker3,[1,2,10],[0,2,1],[0,1],new_lines[len(new_lines)-1][0])
 iterate(sandy,master_copy,welded_ring2,[1,7,16,18,19,10],[1,5,6,8,9,2],[1,2],new_lines[len(new_lines)-1][0])
 iterate(sandy,master_copy,mountain_top2,[1,7,18,16,14],[0,1,3,5,7],[0],new_lines[len(new_lines)-1][0])
+print "about to run the new ones"
+iterate(sandy,master_copy,afsrr_leap_tracker,[4,19,31,7,1,2],[2,12,18,19,1,7],[1,3],new_lines[len(new_lines)-1][0])
+iterate(sandy,master_copy,fontana,[1,4,31,19,7],[1,2,8,9,16],[1,3],new_lines[len(new_lines)-1][0])
+iterate(sandy,master_copy,ge_leap_lta_tracker,[1,2,31,19,16,7],[1,3,7,8,9,13],[1,2],new_lines[len(new_lines)-1][0])
+iterate(sandy,master_copy,frisa_leap_rings_tracker,[1,2,31,19,7],[1,3,4,5,6],[1,2],new_lines[len(new_lines)-1][0])
+iterate(sandy,master_copy,leap_program_updates,[1,2,31,19,7,16,14],[1,3,7,8,9,17,25],[1,2],new_lines[len(new_lines)-1][0])
+iterate(sandy,master_copy,leap_weekly_updates,[1,2,31,19,16],[1,3,7,8,17],[1,2],new_lines[len(new_lines)-1][0])
+# print "about to run qpes"
+# iterate(sandy,master_copy,raw_qpe,[1,4,3],[0,6,2],[0],new_lines[len(new_lines)-1][0])
+
 for line in new_lines:
     master_copy.append(line)
 filename="master_test.csv"

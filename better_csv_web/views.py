@@ -17,7 +17,7 @@ def batch_selection(request):
 def run_batch(request):
     results = execute(request)
     return render(request, "results.html",{
-            "results": results
+            "results": results["messages"], "runtime":results["runtime"]
     })
 def file_upload(request):
     if request.method == 'POST':

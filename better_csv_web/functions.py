@@ -6,6 +6,7 @@ import time
 from os import listdir
 from os.path import isfile, join
 from parse_functions import BetterCSV
+import time
 DATA_DIR = "/data/"
 MASTERS_DIR = "/masters/"
 
@@ -40,7 +41,7 @@ def rename_file(fname, new_filename):
         return {"result":False, "message": traceback.print_exc()}
 
 def execute(request):
-
+    start = time.time()
     messages=[]
     for master in File.objects.filter(is_master=True):
         master_copy= BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+master.filename).read()))
@@ -66,7 +67,7 @@ def execute(request):
 
 
         write_csv(str(BASE_DIR+MASTERS_DIR+str(time.strftime("%d%m%Y"))+str(time.strftime("%H-%M-%S"))+".csv"), master_copy)
-        return messages
+        return {"messages": messages, "runtime":time.time()-start}
 
 
 
@@ -77,6 +78,7 @@ def update_row(master_row, data_row, column_mapping):
     return master_row
 
 def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
+
     better_csv = BetterCSV()
     new_master = []
     found_count = 0
@@ -93,7 +95,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
                 found_count = found_count + 1
                 break
         new_master.append(line)
-    return {"data":new_master, "message": "%s count: %s" % (filname, found_count)}
+    return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
 
 def get_result_files():
 

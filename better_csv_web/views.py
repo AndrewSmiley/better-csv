@@ -10,7 +10,8 @@ def index(request):
 def batch_selection(request):
 
     return render(request, "batch_selection.html",{
-     'filenames' : get_all_filenames()
+     'source_files' : get_all_source_file_names(),
+     'master_files' : get_all_master_file_names()
     })
 
     pass

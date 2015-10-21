@@ -5,7 +5,7 @@ import traceback
 import time
 from os import listdir
 from os.path import isfile, join
-from parse_functions import BetterCSV
+from parse_functions import BetterCSV, binary_search
 import time
 DATA_DIR = "/data/"
 MASTERS_DIR = "/masters/"
@@ -16,9 +16,11 @@ def write_csv(filepath,rows):
         hs.write(",".join(mline)+"\r")
 
     hs.close()
-def get_all_filenames():
-
+def get_all_source_file_names():
     return File.objects.filter(is_master=False)
+
+def get_all_master_file_names():
+    return File.objects.filter(is_master=True)
 
 def upload_file(request, is_master):
     file = File()
@@ -43,31 +45,33 @@ def rename_file(fname, new_filename):
 def execute(request):
     start = time.time()
     messages=[]
-    for master in File.objects.filter(is_master=True):
-        master_copy= BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+master.filename).read()))
-        filenames = []
+    for master in request.POST.getlist('master_files'):
+        master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
 
-        for file in request.POST.getlist('filenames'):
-            data_file= BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+file).read()))
-            #load the search columns
+
+        for file in request.POST.getlist('source_files'):
+            data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
+            # load the search columns
             master_search_columns = []
-            for msc in SearchColumn.objects.filter(datafile=master):
-                master_search_columns.append(msc.column_id-1)
-            data_search_columns =[]
-            for dsc in SearchColumn.objects.filter(datafile=File.objects.get(filename=file)):
-                data_search_columns.append(dsc.column_id-1)
-            #load the mappings
+            for msc in SearchColumn.objects.filter(file=File.objects.get(filename=master)):
+                master_search_columns.append(msc.column_id - 1)
+            data_search_columns = []
+            for dsc in SearchColumn.objects.filter(file=File.objects.get(filename=file)):
+                data_search_columns.append(dsc.column_id - 1)
+            # load the mappings
             mappings = {}
-            for mapping in ColumnMapping.objects.filter(datafile=File.objects.get(filename=file)):
-                mappings[mapping.master_column_id-1]=mapping.source_column_id-1
-            #actually execute and update
-            results =iterate(master_copy, data_file,master_search_columns,data_search_columns,mappings,file)
+            for mapping in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                        source_file=File.objects.get(filename=file)):
+                mappings[mapping.master_column_id - 1] = mapping.source_column_id - 1
+            # actually execute and update
+            results = iterate(master_copy, data_file, master_search_columns, data_search_columns, mappings, file)
             master_copy = results['data']
             messages.append(results['message'])
 
 
-        write_csv(str(BASE_DIR+MASTERS_DIR+str(time.strftime("%d%m%Y"))+str(time.strftime("%H-%M-%S"))+".csv"), master_copy)
-        return {"messages": messages, "runtime":time.time()-start}
+            write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
+
+    return {"messages": messages, "runtime":time.time()-start}
 
 
 
@@ -83,18 +87,31 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
     new_master = []
     found_count = 0
     for line in master_copy:
-        master_args=[]
-        for column in master_search_columns:
-            master_args.append(line[column])
-        for d in data_copy:
-            data_args =[]
-            for column in data_search_columns:
-                data_args.append(d[column])
-            if better_csv.search(master_args, data_args) :
-                line = update_row(line, d, column_mapping)
-                found_count = found_count + 1
+        for m in master_search_columns:
+            for d in data_search_columns:
+                data_copy = sorted(data_copy, key=lambda x: x[d], reverse=False)
+                results = binary_search(line, data_copy,m, d)
+                found = results["result"]
+                if found:
+                    line = update_row(line, data_copy[results["index"]], column_mapping)
+                    found_count = found_count +1
+                    break
+            if found:
                 break
         new_master.append(line)
+
+        # master_args=[]
+        # for column in master_search_columns:
+        #     master_args.append(line[column])
+        # for d in data_copy:
+        #     data_args =[]
+        #     for column in data_search_columns:
+        #         data_args.append(d[column])
+        #     if better_csv.search(master_args, data_args) :
+        #         line = update_row(line, d, column_mapping)
+        #         found_count = found_count + 1
+        #         break
+        # new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
 
 def get_result_files():

@@ -3,8 +3,45 @@ import string
 """
 Function to read a file and return a string of the contents
 """
+def binary_search(master_row, source_data,master_search_index, source_search_index):
+    lower_bound = 0
+    upper_bound = len(source_data) - 1
+    found = False
+    while lower_bound <= upper_bound and not found:
+        middle_pos = (lower_bound + upper_bound) // 2
+        # if BetterCSV().search([source_data[middle_pos][source_search_index]],master_row[master_search_index]):
+        #         # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+        #         found = True
+        #         break
+        if source_data[middle_pos][source_search_index] < master_row[master_search_index]:
+            if BetterCSV().search([source_data[middle_pos][source_search_index]],[master_row[master_search_index]]):
+                # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+                return {"result": True, "index": middle_pos}
+                break
+            # print "working lower bound"
+            lower_bound = middle_pos + 1
+
+        elif source_data[middle_pos][source_search_index] > master_row[master_search_index] :
+            if BetterCSV().search([master_row[master_search_index]],[source_data[middle_pos][source_search_index]]):
+                # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+                return {"result": True, "index": middle_pos}
+                break
+            # print "working upper bound"
+            upper_bound = middle_pos - 1
+        else:
+            # print " BINARY SEARCH Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+            if len(source_data[middle_pos][source_search_index]) > 5:
+
+                return {"result": True, "index": middle_pos}
+            else:
+                break
+
+
+    return {"result": False, "index": -1}
 
 class BetterCSV:
+
+
     def make_parseable(self,string,characters):
         for search,replace_with in characters.iteritems():
                 if search in string:
@@ -127,7 +164,7 @@ class BetterCSV:
                     #     return False
                     for search_value in valid_search_values:
                         if search_term in search_value:
-                            print "Match Found: %s in %s" % (search_term,search_value)
+                            # print "Match Found: %s in %s" % (search_term,search_value)
                             return True
             # print "No valid search terms :("
             # for search_value in valid_search_values:
@@ -145,7 +182,7 @@ class BetterCSV:
     def get_lists(self,lines):
         arrays = []
         for string in lines:
-            print string
+            # print string
             should_get_last = True
             last_position = 0
             line = []

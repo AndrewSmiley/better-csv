@@ -110,13 +110,13 @@ class BetterCSV:
                             from_end = from_end+1
                             for search_value in valid_search_values:
                                 if search_term in search_value:
-                                    # print "Match Found: %s in %s" % (search_term,search_value)
+                                    print "Match Found: %s in %s" % (search_term,search_value)
                                     return True
                         else:
                             from_end = from_end+1
                             for search_value in valid_search_values:
                                 if search_term[:from_end*-1] in search_value:
-                                    # print "Match Found: %s in %s" % (search_term,search_value)
+                                    print "Match Found: %s in %s" % (search_term,search_value)
                                     return True
             else:
                 for search_term in valid_search_terms:
@@ -127,7 +127,7 @@ class BetterCSV:
                     #     return False
                     for search_value in valid_search_values:
                         if search_term in search_value:
-                            # print "Match Found: %s in %s" % (search_term,search_value)
+                            print "Match Found: %s in %s" % (search_term,search_value)
                             return True
             # print "No valid search terms :("
             # for search_value in valid_search_values:
@@ -145,7 +145,7 @@ class BetterCSV:
     def get_lists(self,lines):
         arrays = []
         for string in lines:
-            # print string
+            print string
             should_get_last = True
             last_position = 0
             line = []
@@ -169,11 +169,23 @@ class BetterCSV:
                             line.append(string[last_position: last_position+first_comma+second_comma])
                             last_position = last_position+first_comma+second_comma+1
                         else:
-                            tmp =string[last_position:last_position+string[last_position+1:].find("\"")+2]
+                            end_pos = last_position+string[last_position+1:].find("\"")+2
+                            multiple_qoutes = False
+                            if string[end_pos] != ",":
+                                end_pos = end_pos+1
+                                while not multiple_qoutes:
+                                    if string[end_pos] == ",":
+                                        multiple_qoutes = True
+                                        end_pos = end_pos +1
+                                    else:
+                                        end_pos = end_pos +1
+
+
+                            tmp =string[last_position:end_pos]
                             line.append(tmp)
                             # line.append(string[last_position:last_position+string[last_position:].find("\"")+1])
                             #the +1 ensures we skip passed the next one
-                            last_position = string.find(tmp)+1+len(tmp)
+                            last_position = string.find(tmp)+1+len(tmp) if string.find(tmp)+1+len(tmp) > last_position else last_position +1
                             # last_position = last_position+string[last_position+1:].find("\"")+1
 
 
@@ -196,6 +208,17 @@ class BetterCSV:
                                 line.append(string[last_position:comma_pos + last_position:])
                                 open_qoute_pos = last_position + comma_pos + 1
                                 close_qoute_pos = string[open_qoute_pos + 1:len(string)].find('\"')
+                                multiple_qoutes = False
+                                try:
+                                    if string[open_qoute_pos + close_qoute_pos + 2] == "\"" or string[open_qoute_pos + close_qoute_pos + 2] != ",":
+                                        while not multiple_qoutes:
+                                            if string[open_qoute_pos + close_qoute_pos + 2 +1] == ",":
+                                                multiple_qoutes = True
+                                                close_qoute_pos = close_qoute_pos +1
+                                            else:
+                                                close_qoute_pos = close_qoute_pos +1
+                                except:
+                                    pass
                                 line.append(string[open_qoute_pos:(close_qoute_pos + 2) + open_qoute_pos])
                                 last_position = open_qoute_pos + close_qoute_pos + 2
                                 if last_position == len(string):

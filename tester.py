@@ -4,7 +4,7 @@ from parse_functions import BetterCSV
 from excel_functions import iterate
 import time
 better_csv=BetterCSV()
-master_copy = better_csv.get_lists(better_csv.get_lines(open("master_copy_updated_data.csv").read()))
+master_copy = better_csv.get_lists(better_csv.get_lines(open("master_test.csv").read()))
 # master_copy_lines=[]
 # for line in master_copy:
 #     if len(line) < 32:

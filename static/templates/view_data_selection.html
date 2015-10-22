@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+    <script type="text/javascript"></script>
      <h4>Select a file from the list</h4>
     <form action="{% url "view_data" %}" method="post">{% csrf_token %}
+    <p>Folder</p>
+    <select name="folder">
+        {% for f in folders %}
+            <option value="{{ f.folder_name }}">{{ f.folder_name }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <p>File</p>
     <select name="filename">
         {% for f in files %}
             <option value="{{ f }}">{{ f }}</option>

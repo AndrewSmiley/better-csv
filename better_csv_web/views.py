@@ -4,6 +4,7 @@ from functions import *
 from django.core.urlresolvers import reverse
 from better_csv_web.settings import *
 from functions import get_file
+from models import Folder
 
 def index(request):
     return render(request, 'index.html')
@@ -43,12 +44,12 @@ def download(request):
         return HttpResponseRedirect(reverse("dowload_list"))
 
 def view_data_selection(request):
-    return  render(request, "view_data_selection.html", {"files": get_all_files()})
+    return  render(request, "view_data_selection.html", {"files": get_all_files(), "folders":Folder.objects.all()})
 def view_data(request):
     if request.method != 'POST':
         return ("This is not a valid way to access")
     else:
         return render(request, "view_data.html", {"rows":BetterCSV().get_lists(BetterCSV().get_lines(get_file(BASE_DIR+DATA_DIR, request.POST['filename']).read())), "file":request.POST['filename']})
-
-
+def ajax_handler(request,action):
+    return HttpResponse("Proof of concept: %s" % (action))
 

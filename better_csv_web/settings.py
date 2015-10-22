@@ -66,12 +66,17 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static')
+STATIC_ROOT=''
 
 STATIC_URL = '/static/'
 
 # List of finder classes that know how to find static files in
 # various locations.
+
+STATICFILES_DIRS = (
+     os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static'),
+)
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -84,8 +89,20 @@ TEMPLATE_LOADERS = (
 
 #     'django.template.loaders.eggs.Loader',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    'django.core.context_processors.request',
+)
+
 TEMPLATE_DIRS = (
-    STATIC_ROOT + '/templates/',
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static') + '/templates/',
 )
 MEDIA_ROOT = BASE_DIR + '/media/'
 

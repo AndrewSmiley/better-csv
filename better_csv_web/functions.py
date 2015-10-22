@@ -79,7 +79,8 @@ def execute(request):
 
 def update_row(master_row, data_row, column_mapping):
     for key,value in column_mapping.iteritems():
-        master_row[key]=data_row[value]
+
+        master_row[key]=data_row[value] if len(data_row[value]) > 0 and data_row[value] != "0" else master_row[key]
     return master_row
 
 def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):

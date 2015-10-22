@@ -36,8 +36,8 @@ def download(request):
     if request.method == 'POST':
         file = get_file(BASE_DIR+MASTERS_DIR, request.POST['filename'])
         response = HttpResponse()
-        response['Content-Disposition'] = 'attachment; filename="%"' % request.POST['filename']
-        response.write(file.body)
+        response['Content-Disposition'] = 'attachment; filename="%s"' % request.POST['filename']
+        response.write(file.read())
         return response
     else:
         return HttpResponseRedirect(reverse("dowload_list"))

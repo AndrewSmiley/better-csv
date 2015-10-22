@@ -8,7 +8,7 @@ from os.path import isfile, join
 from parse_functions import BetterCSV, binary_search
 import time
 DATA_DIR = "/data/"
-MASTERS_DIR = "/masters/"
+MASTERS_DIR = "/results/"
 
 def write_csv(filepath,rows):
     hs = open(filepath,"w+")
@@ -120,6 +120,9 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
 def get_result_files():
 
     return [ f for f in listdir(BASE_DIR+MASTERS_DIR) if isfile(join(BASE_DIR+MASTERS_DIR,f)) ]
+
+def get_all_files():
+    return [ f for f in listdir(BASE_DIR+MASTERS_DIR) if isfile(join(BASE_DIR+MASTERS_DIR,f)) ] + [ f for f in listdir(BASE_DIR+DATA_DIR) if isfile(join(BASE_DIR+DATA_DIR,f)) ]
 
 def get_file(filepath, filename):
     return open(filepath+filename)

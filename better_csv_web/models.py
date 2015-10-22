@@ -15,7 +15,7 @@ class ColumnMapping(models.Model):
     master_file= models.ForeignKey(File, null=False, related_name='master_file')
     source_file= models.ForeignKey(File, null=False,related_name='source_file')
     def __unicode__(self):
-        return "%s %s" % (self.source_file.filename, str(self.source_column_id))
+        return "%s %s" % (self.source_file.filename, str(self.source_column_id) if self.source_column_name == "N/A" else self.source_column_name)
         # return self.master_column_name if self.master_column_name != "N/A" else str(self.master_column_id)
 class SearchColumn(models.Model):
     column_id = models.IntegerField()
@@ -23,5 +23,5 @@ class SearchColumn(models.Model):
     column_name = models.CharField(max_length=70, default="N/A")
 
     def __unicode__(self):
-        return "%s %s" % (self.file.filename, self.column_id)
+        return "%s %s" % (self.file.filename, self.column_id if self.column_name == "N/A" else self.column_name)
         # return  self.column_name if self.column_name != "N/A" else str(self.column_id)

@@ -50,6 +50,7 @@ def execute(request):
 
 
         for file in request.POST.getlist('source_files'):
+            print "Processing file"+file
             data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
             # load the search columns
             master_search_columns = []
@@ -88,6 +89,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
     found_count = 0
     for line in master_copy:
         for m in master_search_columns:
+            found = False
             for d in data_search_columns:
                 data_copy = sorted(data_copy, key=lambda x: x[d], reverse=False)
                 results = binary_search(line, data_copy,m, d)

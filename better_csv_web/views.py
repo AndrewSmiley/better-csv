@@ -48,8 +48,7 @@ def view_data(request):
     if request.method != 'POST':
         return ("This is not a valid way to access")
     else:
-        rows = BetterCSV().get_lists(BetterCSV().get_lines(get_file(BASE_DIR+DATA_DIR, request.POST['filename']).read()))
-        return render(request, "view_data.html", {"rows":rows, "file":request.POST['filename']})
+        return render(request, "view_data.html", {"rows":BetterCSV().get_lists(BetterCSV().get_lines(get_file(BASE_DIR+DATA_DIR, request.POST['filename']).read())), "file":request.POST['filename']})
 
 
 

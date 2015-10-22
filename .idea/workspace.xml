@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e396e359-a964-496f-9069-9d74b9314ad3" name="Default" comment="after adding new files&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/templates/view_data.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/templates/view_data_selection.html" />
-      <change type="MOVED" beforePath="C:\Users\smileya\PycharmProjects\better-csv\masters\2010201506-17-24.csv" afterPath="$PROJECT_DIR$/results/2010201506-17-24.csv" />
-      <change type="MOVED" beforePath="C:\Users\smileya\PycharmProjects\better-csv\masters\2110201513-22-46.csv" afterPath="$PROJECT_DIR$/results/2110201513-22-46.csv" />
-      <change type="MOVED" beforePath="C:\Users\smileya\PycharmProjects\better-csv\masters\leah_22102015.csv" afterPath="$PROJECT_DIR$/results/leah_22102015.csv" />
-      <change type="MOVED" beforePath="C:\Users\smileya\PycharmProjects\better-csv\masters\this_is_it_1019.csv" afterPath="$PROJECT_DIR$/results/this_is_it_1019.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage.db" afterPath="$PROJECT_DIR$/storage.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Excel Parser.iml" afterPath="$PROJECT_DIR$/.idea/Excel Parser.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/templates/base.html" afterPath="$PROJECT_DIR$/static/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/better_csv_web/functions.py" afterPath="$PROJECT_DIR$/better_csv_web/functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/better_csv_web/urls.py" afterPath="$PROJECT_DIR$/better_csv_web/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/better_csv_web/views.py" afterPath="$PROJECT_DIR$/better_csv_web/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Excel Parser.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,11 +54,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/better_csv_web/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.81026787">
+              <caret line="50" column="110" selection-start-line="50" selection-start-column="110" selection-end-line="50" selection-end-column="110" />
               <folding />
             </state>
           </provider>
@@ -139,11 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="functions.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="functions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/better_csv_web/functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.7265625">
-              <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
               <folding>
                 <element signature="e#24#74#0" expanded="true" />
               </folding>
@@ -239,8 +226,8 @@
         <option value="$PROJECT_DIR$/better_csv_web/urls.py" />
         <option value="$PROJECT_DIR$/better_csv_web/functions.py" />
         <option value="$PROJECT_DIR$/static/templates/view_data_selection.html" />
-        <option value="$PROJECT_DIR$/better_csv_web/views.py" />
         <option value="$PROJECT_DIR$/static/templates/view_data.html" />
+        <option value="$PROJECT_DIR$/better_csv_web/views.py" />
       </list>
     </option>
   </component>
@@ -1320,14 +1307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/better_csv_web/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/templates/view_data_selection.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846">
@@ -1348,11 +1327,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/better_csv_web/functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7265625">
-          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding>
             <element signature="e#24#74#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/better_csv_web/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.81026787">
+          <caret line="50" column="110" selection-start-line="50" selection-start-column="110" selection-end-line="50" selection-end-column="110" />
+          <folding />
         </state>
       </provider>
     </entry>

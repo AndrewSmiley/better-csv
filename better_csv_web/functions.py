@@ -45,11 +45,11 @@ def rename_file(fname, new_filename):
 def execute(request):
     start = time.time()
     messages=[]
-    for master in request.POST.getlist('master_files'):
+    for master in request.POST.getlist('master_files[]'):
         master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
 
 
-        for file in request.POST.getlist('source_files'):
+        for file in request.POST.getlist('source_files[]'):
             print "Processing file"+file
             data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
             # load the search columns
@@ -126,3 +126,6 @@ def get_all_files():
 
 def get_file(filepath, filename):
     return open(filepath+filename)
+
+def get_files_in_folder(filepath):
+    return [ f for f in listdir(filepath) if isfile(join(filepath,f)) ]

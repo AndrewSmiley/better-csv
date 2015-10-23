@@ -49,7 +49,16 @@ def view_data(request):
     if request.method != 'POST':
         return ("This is not a valid way to access")
     else:
-        return render(request, "view_data.html", {"rows":BetterCSV().get_lists(BetterCSV().get_lines(get_file(BASE_DIR+DATA_DIR, request.POST['filename']).read())), "file":request.POST['filename']})
+        return render(request, "view_data.html", {"rows":BetterCSV().get_lists(BetterCSV().get_lines(get_file("%s/%s/"%(BASE_DIR,request.POST['folder']), request.POST['filename']).read())), "file":request.POST['filename']})
 def ajax_handler(request,action):
+    if action == u'get_files':
+        return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x,x) for x in get_files_in_folder(("%s/%s/" % (BASE_DIR,request.GET['folder']))))))
+        pass
+    elif action == u'run_batch':
+        results = execute(request)
+        messages = results['messages']
+        messages.append("Total Time: "+str(results['runtime'])+" Seconds")
+        return HttpResponse(''.join(list("<p>%s</p>" % (x) for x in messages)))
+
     return HttpResponse("Proof of concept: %s" % (action))
 

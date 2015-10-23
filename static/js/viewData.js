@@ -5,36 +5,38 @@
 /**
 Let's see if i can remember how this shit is supposed to work
  */
-function ajaxGetScholarshipForm(registration_id){
+function getFilesInFolder(){
     $.ajax({
-        url : "/daapcamps/registration/get/scholarship_form/",
+        url : "/ajax_handler/get_files/",
         type: "get",
         data : {
-            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
+            'folder' : $('.folder').find(":selected").text()
 
         },
         dataType: "html",
         success: function(data, textStatus, jqXHR){
             //try to append the html data recieved
-            $("#form").html(data);
-
-            $("#scholarship_dialog").dialog({
-                width: '600px',
-                padding: '100px',
-                //#height: '500px',
-                autoOpen: false,
-                show: {
-                    effect: "blind",
-                    duration: 1000
-                },
-                hide: {
-                    effect: "explode",
-                    duration: 1000
-                }
-            });
-
-            $("#registration_id").attr('value', registration_id)
-          $("#scholarship_dialog").dialog("open");
+            console.log(data)
+            $("#filename").html(data);
+          //
+          //  $("#scholarship_dialog").dialog({
+          //      width: '600px',
+          //      padding: '100px',
+          //      //#height: '500px',
+          //      autoOpen: false,
+          //      show: {
+          //          effect: "blind",
+          //          duration: 1000
+          //      },
+          //      hide: {
+          //          effect: "explode",
+          //          duration: 1000
+          //      }
+          //  });
+          //
+          //  $("#registration_id").attr('value', registration_id)
+          //$("#scholarship_dialog").dialog("open");
 
 
         }
@@ -46,3 +48,4 @@ function ajaxGetScholarshipForm(registration_id){
 
     });
 }
+

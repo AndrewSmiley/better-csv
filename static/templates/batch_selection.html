@@ -1,16 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Select the files you would like to run against</h3>
-<form action="{% url "run_batch" %}" method="post">{% csrf_token %}
+    <script type="text/javascript" src="/static/js/runBatch.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+       $('#results').hide();
+        $('#loading').hide();
+        console.log("We run it");
+    });
+
+   $(document).on("click", "#runBtn", function(){
+        console.log("We run it");
+       $('#loading').show();
+       $('#runFrm').hide();
+       runBatch();
+    });
+
+    $(document).on("click", "#runAgainBtn", function(){
+        $('#runFrm').show();
+        $('#results').hide();
+        $('#loading').hide();
+    });
+    </script>
+<div id="runFrm">
+    <h3>Select the files you would like to run against</h3>
+
+    <form action="{% url "run_batch" %}" method="post">{% csrf_token %}
     <h4>Select Source Files</h4><br>
     {%  for file in source_files %}
-        <input type="checkbox" name="source_files" value="{{ file.filename }}"> {{ file.filename }}<br>
+        <input class="source_files" type="checkbox" name="source_files" value="{{ file.filename }}"> {{ file.filename }}<br>
     {% endfor %}<br>
 <h4>Select Master Files</h4><br>
     {%  for file in master_files %}
-        <input type="checkbox" name="master_files" value="{{ file.filename }}"> {{ file.filename }}<br>
+        <input class="master_files" type="checkbox" name="master_files" value="{{ file.filename }}"> {{ file.filename }}<br>
     {% endfor %}<br>
     <br>
-    <input type="submit" value="Run">
 </form>
+    <button type="button" id="runBtn">Run</button>
+</div>
+
+    <div id="results">
+    <h4>Results</h4>
+        <img src="/static/images/mammoth.gif">
+    <div id="result_div"></div>
+    <button type="button" id="runAgainBtn">Run New Batch</button>
+    </div>
+    <div id="loading">
+    <img src="/static/images/d9874.gif">
+    <p>We're Chasing Down Your Data</p>
+    </div>
 {% endblock %}

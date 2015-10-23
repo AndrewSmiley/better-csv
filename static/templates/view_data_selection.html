@@ -1,20 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-    <script type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/viewData.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+            getFilesInFolder();
+        };
+        $(document).on('change','.folder',function(){
+            getFilesInFolder();
+        });
+    </script>
      <h4>Select a file from the list</h4>
     <form action="{% url "view_data" %}" method="post">{% csrf_token %}
     <p>Folder</p>
-    <select name="folder">
+    <select name="folder" class="folder">
         {% for f in folders %}
             <option value="{{ f.folder_name }}">{{ f.folder_name }}</option>
         {% endfor %}
     </select>
     <br><br>
     <p>File</p>
-    <select name="filename">
-        {% for f in files %}
-            <option value="{{ f }}">{{ f }}</option>
-        {% endfor %}
+    <select name="filename" id="filename">
+{#   folder     {% for f in files %}#}
+{#            <option value="{{ f }}">{{ f }}</option>#}
+{#        {% endfor %}#}
     </select>
     <br><br>
     <input type="submit" value="View">

@@ -59,6 +59,10 @@ def ajax_handler(request,action):
         messages = results['messages']
         messages.append("Total Time: "+str(results['runtime'])+" Seconds")
         return HttpResponse(''.join(list("<p>%s</p>" % (x) for x in messages)))
+    elif action == u'search':
+        results = searchInFiles()
 
     return HttpResponse("Proof of concept: %s" % (action))
 
+def search(request):
+    return render(request, "search.html",{"files":get_all_files()})

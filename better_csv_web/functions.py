@@ -129,3 +129,6 @@ def get_file(filepath, filename):
 
 def get_files_in_folder(filepath):
     return [ f for f in listdir(filepath) if isfile(join(filepath,f)) ]
+
+def searchInFiles(request):
+    pass

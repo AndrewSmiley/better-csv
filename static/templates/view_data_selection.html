@@ -8,6 +8,12 @@
         $(document).on('change','.folder',function(){
             getFilesInFolder();
         });
+    $(document).on("click", "#runBtn", function(){
+        console.log("We run it");
+       $('#loading').show();
+       $('#runFrm').hide();
+       runBatch();
+    });
     </script>
      <h4>Select a file from the list</h4>
     <form action="{% url "view_data" %}" method="post">{% csrf_token %}

@@ -53,7 +53,7 @@ def view_data(request):
 def ajax_handler(request,action):
     if action == u'get_files':
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x,x) for x in get_files_in_folder(("%s/%s/" % (BASE_DIR,request.GET['folder']))))))
-        pass
+
     elif action == u'run_batch':
         results = execute(request)
         messages = results['messages']
@@ -61,8 +61,10 @@ def ajax_handler(request,action):
         return HttpResponse(''.join(list("<p>%s</p>" % (x) for x in messages)))
     elif action == u'search':
         results = searchInFiles()
+    elif action == u'get_files_for_search':
+        return HttpResponse(''.join(list("<input type=\"checkbox\" name=\"search_files\" value=\"%s\">%s<br>" % (x,x) for x in get_files_in_folder(("%s/%s/" % (BASE_DIR,request.GET['folder']))))))
 
     return HttpResponse("Proof of concept: %s" % (action))
 
 def search(request):
-    return render(request, "search.html",{"files":get_all_files()})
+    return render(request, "search.html",{ "folders":Folder.objects.all()})

@@ -112,7 +112,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
         #         data_args.append(d[column])
         #     if better_csv.search(master_args, data_args) :
         #         line = update_row(line, d, column_mapping)
-        #         found_count = found_count + 1
+        #         found_count = found_count + 1You
         #         break
         # new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
@@ -131,4 +131,12 @@ def get_files_in_folder(filepath):
     return [ f for f in listdir(filepath) if isfile(join(filepath,f)) ]
 
 def searchInFiles(request):
-    pass
+    search_results = []
+    for file in request.POST.getlist('search_files[]'):
+        rows =BetterCSV().get_lists(BetterCSV().get_lines(get_file("%s/%s/"%(BASE_DIR,request.POST['folder']))))
+        i = 0
+        while i < len(rows[0]):
+            rows = sorted(rows, key=lambda x: x[i], reverse=False)
+            results = binary_search(line, data_copy,m, d)
+
+

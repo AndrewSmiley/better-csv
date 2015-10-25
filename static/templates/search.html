@@ -5,18 +5,30 @@
       $(document).ready(function () {
        $('#results').hide();
         $('#loading').hide();
+          getFilesInFolder();
         console.log("We run it");
     });
+      $(document).on('change','.folder',function(){
+            getFilesInFolder();
+        });
     </script>
     <div class="search_div">
     <h4>Search</h4><br>
     <input name="search_value" id="search_text" type="text" autocomplete="on"><br>
+        <br>
+        <h4>Select The File Folder</h4>
+        <select name="folder" class="folder">
+            {% for f in folders %}
+                <option value="{{ f }}">{{ f }}</option>
+            {% endfor %}
+        </select>
+
     <br>
     <h4>Select Files to Search In</h4>
-    {% for file in files %}
-    <input type="checkbox" value=" {{ file }}" name="search_files">{{ file }}<br>
-    {% endfor %}
-    <br><br>
+   <div class="files_div">
+
+   </div>
+        <br>
     <button type="button" id="search">Search</button>
     </div>
 

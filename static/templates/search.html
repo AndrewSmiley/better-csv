@@ -11,10 +11,26 @@
       $(document).on('change','.folder',function(){
             getFilesInFolder();
         });
+
+    $(document).on("click", "#searchBtn", function(){
+       searchForData();
+        console.log("We run it");
+       $('#loading').show();
+        $('.search_div').hide();
+
+    });
+    $(document).on("click", "#searchAgain", function(){
+{#       searchForData();#}
+        console.log("We run it");
+       $('.search_div').show();
+        $('#results').hide();
+
+    });
     </script>
     <div class="search_div">
     <h4>Search</h4><br>
-    <input name="search_value" id="search_text" type="text" autocomplete="on"><br>
+    <form method="post">{% csrf_token %}
+    <input name="search_text" id="search_text" type="text"><br>
         <br>
         <h4>Select The File Folder</h4>
         <select name="folder" class="folder">
@@ -29,7 +45,8 @@
 
    </div>
         <br>
-    <button type="button" id="search">Search</button>
+    <button type="button" id="searchBtn">Search</button>
+    </form>
     </div>
 
     <div id="results">

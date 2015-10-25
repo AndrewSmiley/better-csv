@@ -5,7 +5,7 @@ import traceback
 import time
 from os import listdir
 from os.path import isfile, join
-from parse_functions import BetterCSV, binary_search
+from parse_functions import BetterCSV, binary_search, basic_binary_search
 import time
 DATA_DIR = "/data/"
 MASTERS_DIR = "/results/"
@@ -130,13 +130,32 @@ def get_file(filepath, filename):
 def get_files_in_folder(filepath):
     return [ f for f in listdir(filepath) if isfile(join(filepath,f)) ]
 
-def searchInFiles(request):
+def array_to_html_tr(array):
+    return "<tr>%s</tr>" % (''.join(list("<td>%s</td>" % (x) for x in array)))
+
+def search_in_files(request):
     search_results = []
     for file in request.POST.getlist('search_files[]'):
-        rows =BetterCSV().get_lists(BetterCSV().get_lines(get_file("%s/%s/"%(BASE_DIR,request.POST['folder']))))
-        i = 0
-        while i < len(rows[0]):
-            rows = sorted(rows, key=lambda x: x[i], reverse=False)
-            results = binary_search(line, data_copy,m, d)
+        rows =BetterCSV().get_lists(BetterCSV().get_lines(get_file("%s/%s/"%(BASE_DIR,request.POST['folder']), file).read()))
+        start = time.time()
+    #   the binary search way
+        count = 0
+        for row in rows:
+
+            # row = sorted(row, key=lambda x: x[i], reverse=False)
+            try:
+                if basic_binary_search(request.POST['search_term'], sorted(row)):
+                    html = "<table style=\"width: 100%%\" border=\"2\">%s%s</table><br><br>" % (array_to_html_tr(rows[0]),array_to_html_tr(row).replace(request.POST['search_term'],"<mark>%s</mark>" % (request.POST['search_term'])))
+                    first_part = "<h3>Result found in row %s of file %s</h3><br>" % (count+1, file)
+                    search_results.append(first_part+html)
+                    #search_results.append(("Result found in row %s of file %s<br> <table style=\"width: 100%\" border=\"2\">%s</table><br><br>" % (str(count), file, array_to_html_tr(row))).decode('utf-8'))
+                count = count+1
+            except Exception, e:
+                count = count+1
+                print str(e)
+                continue
+        print str("%s seconds to search file %s" % (str(time.time()-start), file))
+
+    return search_results
 
 

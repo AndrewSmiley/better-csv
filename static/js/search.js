@@ -1,7 +1,7 @@
 /**
  * Created by pridemai on 10/24/15.
  */
-function search(){
+function searchForData(){
     $.ajax({
         url : "/ajax_handler/search/",
         type: "post",
@@ -9,9 +9,9 @@ function search(){
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
             'search_files' : $('input[name="search_files"]:checked').map(function(){
 
-      return $(this).val();
-    }).get(),
-            'search_text' : $('.search_text'),
+                return $(this).val();
+            }).get(),
+            'search_term' : $('#search_text').val(),
              'folder' : $('.folder').find(":selected").text()
          },
         dataType: "html",

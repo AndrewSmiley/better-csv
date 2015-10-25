@@ -38,7 +38,24 @@ def binary_search(master_row, source_data,master_search_index, source_search_ind
 
 
     return {"result": False, "index": -1}
+"""
+function to search for a term in an array
+"""
+def basic_binary_search(search_term, array):
+    lower_bound = 0
+    upper_bound = len(array) - 1
+    while lower_bound <= upper_bound:
+        middle_pos = (lower_bound + upper_bound) // 2
+        if  array[middle_pos] < search_term :
+            lower_bound = middle_pos + 1
+        elif array[middle_pos] > search_term:
+            upper_bound = middle_pos - 1
+        else:
+            return True
 
+    return False
+
+    pass
 class BetterCSV:
 
 

@@ -60,7 +60,7 @@ def ajax_handler(request,action):
         messages.append("Total Time: "+str(results['runtime'])+" Seconds")
         return HttpResponse(''.join(list("<p>%s</p>" % (x) for x in messages)))
     elif action == u'search':
-        results = searchInFiles()
+        return HttpResponse(search_in_files(request))
     elif action == u'get_files_for_search':
         return HttpResponse(''.join(list("<input type=\"checkbox\" name=\"search_files\" value=\"%s\">%s<br>" % (x,x) for x in get_files_in_folder(("%s/%s/" % (BASE_DIR,request.GET['folder']))))))
 

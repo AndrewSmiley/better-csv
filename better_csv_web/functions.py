@@ -47,7 +47,7 @@ def execute(request):
     start = time.time()
     messages=[]
     for master in request.POST.getlist('master_files[]'):
-        if ".csv" in master.name :
+        if ".csv" in master :
             master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
 
             for file in request.POST.getlist('source_files[]'):
@@ -72,22 +72,38 @@ def execute(request):
 
 
                 write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
-        elif ".xls" in master.name or ".xlsx" in master.name:
-            master_copy = load_workbook(filename = master.name)
+        elif ".xls" in master or ".xlsx" in master:
+            master_copy = load_workbook(filename = "data/%s" %(master))
             master_sheet = master_copy.get_sheet_by_name(master_copy.get_sheet_names()[0])
             #iterate over the source files
             for file in request.POST.getlist('source_files[]'):
                 #check if it's excel or not
-                if ".xls" in file.name or ".xlsx" in file.name:
+                if ".xls" in file or ".xlsx" in file:
+                    data_wb = load_workbook(filename = 'data/%s'%(file))
+                    data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
+                    dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file)))
+                    result = iterate_excel(master_sheet,data_sheet,
+                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                  dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file))))
+                    master_sheet = result['data']
 
+                    messages.append(result['message'])
                     #ok so if it's an excel file use the iterate function that we had before
                     pass
                 #otherwise check for csv
-                elif ".csv" in file.name:
+                elif ".csv" in file:
                     pass
                 #otherwise we want to just move to the next file cause something is fucky
                 else:
                     continue
+            try:
+                master_copy._add_sheet(master_sheet)
+                master_copy.save('document.xlsx')
+            except:
+                master_copy.save(master)
 
         else:
             continue
@@ -137,24 +153,33 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
 def iterate_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
 
-    master_copy_row = master_copy.row
+    master_copy_row = master_copy.min_row
     found_count=0
-    while master_copy_row < master_copy.max_row:
+    while master_copy_row <= master_copy.max_row:
         data_copy_row = data_copy.min_row
-        found = False
+
         master_args = list(master_copy.cell(row=master_copy_row, column=x).value for x in master_search_columns)
-        while data_copy_row < data_copy.max_row:
-            data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
-            if BetterCSV().search(master_args, data_search_columns):
-                found_count = found_count + 1
-                for x, y in column_mapping:
-                    master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
-                # (master_copy.cell(row=master_copy_row,column=int(x)).value y for x, y in column_mapping)
+        while data_copy_row <= data_copy.max_row:
+            try:
+                print "Working row: %s/%s" % (master_copy_row,data_copy_row)
+                data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
+                if BetterCSV().search(master_args, data_args):
+
+                    found_count = found_count + 1
+                    for x, y in column_mapping:
+                        master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
+                    break
+            except Exception,e:
+                print str(e)
+
+            data_copy_row = data_copy_row +1
+        master_copy_row = master_copy_row +1
 
 
 
 
-     return {"data":master_copy, "message": "%s count: %s" % (filname, found_count) }
+
+    return {"data":master_copy, "message": "%s count: %s" % (filname, found_count) }
 def get_result_files():
 
     return [ f for f in listdir(BASE_DIR+MASTERS_DIR) if isfile(join(BASE_DIR+MASTERS_DIR,f)) ]
@@ -197,3 +222,25 @@ def search_in_files(request):
     return search_results
 
 
+def excel_to_csv(sheet):
+    data_list=[]
+    row = sheet.min_row
+    while row <= sheet.max_row:
+        # print str(row)
+        row_data = []
+        col = sheet.min_column
+        while col <= sheet.max_column:
+            # print data_sheet.cell(row=row, column=col).value
+            try:
+
+                row_data.append(str(sheet.cell(row=row, column=col).value))
+                col=col+1
+            except Exception,e:
+                print str(e)
+                col=col+1
+
+    row = row+1
+    data_list.append(row_data)
+
+
+    return data_list

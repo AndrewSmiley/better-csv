@@ -7,6 +7,7 @@ from os import listdir
 from os.path import isfile, join
 from parse_functions import BetterCSV, binary_search, basic_binary_search
 import time
+from openpyxl import *
 DATA_DIR = "/data/"
 MASTERS_DIR = "/results/"
 
@@ -46,32 +47,50 @@ def execute(request):
     start = time.time()
     messages=[]
     for master in request.POST.getlist('master_files[]'):
-        master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
+        if ".csv" in master.name :
+            master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
+
+            for file in request.POST.getlist('source_files[]'):
+                print "Processing file"+file
+                data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
+                # load the search columns
+                master_search_columns = []
+                for msc in SearchColumn.objects.filter(file=File.objects.get(filename=master)):
+                    master_search_columns.append(msc.column_id - 1)
+                data_search_columns = []
+                for dsc in SearchColumn.objects.filter(file=File.objects.get(filename=file)):
+                    data_search_columns.append(dsc.column_id - 1)
+                # load the mappings
+                mappings = {}
+                for mapping in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file)):
+                    mappings[mapping.master_column_id - 1] = mapping.source_column_id - 1
+                # actually execute and update
+                results = iterate(master_copy, data_file, master_search_columns, data_search_columns, mappings, file)
+                master_copy = results['data']
+                messages.append(results['message'])
 
 
-        for file in request.POST.getlist('source_files[]'):
-            print "Processing file"+file
-            data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
-            # load the search columns
-            master_search_columns = []
-            for msc in SearchColumn.objects.filter(file=File.objects.get(filename=master)):
-                master_search_columns.append(msc.column_id - 1)
-            data_search_columns = []
-            for dsc in SearchColumn.objects.filter(file=File.objects.get(filename=file)):
-                data_search_columns.append(dsc.column_id - 1)
-            # load the mappings
-            mappings = {}
-            for mapping in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                        source_file=File.objects.get(filename=file)):
-                mappings[mapping.master_column_id - 1] = mapping.source_column_id - 1
-            # actually execute and update
-            results = iterate(master_copy, data_file, master_search_columns, data_search_columns, mappings, file)
-            master_copy = results['data']
-            messages.append(results['message'])
+                write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
+        elif ".xls" in master.name or ".xlsx" in master.name:
+            master_copy = load_workbook(filename = master.name)
+            master_sheet = master_copy.get_sheet_by_name(master_copy.get_sheet_names()[0])
+            #iterate over the source files
+            for file in request.POST.getlist('source_files[]'):
+                #check if it's excel or not
+                if ".xls" in file.name or ".xlsx" in file.name:
 
+                    #ok so if it's an excel file use the iterate function that we had before
+                    pass
+                #otherwise check for csv
+                elif ".csv" in file.name:
+                    pass
+                #otherwise we want to just move to the next file cause something is fucky
+                else:
+                    continue
 
-            write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
-
+        else:
+            continue
     return {"messages": messages, "runtime":time.time()-start}
 
 
@@ -116,7 +135,26 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
         #         break
         # new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
+def iterate_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
 
+    master_copy_row = master_copy.row
+    found_count=0
+    while master_copy_row < master_copy.max_row:
+        data_copy_row = data_copy.min_row
+        found = False
+        master_args = list(master_copy.cell(row=master_copy_row, column=x).value for x in master_search_columns)
+        while data_copy_row < data_copy.max_row:
+            data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
+            if BetterCSV().search(master_args, data_search_columns):
+                found_count = found_count + 1
+                for x, y in column_mapping:
+                    master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
+                # (master_copy.cell(row=master_copy_row,column=int(x)).value y for x, y in column_mapping)
+
+
+
+
+     return {"data":master_copy, "message": "%s count: %s" % (filname, found_count) }
 def get_result_files():
 
     return [ f for f in listdir(BASE_DIR+MASTERS_DIR) if isfile(join(BASE_DIR+MASTERS_DIR,f)) ]

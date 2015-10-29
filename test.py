@@ -25,24 +25,6 @@ while row <= data_sheet.max_row:
     row = row+1
     data_list.append(row_data)
 
-# row = master_sheet.min_row
-# master_list=[]
-# while row <= master_sheet.max_row:
-#     # print str(row)
-#     row_data = []
-#     col = master_sheet.min_column
-#     while col <= master_sheet.max_column:
-#         # print data_sheet.cell(row=row, column=col).value
-#         try:
-#             print "%s:%s" % (row, col)
-#             row_data.append(str(master_sheet.cell(row=row, column=col).value))
-#             col=col+1
-#         except Exception,e:
-#             print str(e)
-#             col=col+1
-#
-#     row = row+1
-#     data_list.append(row_data)
 master_search_columns = [4,8]
 data_search_columns = [0,3]
 master_row = master_sheet.min_row

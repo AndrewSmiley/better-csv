@@ -5,7 +5,7 @@ import traceback
 import time
 from os import listdir
 from os.path import isfile, join
-from parse_functions import BetterCSV, binary_search, basic_binary_search
+from parse_functions import BetterCSV, binary_search, basic_binary_search,basic_binary_search_with_added_shit,excel_binary_search
 import time
 from openpyxl import *
 DATA_DIR = "/data/"
@@ -83,11 +83,11 @@ def execute(request):
                     data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
                     dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
                                                             source_file=File.objects.get(filename=file)))
-                    result = iterate_excel(master_sheet,data_sheet,
+                    result = iterate_excel(master_sheet,list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)]),
                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
-                                  dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file))))
+                                  dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file))), file)
                     master_sheet = result['data']
 
                     messages.append(result['message'])
@@ -152,27 +152,51 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
         # new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
 def iterate_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
-
+    print type(column_mapping)
     master_copy_row = master_copy.min_row
     found_count=0
+
     while master_copy_row <= master_copy.max_row:
-        data_copy_row = data_copy.min_row
+        # data_copy_row = data_copy.min_row
 
-        master_args = list(master_copy.cell(row=master_copy_row, column=x).value for x in master_search_columns)
-        while data_copy_row <= data_copy.max_row:
+        # master_args = list(master_copy.cell(row=master_copy_row, column=x).value for x in master_search_columns)
+
+        for m in master_search_columns:
             try:
-                print "Working row: %s/%s" % (master_copy_row,data_copy_row)
-                data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
-                if BetterCSV().search(master_args, data_args):
-
-                    found_count = found_count + 1
-                    for x, y in column_mapping:
-                        master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
-                    break
+                found = False
+                for d in data_search_columns:
+                    d = d-1
+                    data_copy = sorted(data_copy, key=lambda x: x[d].value, reverse=False)
+                    # searchable_data_list = list(x[d] for x in data_copy)
+                    result = excel_binary_search(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy, d)
+                    found = result['result']
+                    if found:
+                        # print "Match Found"
+                        found_count = found_count+1
+                        for x,y in column_mapping:
+                            master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy[int(result['index'])][int(y)-1].value
+                            break
             except Exception,e:
-                print str(e)
+                traceback.print_exc()
 
-            data_copy_row = data_copy_row +1
+            if found:
+                break
+
+
+        # while data_copy_row <= data_copy.max_row:
+        #     try:
+        #         print "Working row: %s/%s" % (master_copy_row,data_copy_row)
+        #         data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
+        #         if BetterCSV().search(master_args, data_args):
+        #
+        #             found_count = found_count + 1
+        #             for x, y in column_mapping:
+        #                 master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
+        #             break
+        #     except Exception,e:
+        #         print str(e)
+
+            # data_copy_row = data_copy_row +1
         master_copy_row = master_copy_row +1
 
 
@@ -230,7 +254,7 @@ def excel_to_csv(sheet):
         row_data = []
         col = sheet.min_column
         while col <= sheet.max_column:
-            # print data_sheet.cell(row=row, column=col).value
+            print sheet.cell(row=row, column=col).value
             try:
 
                 row_data.append(str(sheet.cell(row=row, column=col).value))
@@ -239,8 +263,8 @@ def excel_to_csv(sheet):
                 print str(e)
                 col=col+1
 
-    row = row+1
-    data_list.append(row_data)
+        row = row+1
+        data_list.append(row_data)
 
 
     return data_list

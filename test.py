@@ -1,60 +1,89 @@
 from openpyxl import *
-from parse_functions import BetterCSV, binary_search,basic_binary_search, basic_binary_search_with_added_shit
+from parse_functions import BetterCSV, binary_search,basic_binary_search, basic_binary_search_with_added_shit,excel_binary_search
 
-book2 = load_workbook(filename = 'Book2.xlsx')
+book2 = load_workbook(filename = 'data/master_test.xlsx')
 data_sheet =book2.get_sheet_by_name(book2.get_sheet_names()[0])
 master_book = load_workbook(filename ='leah_color_coded.xlsx')
 master_sheet=master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
+sorted_data = list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
+#
+# for x in sorted(sorted_data, key=lambda x: x[1].value, reverse=False)[0]:
+#     print x.value
 
-row = data_sheet.min_row
-data_list=[]
-while row <= data_sheet.max_row:
-    # print str(row)
-    row_data = []
-    col = data_sheet.min_column
-    while col <= data_sheet.max_column:
-        # print data_sheet.cell(row=row, column=col).value
-        try:
-            print "%s:%s" % (row, col)
-            row_data.append(str(data_sheet.cell(row=row, column=col).value))
-            col=col+1
-        except Exception,e:
-            print str(e)
-            col=col+1
-
-    row = row+1
-    data_list.append(row_data)
-
-master_search_columns = [4,8]
-data_search_columns = [0,3]
+master_search_columns = [4,8    ]
+data_search_columns = [1,10]
 master_row = master_sheet.min_row
-found_count = 0
-# for master_row in master_list:
+found_count= 0
 while master_row <= master_sheet.max_row:
     for m in master_search_columns:
         found = False
         for d in data_search_columns:
-            data_list = sorted(data_list,key=lambda x: x[d], reverse=False)
-            searchable_data_list = list(x[d] for x in data_list)
-            result = basic_binary_search_with_added_shit(master_sheet.cell(row=master_row, column=m).value,searchable_data_list)
-            found = result['result']
-            # results = binary_search(master_row,data_list, m, d)
-            # found = results["result"]
-            if found:
-                print "Match found"
-                found_count = found_count+1
-                master_sheet.cell(row=master_row, column=20).value = int(data_list[int(result['index'])][2])+int(data_list[int(result['index'])][4])
-
+            sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
+            res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), sorted_data, d)
+            if res['result'] ==True:
+                # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
+                found=True
+                found_count= found_count+1
                 break
         if found:
             break
+
+
     master_row = master_row+1
-print str(found_count)
-try:
-    master_book._add_sheet(master_sheet)
-    master_book.save('document.xlsx')
-except:
-    master_book.save('document.xlsx')
+
+
+# sorted_data = list(x for x in [data_sheet.cell(row=y, column=z) for y in range(data_sheet.min_row, data_sheet.max_row) for z in range(data_sheet.min_column, data_sheet.max_column)])
+# sorted_data = list x for x in [data_sheet.cell()]
+print found_count
+# row = data_sheet.min_row
+# data_list=[]
+# while row <= data_sheet.max_row:
+#     # print str(row)
+#     row_data = []
+#     col = data_sheet.min_column
+#     while col <= data_sheet.max_column:
+#         # print data_sheet.cell(row=row, column=col).value
+#         try:
+#             print "%s:%s" % (row, col)
+#             row_data.append(str(data_sheet.cell(row=row, column=col).value))
+#             col=col+1
+#         except Exception,e:
+#             print str(e)
+#             col=col+1
+#
+#     row = row+1
+#     data_list.append(row_data)
+#
+# master_search_columns = [4,8]
+# data_search_columns = [0,3]
+# master_row = master_sheet.min_row
+# found_count = 0
+# # for master_row in master_list:
+# while master_row <= master_sheet.max_row:
+#     for m in master_search_columns:
+#         found = False
+#         for d in data_search_columns:
+#             data_list = sorted(data_list,key=lambda x: x[d], reverse=False)
+#             searchable_data_list = list(x[d] for x in data_list)
+#             result = basic_binary_search_with_added_shit(master_sheet.cell(row=master_row, column=m).value,searchable_data_list)
+#             found = result['result']
+#             # results = binary_search(master_row,data_list, m, d)
+#             # found = results["result"]
+#             if found:
+#                 print "Match found"
+#                 found_count = found_count+1
+#                 master_sheet.cell(row=master_row, column=20).value = int(data_list[int(result['index'])][2])+int(data_list[int(result['index'])][4])
+#
+#                 break
+#         if found:
+#             break
+#     master_row = master_row+1
+# print str(found_count)
+# try:
+#     master_book._add_sheet(master_sheet)
+#     master_book.save('document.xlsx')
+# except:
+#     master_book.save('document.xlsx')
 
 #     better_csv = BetterCSV()
 #     new_master = []

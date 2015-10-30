@@ -1,5 +1,30 @@
 __author__ = 'pridemai'
 import string
+
+"""
+function to search for a term in an array
+"""
+def excel_binary_search(search_term, array,search_key):
+    lower_bound = 0
+    upper_bound = len(array) - 1
+    while lower_bound <= upper_bound:
+        middle_pos = (lower_bound + upper_bound) // 2
+        if  str(array[middle_pos][search_key].value) < search_term :
+            if BetterCSV().search([array[middle_pos][search_key].value],[search_term]):
+                print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                return {'result':True, 'index': middle_pos}
+            lower_bound = middle_pos + 1
+        elif str(array[middle_pos][search_key].value) > search_term:
+            if BetterCSV().search([search_term], [array[middle_pos][search_key].value]):
+                print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                return {'result':True, 'index': middle_pos}
+            upper_bound = middle_pos - 1
+        else:
+            print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+            return {'result':True, 'index': middle_pos}
+
+    return {'result':False,'index':middle_pos}
+    pass
 """
 Function to read a file and return a string of the contents
 """
@@ -55,6 +80,26 @@ def basic_binary_search(search_term, array):
 
     return False
 
+"""
+function to search for a term in an array
+"""
+def basic_binary_search_with_added_shit(search_term, array):
+    lower_bound = 0
+    upper_bound = len(array) - 1
+    while lower_bound <= upper_bound:
+        middle_pos = (lower_bound + upper_bound) // 2
+        if  array[middle_pos] < search_term :
+            if BetterCSV().search([array[middle_pos]],[search_term]):
+                return {'result':True, 'index': middle_pos}
+            lower_bound = middle_pos + 1
+        elif array[middle_pos] > search_term:
+            if BetterCSV().search([search_term], [array[middle_pos]]):
+                return {'result':True, 'index': middle_pos}
+            upper_bound = middle_pos - 1
+        else:
+            return {'result':True, 'index': middle_pos}
+
+    return {'result':False,'index':middle_pos}
     pass
 class BetterCSV:
 
@@ -81,6 +126,12 @@ class BetterCSV:
         valid_search_terms=[]
         valid_search_values=[]
         for s in search_terms:
+            if s == None:
+                continue
+            try:
+               s = str(s)
+            except:
+               break
             s = s.replace("("," ")
             s = s.replace(")"," ")
             s = s.replace(")"," ")
@@ -117,6 +168,12 @@ class BetterCSV:
                 else:
                     valid_search_terms.append(s.replace(" ",""))
         for s in search_values:
+            if s == None:
+                continue
+            try:
+                s = str(s)
+            except:
+                break
             # s = self.make_parseable(s, {"/": " ", "(":" ",")":" "})
             s = s.replace("("," ")
             s = s.replace(")"," ")
@@ -181,7 +238,7 @@ class BetterCSV:
                     #     return False
                     for search_value in valid_search_values:
                         if search_term in search_value:
-                            # print "Match Found: %s in %s" % (search_term,search_value)
+                            print "Match Found: %s in %s" % (search_term,search_value)
                             return True
             # print "No valid search terms :("
             # for search_value in valid_search_values:

@@ -28,3 +28,30 @@ class Folder(models.Model):
     folder_name = models.CharField(max_length=70, null=False)
     def __unicode__(self):
         return self.folder_name
+
+class Action(models.Model):
+    action_name=models.CharField(max_length=50)
+    code = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.action_name
+
+
+class MacroColumn(models.Model):
+    macro_column_name = models.CharField(max_length=50)
+    file_reference = models.ForeignKey(File, null=False)
+    column_id = models.IntegerField(null=False)
+
+    def __unicode__(self):
+        return self.macro_column_name
+
+class Macro(models.Model):
+    macro_name = models.CharField(max_length=50)
+    action = models.ForeignKey(Action, null=False)
+    # arguments = models.ManyToManyField(MacroColumn,null=False)
+    master_file = models.ForeignKey(File, null=False)
+    master_file_column_id = models.IntegerField(null=False)
+    source_file_columns = models.ManyToManyField
+    def __unicode__(self):
+        return self.macro_name
+

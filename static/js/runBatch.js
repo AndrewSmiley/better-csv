@@ -19,7 +19,8 @@ function runBatch(){
     }).get(),
             'source_files' : $('input[name="source_files"]:checked').map(function(){
       return $(this).val();
-    }).get()
+    }).get(),
+            'exact_matches': $(".exact_matches").is(":checked")? "True":"False"
         },
         dataType: "html",
         success: function(data, textStatus, jqXHR){

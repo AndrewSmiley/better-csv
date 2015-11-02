@@ -5,4 +5,5 @@ from models import *
 def process_macro(macro):
     pass
 
-def has_macro()
+def has_macro():
+    pass

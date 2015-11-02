@@ -5,7 +5,7 @@ import traceback
 import time
 from os import listdir
 from os.path import isfile, join
-from parse_functions import BetterCSV, binary_search, basic_binary_search,basic_binary_search_with_added_shit,excel_binary_search
+from parse_functions import *
 import time
 from openpyxl import *
 DATA_DIR = "/data/"
@@ -46,30 +46,42 @@ def rename_file(fname, new_filename):
 def execute(request):
     start = time.time()
     messages=[]
+    # exact_matches = True if 'exact_matches' in request.POST else False
+    exact_matches = True if request.POST.getlist('exact_matches')[0] == "True" else False
     for master in request.POST.getlist('master_files[]'):
         if ".csv" in master :
             master_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + master).read()))
 
             for file in request.POST.getlist('source_files[]'):
-                print "Processing file"+file
-                data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
-                # load the search columns
-                master_search_columns = []
-                for msc in SearchColumn.objects.filter(file=File.objects.get(filename=master)):
-                    master_search_columns.append(msc.column_id - 1)
-                data_search_columns = []
-                for dsc in SearchColumn.objects.filter(file=File.objects.get(filename=file)):
-                    data_search_columns.append(dsc.column_id - 1)
-                # load the mappings
-                mappings = {}
-                for mapping in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file)):
-                    mappings[mapping.master_column_id - 1] = mapping.source_column_id - 1
-                # actually execute and update
-                results = iterate(master_copy, data_file, master_search_columns, data_search_columns, mappings, file)
-                master_copy = results['data']
-                messages.append(results['message'])
+                if ".csv" in file:
+                    print "Processing file"+file
+                    data_file = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR + DATA_DIR + file).read()))
+                    # load the search columns
+                    master_search_columns = []
+                    for msc in SearchColumn.objects.filter(file=File.objects.get(filename=master)):
+                        master_search_columns.append(msc.column_id - 1)
+                    data_search_columns = []
+                    for dsc in SearchColumn.objects.filter(file=File.objects.get(filename=file)):
+                        data_search_columns.append(dsc.column_id - 1)
+                        # load the mappings
+                    mappings = {}
+                    for mapping in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                                source_file=File.objects.get(filename=file)):
+                        mappings[mapping.master_column_id - 1] = mapping.source_column_id - 1
+                        # actually execute and update
+                    results = iterate(master_copy, data_file, master_search_columns, data_search_columns, mappings, file,exact_matches)
+                    master_copy = results['data']
+                    messages.append(results['message'])
+                elif ".xls" in file or ".xlsx" in file:
+                    data_wb = load_workbook(filename = 'data/%s'%(file))
+                    data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
 
+                    result = iterate_master_csv_data_excel(master_copy,data_sheet,list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                                            list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                                            dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file))), file, exact_matches)
+                    master_copy = result['data']
+                    messages.append(result['message'])
 
                 write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
         elif ".xls" in master or ".xlsx" in master:
@@ -87,7 +99,7 @@ def execute(request):
                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
                                   dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file))), file)
+                                                            source_file=File.objects.get(filename=file))), file, exact_matches)
                     master_sheet = result['data']
 
                     messages.append(result['message'])
@@ -95,13 +107,23 @@ def execute(request):
                     pass
                 #otherwise check for csv
                 elif ".csv" in file:
-                    pass
+                    data_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+file).read()))
+                    result = iterate_master_excel_data_csv(master_copy,data_copy,
+                                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                                   dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                            source_file=File.objects.get(filename=file))),
+                                                  file,exact_matches)
+                    master_sheet = result['data']
+                    messages.append(result['message'])
+
+
                 #otherwise we want to just move to the next file cause something is fucky
                 else:
                     continue
             try:
                 master_copy._add_sheet(master_sheet)
-                master_copy.save('document.xlsx')
+                master_copy.save(master)
             except:
                 master_copy.save(master)
 
@@ -118,7 +140,7 @@ def update_row(master_row, data_row, column_mapping):
         master_row[key]=data_row[value] if len(data_row[value]) > 0 and data_row[value] != "0" else master_row[key]
     return master_row
 
-def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
+def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
 
     better_csv = BetterCSV()
     new_master = []
@@ -128,7 +150,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
             found = False
             for d in data_search_columns:
                 data_copy = sorted(data_copy, key=lambda x: x[d], reverse=False)
-                results = binary_search(line, data_copy,m, d)
+                results = binary_search(line, data_copy,m, d,exact_matches)
                 found = results["result"]
                 if found:
                     line = update_row(line, data_copy[results["index"]], column_mapping)
@@ -151,7 +173,75 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
         #         break
         # new_master.append(line)
     return {"data":new_master, "message": "%s count: %s" % (filname, found_count) }
-def iterate_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A"):
+
+
+def iterate_master_excel_data_csv(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
+    master_copy_row = master_copy.min_row
+    found_count=0
+
+    while master_copy_row <= master_copy.max_row:
+        for m in master_search_columns:
+            found = False
+            for d in data_search_columns:
+                data_copy = sorted(data_copy, key=lambda x: x[d-1], reverse=False)
+                results = basic_binary_search_with_searchkey(str(master_copy.cell(row=master_copy_row, column=m)), data_copy,d-1, exact_matches)
+                found = results['result']
+                if found:
+                    found_count = found_count +1
+                    master_copy_row = master_copy_row + 1
+                    for x,y in column_mapping:
+                        master_copy.cell(row=master_copy_row, column=int(x)).value=data_copy[int(results['index'])][int(y)-1]
+                    break
+            if found:
+                break
+        master_copy_row = master_copy_row + 1
+    return {"data": master_copy, "message":"%s count %s" % (filname, found_count)}
+
+def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
+    data_copy_row = data_copy.min_row
+    #
+    # while data_copy_row <= data_copy.max_row:
+    #     for m in master_search_columns:
+    #         for d in data_search_columns:
+    new_master_copy = []
+    found_count = 0
+    for master_line in master_copy:
+        found = False
+        for m in master_search_columns:
+            for d in data_search_columns:
+                results = basic_binary_search_with_searchkey(master_line[m],
+                                                             sorted(list(x for x in [[data_copy.cell(row=y, column=z)  for z in range(data_copy.min_column, data_copy.max_column)] for y in range(data_copy.min_row, data_copy.max_row)]),key=lambda x:[d-1].value,reverse=False),
+                                                            d-1, exact_matches)
+                found = results['result']
+                if found:
+                    found_count = found_count+1
+                    for x,y in column_mapping:
+                        master_line[int(x)-1] = data_copy.cell(row=results['index'], column=int(y)).value
+
+                    break
+            if found:
+                break
+
+
+        new_master_copy.append(master_line)
+
+    return {"data":new_master_copy,"message":"%s count %s" % (filname, found_count)}
+
+
+
+    pass
+
+def iterate_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
+    """
+    Function to iterate over two excel files, find matches and update data
+    :param master_copy:  an openpyxl worksheet
+    :param data_copy: an openpyxl worksheet
+    :param master_search_columns:
+    :param data_search_columns:
+    :param column_mapping:
+    :param filname:
+    :return:
+    """
     print type(column_mapping)
     master_copy_row = master_copy.min_row
     found_count=0
@@ -168,12 +258,13 @@ def iterate_excel(master_copy,data_copy, master_search_columns, data_search_colu
                     d = d-1
                     data_copy = sorted(data_copy, key=lambda x: x[d].value, reverse=False)
                     # searchable_data_list = list(x[d] for x in data_copy)
-                    result = excel_binary_search(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy, d)
+                    result = excel_binary_search(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy, d,exact_matches)
                     found = result['result']
                     if found:
                         # print "Match Found"
                         found_count = found_count+1
                         for x,y in column_mapping:
+                            master_copy_row = master_copy_row + 1
                             master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy[int(result['index'])][int(y)-1].value
                             break
             except Exception,e:
@@ -181,22 +272,6 @@ def iterate_excel(master_copy,data_copy, master_search_columns, data_search_colu
 
             if found:
                 break
-
-
-        # while data_copy_row <= data_copy.max_row:
-        #     try:
-        #         print "Working row: %s/%s" % (master_copy_row,data_copy_row)
-        #         data_args = list(data_copy.cell(row=data_copy_row, column=x).value for x in data_search_columns)
-        #         if BetterCSV().search(master_args, data_args):
-        #
-        #             found_count = found_count + 1
-        #             for x, y in column_mapping:
-        #                 master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy.cell(row=data_copy_row, column=y).value
-        #             break
-        #     except Exception,e:
-        #         print str(e)
-
-            # data_copy_row = data_copy_row +1
         master_copy_row = master_copy_row +1
 
 

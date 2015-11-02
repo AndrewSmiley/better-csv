@@ -1,23 +1,51 @@
 __author__ = 'pridemai'
 import string
 
-"""
-function to search for a term in an array
-"""
-def excel_binary_search(search_term, array,search_key):
+
+def basic_binary_search_with_searchkey(search_term, array,search_key, exact_matches=False):
     lower_bound = 0
     upper_bound = len(array) - 1
     while lower_bound <= upper_bound:
         middle_pos = (lower_bound + upper_bound) // 2
         if  str(array[middle_pos][search_key].value) < search_term :
-            if BetterCSV().search([array[middle_pos][search_key].value],[search_term]):
-                print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
-                return {'result':True, 'index': middle_pos}
+            if not exact_matches:
+                if BetterCSV().search([array[middle_pos][search_key]],[search_term]):
+                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    return {'result':True, 'index': middle_pos}
+            lower_bound = middle_pos + 1
+        elif str(array[middle_pos][search_key]) > search_term:
+            if not exact_matches:
+                if BetterCSV().search([search_term], [array[middle_pos][search_key]]):
+                    print "match found: %s = %s" % (array[middle_pos][search_key], search_term)
+                    return {'result':True, 'index': middle_pos}
+            upper_bound = middle_pos - 1
+        else:
+            print "match found: %s = %s" % (array[middle_pos][search_key], search_term)
+            return {'result':True, 'index': middle_pos}
+
+    return {'result':False,'index':middle_pos}
+    pass
+
+
+"""
+function to search for a term in an array
+"""
+def excel_binary_search(search_term, array,search_key, exact_matches=False):
+    lower_bound = 0
+    upper_bound = len(array) - 1
+    while lower_bound <= upper_bound:
+        middle_pos = (lower_bound + upper_bound) // 2
+        if  str(array[middle_pos][search_key].value) < search_term :
+            if not exact_matches:
+                if BetterCSV().search([array[middle_pos][search_key].value],[search_term]):
+                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    return {'result':True, 'index': middle_pos}
             lower_bound = middle_pos + 1
         elif str(array[middle_pos][search_key].value) > search_term:
-            if BetterCSV().search([search_term], [array[middle_pos][search_key].value]):
-                print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
-                return {'result':True, 'index': middle_pos}
+            if not exact_matches:
+                if BetterCSV().search([search_term], [array[middle_pos][search_key].value]):
+                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    return {'result':True, 'index': middle_pos}
             upper_bound = middle_pos - 1
         else:
             print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
@@ -28,7 +56,7 @@ def excel_binary_search(search_term, array,search_key):
 """
 Function to read a file and return a string of the contents
 """
-def binary_search(master_row, source_data,master_search_index, source_search_index):
+def binary_search(master_row, source_data,master_search_index, source_search_index,exact_matches=False):
     lower_bound = 0
     upper_bound = len(source_data) - 1
     found = False
@@ -39,18 +67,20 @@ def binary_search(master_row, source_data,master_search_index, source_search_ind
         #         found = True
         #         break
         if source_data[middle_pos][source_search_index] < master_row[master_search_index]:
-            if BetterCSV().search([source_data[middle_pos][source_search_index]],[master_row[master_search_index]]):
-                # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
-                return {"result": True, "index": middle_pos}
-                break
+            if not exact_matches:
+                if BetterCSV().search([source_data[middle_pos][source_search_index]],[master_row[master_search_index]]):
+                    # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+                    return {"result": True, "index": middle_pos}
+                    break
             # print "working lower bound"
             lower_bound = middle_pos + 1
 
         elif source_data[middle_pos][source_search_index] > master_row[master_search_index] :
-            if BetterCSV().search([master_row[master_search_index]],[source_data[middle_pos][source_search_index]]):
-                # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
-                return {"result": True, "index": middle_pos}
-                break
+            if not exact_matches:
+                if BetterCSV().search([master_row[master_search_index]],[source_data[middle_pos][source_search_index]]):
+                    # print "Match found %s in %s" % (master_row[master_search_index], source_data[middle_pos][source_search_index])
+                    return {"result": True, "index": middle_pos}
+                    break
             # print "working upper bound"
             upper_bound = middle_pos - 1
         else:
@@ -66,7 +96,7 @@ def binary_search(master_row, source_data,master_search_index, source_search_ind
 """
 function to search for a term in an array
 """
-def basic_binary_search(search_term, array):
+def basic_binary_search(search_term, array,exact_matches=False):
     lower_bound = 0
     upper_bound = len(array) - 1
     while lower_bound <= upper_bound:

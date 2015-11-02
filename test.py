@@ -1,25 +1,31 @@
 from openpyxl import *
-from parse_functions import BetterCSV, binary_search,basic_binary_search, basic_binary_search_with_added_shit,excel_binary_search
+from parse_functions import *
 
-book2 = load_workbook(filename = 'data/master_test.xlsx')
+book2 = load_workbook(filename = 'data/Sunny_Forecast_2015-2024.xlsx')
+print "loaded workbook"
 data_sheet =book2.get_sheet_by_name(book2.get_sheet_names()[0])
-master_book = load_workbook(filename ='leah_color_coded.xlsx')
+master_book = load_workbook(filename ='data/Copy of leah_22102015 colorcodedweightbd.xlsx')
 master_sheet=master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
+# data_sheet = BetterCSV().get_lists(BetterCSV().get_lines(open("data/forecast.csv").read()))
+print "about to get data"
 sorted_data = list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
 #
 # for x in sorted(sorted_data, key=lambda x: x[1].value, reverse=False)[0]:
 #     print x.value
-
-master_search_columns = [4,8    ]
-data_search_columns = [1,10]
+print "finished loading the data"
+master_search_columns = [4,8]
+data_search_columns = [1]
 master_row = master_sheet.min_row
 found_count= 0
 while master_row <= master_sheet.max_row:
+
     for m in master_search_columns:
         found = False
         for d in data_search_columns:
+            # res = basic_binary_search_with_searchkey(str(master_sheet.cell(row=master_row, column=m-1).value), sorted(data_sheet, key=lambda x: x[d], reverse=False), d, True)
             sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
-            res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), sorted_data, d)
+            print "processing part %s" %(str(master_sheet.cell(row=master_row, column=m-1).value))
+            res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m-1).value), sorted_data, d)
             if res['result'] ==True:
                 # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
                 found=True

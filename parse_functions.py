@@ -7,20 +7,22 @@ def basic_binary_search_with_searchkey(search_term, array,search_key, exact_matc
     upper_bound = len(array) - 1
     while lower_bound <= upper_bound:
         middle_pos = (lower_bound + upper_bound) // 2
-        if  str(array[middle_pos][search_key].value) < search_term :
+        if  str(array[middle_pos][search_key]).encode('utf-8','ignore') < search_term :
+            # print "comparing %s and %s" % (array[middle_pos][search_key], search_term)
             if not exact_matches:
                 if BetterCSV().search([array[middle_pos][search_key]],[search_term]):
-                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    print "match found: %s = %s" % (array[middle_pos][search_key], search_term)
                     return {'result':True, 'index': middle_pos}
             lower_bound = middle_pos + 1
-        elif str(array[middle_pos][search_key]) > search_term:
+        elif str(array[middle_pos][search_key]).encode('utf-8','ignore') > search_term:
+            # print "comparing %s and %s" % (array[middle_pos][search_key], search_term)
             if not exact_matches:
                 if BetterCSV().search([search_term], [array[middle_pos][search_key]]):
                     print "match found: %s = %s" % (array[middle_pos][search_key], search_term)
                     return {'result':True, 'index': middle_pos}
             upper_bound = middle_pos - 1
         else:
-            print "match found: %s = %s" % (array[middle_pos][search_key], search_term)
+            # print "match found: %s = %s" % (str(array[middle_pos][search_key]).encode('utf-8','ignore'), search_term)
             return {'result':True, 'index': middle_pos}
 
     return {'result':False,'index':middle_pos}
@@ -159,7 +161,7 @@ class BetterCSV:
             if s == None:
                 continue
             try:
-               s = str(s)
+               s = str(s).encode('utf-8')
             except:
                break
             s = s.replace("("," ")
@@ -201,7 +203,7 @@ class BetterCSV:
             if s == None:
                 continue
             try:
-                s = str(s)
+                s = str(s).encode('utf-8')
             except:
                 break
             # s = self.make_parseable(s, {"/": " ", "(":" ",")":" "})

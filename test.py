@@ -33,11 +33,12 @@ for x,y in {'22':'22', '23':'35'}.iteritems():
 #     indexer = indexer+1
 # data = data_list
 # print("Total rows: {0}".format(len(data)))
-# # book2 = load_workbook(filename='data/Sunny_Forecast_2015-2024.xlsx')
+book2 = load_workbook(filename='data/11-2-2015 leah.xlsx')
 # print "loaded workbook"
-# # data_sheet = book2.get_sheet_by_name(book2.get_sheet_names()[0])
-# master_book = load_workbook(filename='data/Copy of leah_22102015 colorcodedweightbd.xlsx')
-# master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
+
+data_sheet = book2.get_sheet_by_name(book2.get_sheet_names()[0])
+master_book = load_workbook(filename='updates.xlsx')
+master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
 # # data_sheet = BetterCSV().get_lists(BetterCSV().get_lines(open("data/forecast.csv").read()))
 # print "about to get data"
 # # sorted_data = list(x for x in
@@ -48,51 +49,54 @@ for x,y in {'22':'22', '23':'35'}.iteritems():
 # #     print x.value
 # for x in data:
 #     print x[0]
-# print "finished loading the data"
-# master_search_columns = [4, 8]
-# data_search_columns = [0]
-# master_row = master_sheet.min_row
-# found_count = 0
-# column_mappings={'24':7,'25':8,'26':9,'27':10,'28':11,'29':12,'30':13,'31':14,'32':15,'33':16}
-# while master_row <= master_sheet.max_row:
-#
-#     for m in master_search_columns:
-#         found = False
-#         for d in data_search_columns:
-#             try:
-#                 data = sorted(data, key=lambda x: x[d], reverse=False)
-#                 res = basic_binary_search_with_searchkey(str(master_sheet.cell(row=master_row, column=m).value).encode('utf-8','ignore'), data, d, True)
-#                 # sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
-#                 # print "processing part %s" % (master_sheet.cell(row=master_row, column=m ).value)
-#                 # res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m - 1).value), sorted_data, d)
-#                 if res['result'] == True:
-#                     # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
-#                     found = True
-#                     found_count = found_count + 1
-#                     for x,y in column_mappings.iteritems():
-#                         # print "Updating column %s=>%s" % (x,y)
-#                         if data[int(res['index'])][int(y)-1] != '' and data[int(res['index'])][int(y)-1] != None:
-#                             print 'updating row %s: %s=>%s' %(master_row,master_sheet.cell(row=master_row,column=int(x)).value, data[int(res['index'])][int(y)-1])
-#                             master_sheet.cell(row=master_row,column=int(x)).value = data[int(res['index'])][int(y)-1]
-#
-#                     break
-#             except Exception,e:
-#                 # print str(e)
-#                 traceback.print_exc()
-#         if found:
-#             break
-#
-#     master_row = master_row + 1
-#
-# try:
-#     master_book._add_sheet(master_sheet)
-#     master_book.save('Copy of leah_22102015 colorcodedweightbd.xlsx')
-# except:
-#     master_book.save('Copy of leah_22102015 colorcodedweightbd.xlsx')
+print "finished loading the data"
+master_search_columns = [4]
+data_search_columns = [4]
+master_row = master_sheet.min_row
+found_count = 0
+column_mappings={'21':21}
+data_sheet = list(x for x in [[data_sheet.cell(row=y, column=z) for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
+while master_row <= master_sheet.max_row:
+
+    for m in master_search_columns:
+        found = False
+        for d in data_search_columns:
+            try:
+                data_sheet= sorted(data_sheet, key=lambda x: x[d-1].value, reverse=False)
+                # res = basic_binary_search_with_searchkey(str(master_sheet.cell(row=master_row, column=m).value).encode('utf-8','ignore'), data, d, True)
+                # sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
+                # print "processing part %s" % (master_sheet.cell(row=master_row, column=m ).value)
+                res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), data_sheet, d-1, False)
+                if res['result'] == True:
+                    # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
+                    found = True
+                    found_count = found_count + 1
+                    for x,y in column_mappings.iteritems():
+                        # print "Updating column %s=>%s" % (x,y)
+                        if data_sheet[int(res['index'])][int(y)-1] != '' and data_sheet[int(res['index'])][int(y)-1] != None:
+                            print 'updating row %s: %s=>%s' %(master_row,master_sheet.cell(row=master_row,column=int(x)).value, data_sheet[int(res['index'])][int(y)-1].value)
+                            master_sheet.cell(row=master_row,column=int(x)).value = data_sheet[int(res['index'])][int(y)-1].value
+                    break
+
+
+
+            except Exception,e:
+                # print str(e)
+                traceback.print_exc()
+        if found:
+            break
+
+    master_row = master_row + 1
+
+try:
+    master_book._add_sheet(master_sheet)
+    master_book.save('updates2.xlsx')
+except:
+    master_book.save('updates2.xlsx')
 #
 # # sorted_data = list(x for x in [data_sheet.cell(row=y, column=z) for y in range(data_sheet.min_row, data_sheet.max_row) for z in range(data_sheet.min_column, data_sheet.max_column)])
 # # sorted_data = list x for x in [data_sheet.cell()]
-# print found_count
+print found_count
 
 
 # t1 = threading.Thread(target=t)

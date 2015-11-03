@@ -54,8 +54,18 @@ master_search_columns = [4]
 data_search_columns = [4]
 master_row = master_sheet.min_row
 found_count = 0
-column_mappings={'21':21}
-data_sheet = list(x for x in [[data_sheet.cell(row=y, column=z) for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
+column_mappings={'20':22,'21':21}
+data_sheet = list(x for x in [[ data_sheet.cell(row=y, column=z) for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
+counter = 0
+print
+print data_sheet[0][21].value
+print master_sheet.cell(row=master_row, column=20).value
+print data_sheet[0][20].value
+print master_sheet.cell(row=master_row, column=21).value
+
+# for d in data_sheet[0]:
+#     print "%s %s" % (counter,d.value)
+#     counter=counter+1
 while master_row <= master_sheet.max_row:
 
     for m in master_search_columns:
@@ -66,16 +76,18 @@ while master_row <= master_sheet.max_row:
                 # res = basic_binary_search_with_searchkey(str(master_sheet.cell(row=master_row, column=m).value).encode('utf-8','ignore'), data, d, True)
                 # sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
                 # print "processing part %s" % (master_sheet.cell(row=master_row, column=m ).value)
-                res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), data_sheet, d-1, False)
+                res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), data_sheet, d-1, True)
                 if res['result'] == True:
                     # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
                     found = True
                     found_count = found_count + 1
-                    for x,y in column_mappings.iteritems():
-                        # print "Updating column %s=>%s" % (x,y)
-                        if data_sheet[int(res['index'])][int(y)-1] != '' and data_sheet[int(res['index'])][int(y)-1] != None:
-                            print 'updating row %s: %s=>%s' %(master_row,master_sheet.cell(row=master_row,column=int(x)).value, data_sheet[int(res['index'])][int(y)-1].value)
-                            master_sheet.cell(row=master_row,column=int(x)).value = data_sheet[int(res['index'])][int(y)-1].value
+                    # for x,y in column_mappings.iteritems():
+                        # print "Updating column %s=>%s" % (x,y-1)
+                        # if data_sheet[int(res['index'])][y-1] != '' and data_sheet[int(res['index'])][y-1] != None:
+                            # print 'updating row %s %s %s: %s=>%s' %(master_row,master_sheet.cell(row=master_sheet.min_row,column=int(x)).value,data_sheet[0][y-1].value,master_sheet.cell(row=master_row,column=int(x)).value, data_sheet[int(res['index'])][y-1].value)
+                            # master_sheet.cell(row=master_row,column=int(x)).value = data_sheet[int(res['index'])][int(y)-1].value
+                    master_sheet.cell(row=master_row, column=20).value = data_sheet[int(res['index'])][21].value
+                    master_sheet.cell(row=master_row, column=21).value = data_sheet[int(res['index'])][20].value
                     break
 
 
@@ -90,9 +102,9 @@ while master_row <= master_sheet.max_row:
 
 try:
     master_book._add_sheet(master_sheet)
-    master_book.save('updates2.xlsx')
+    master_book.save('updates3.xlsx')
 except:
-    master_book.save('updates2.xlsx')
+    master_book.save('updates3.xlsx')
 #
 # # sorted_data = list(x for x in [data_sheet.cell(row=y, column=z) for y in range(data_sheet.min_row, data_sheet.max_row) for z in range(data_sheet.min_column, data_sheet.max_column)])
 # # sorted_data = list x for x in [data_sheet.cell()]

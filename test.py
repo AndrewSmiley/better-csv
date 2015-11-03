@@ -18,7 +18,8 @@ for x,y in {'22':'22', '23':'35'}.iteritems():
 # import pandas as pd
 # print "new revision"
 # # Read the file
-# names =['Part Number','Nomenclature','Demanding Org','Engine Code','Engine Program','Supplier',"2015 (Oct-Dec)",'2016','2017','2018','2019','2020','2021','2022','2023','2024']
+# names =["Finish Machine Supplier","Supplier Code","Identify if current or newly awarded part","GE Ordered Part Number  ie; Finish Machine Part #/Kit # Assembly#","Engine Program,"If Kit/Assembly,  Finish Part # that goes into Kit",# of Parts per Kit,Raw Material Part Number,Raw Material Source,Plant, 2016 Raw Material Price on a per unit part basis , 2016 Total price paid to R/M Source ie; sleeve price ,Yield (sleeve to unit ratio),"R/M Classification IE; Closed Die Forging, Seamless Ring, Flash Welded Ring","Material Type; IN718, Titanium, Rene,",Dimensions of Part ordered from Forger or reference sketch #,"State any operations performed by forger ie; Heat Treat, Parting, Machining, etc.",,QPA,QPE,Billet Diameter,Weight ,Weight Type,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,,,,,,,,,,,,,]
+
 # data = pd.read_csv("data/forecast.csv", names=names)
 # # Output the number of rows
 # indexer = 0
@@ -37,9 +38,9 @@ book2 = load_workbook(filename='data/11-2-2015 leah.xlsx')
 # print "loaded workbook"
 
 data_sheet = book2.get_sheet_by_name(book2.get_sheet_names()[0])
-master_book = load_workbook(filename='updates.xlsx')
+master_book = load_workbook(filename='data/Copy of Combined File (2).xlsx')
 master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
-# # data_sheet = BetterCSV().get_lists(BetterCSV().get_lines(open("data/forecast.csv").read()))
+# data_sheet = BetterCSV().get_lists(BetterCSV().get_lines(open("data/forecast.csv").read()))
 # print "about to get data"
 # # sorted_data = list(x for x in
 # #                    [[data_sheet.cell(row=y, column=z) for z in range(data_sheet.min_column, data_sheet.max_column)] for
@@ -49,6 +50,7 @@ master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
 # #     print x.value
 # for x in data:
 #     print x[0]
+better_csv=BetterCSV()
 print "finished loading the data"
 master_search_columns = [4]
 data_search_columns = [4]
@@ -56,12 +58,18 @@ master_row = master_sheet.min_row
 found_count = 0
 column_mappings={'20':22,'21':21}
 data_sheet = list(x for x in [[ data_sheet.cell(row=y, column=z) for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)])
+# data_sheet =better_csv.get_lists(better_csv.get_lines(open("data/sunnydrivesmeupawallwiththisshit.csv").read()))
+
 counter = 0
 print
 print data_sheet[0][21].value
-print master_sheet.cell(row=master_row, column=20).value
+print master_sheet.cell(row=master_row, column=30).value
+master_sheet.cell(row=master_row, column=30).value = "Weight"
 print data_sheet[0][20].value
-print master_sheet.cell(row=master_row, column=21).value
+print master_sheet.cell(row=master_row, column=31).value
+master_sheet.cell(row=master_row, column=31).value = "Billet Diameter"
+print data_sheet[0][3].value
+print master_sheet.cell(row=master_row, column=4).value
 
 # for d in data_sheet[0]:
 #     print "%s %s" % (counter,d.value)
@@ -86,8 +94,8 @@ while master_row <= master_sheet.max_row:
                         # if data_sheet[int(res['index'])][y-1] != '' and data_sheet[int(res['index'])][y-1] != None:
                             # print 'updating row %s %s %s: %s=>%s' %(master_row,master_sheet.cell(row=master_sheet.min_row,column=int(x)).value,data_sheet[0][y-1].value,master_sheet.cell(row=master_row,column=int(x)).value, data_sheet[int(res['index'])][y-1].value)
                             # master_sheet.cell(row=master_row,column=int(x)).value = data_sheet[int(res['index'])][int(y)-1].value
-                    master_sheet.cell(row=master_row, column=20).value = data_sheet[int(res['index'])][21].value
-                    master_sheet.cell(row=master_row, column=21).value = data_sheet[int(res['index'])][20].value
+                    master_sheet.cell(row=master_row, column=30).value = data_sheet[int(res['index'])][21].value
+                    master_sheet.cell(row=master_row, column=31).value = data_sheet[int(res['index'])][20].value
                     break
 
 
@@ -102,9 +110,9 @@ while master_row <= master_sheet.max_row:
 
 try:
     master_book._add_sheet(master_sheet)
-    master_book.save('updates3.xlsx')
+    master_book.save('updates4.xlsx')
 except:
-    master_book.save('updates3.xlsx')
+    master_book.save('updates4.xlsx')
 #
 # # sorted_data = list(x for x in [data_sheet.cell(row=y, column=z) for y in range(data_sheet.min_row, data_sheet.max_row) for z in range(data_sheet.min_column, data_sheet.max_column)])
 # # sorted_data = list x for x in [data_sheet.cell()]

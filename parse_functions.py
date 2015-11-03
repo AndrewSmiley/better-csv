@@ -40,17 +40,17 @@ def excel_binary_search(search_term, array,search_key, exact_matches=False):
         if  str(array[middle_pos][search_key].value) < search_term :
             if not exact_matches:
                 if BetterCSV().search([array[middle_pos][search_key].value],[search_term]):
-                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    # print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
                     return {'result':True, 'index': middle_pos}
             lower_bound = middle_pos + 1
         elif str(array[middle_pos][search_key].value) > search_term:
             if not exact_matches:
                 if BetterCSV().search([search_term], [array[middle_pos][search_key].value]):
-                    print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+                    # print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
                     return {'result':True, 'index': middle_pos}
             upper_bound = middle_pos - 1
         else:
-            print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
+            # print "match found: %s = %s" % (array[middle_pos][search_key].value, search_term)
             return {'result':True, 'index': middle_pos}
 
     return {'result':False,'index':middle_pos}

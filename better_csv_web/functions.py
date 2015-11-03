@@ -123,9 +123,11 @@ def execute(request):
                     continue
             try:
                 master_copy._add_sheet(master_sheet)
-                master_copy.save(master)
+                master_copy.save("results/"+master)
+
             except:
-                master_copy.save(master)
+                print "saving file"
+                master_copy.save("results/"+master)
 
         else:
             continue
@@ -189,7 +191,7 @@ def iterate_master_excel_data_csv(master_copy,data_copy, master_search_columns, 
                 if found:
                     found_count = found_count +1
                     master_copy_row = master_copy_row + 1
-                    for x,y in column_mapping:
+                    for x,y in column_mapping.iteritems():
                         master_copy.cell(row=master_copy_row, column=int(x)).value=data_copy[int(results['index'])][int(y)-1]
                     break
             if found:
@@ -215,7 +217,7 @@ def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, 
                 found = results['result']
                 if found:
                     found_count = found_count+1
-                    for x,y in column_mapping:
+                    for x,y in column_mapping.iteritems():
                         master_line[int(x)-1] = data_copy.cell(row=results['index'], column=int(y)).value
 
                     break
@@ -242,7 +244,8 @@ def iterate_excel(master_copy,data_copy, master_search_columns, data_search_colu
     :param filname:
     :return:
     """
-    print type(column_mapping)
+    for x,y in column_mapping.iteritems():
+        print "%s, %s" %(x,y)
     master_copy_row = master_copy.min_row
     found_count=0
 
@@ -263,10 +266,11 @@ def iterate_excel(master_copy,data_copy, master_search_columns, data_search_colu
                     if found:
                         # print "Match Found"
                         found_count = found_count+1
-                        for x,y in column_mapping:
-                            master_copy_row = master_copy_row + 1
+                        for x,y in column_mapping.iteritems():
+                            print "Updating row %s %s:%s : %s=>%s" %(master_copy_row,x,y,master_copy.cell(row=master_copy_row, column=int(x)).value,data_copy[int(result['index'])][int(y)-1].value)
                             master_copy.cell(row=master_copy_row, column=int(x)).value = data_copy[int(result['index'])][int(y)-1].value
-                            break
+                            master_copy_row = master_copy_row + 1
+                        break
             except Exception,e:
                 traceback.print_exc()
 

@@ -76,7 +76,7 @@ def execute(request):
                     data_wb = load_workbook(filename = 'data/%s'%(file))
                     data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
 
-                    result = iterate_master_csv_data_excel(master_copy,data_sheet,list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                    result = iterate_master_csv_data_excel(master_sheet,data_sheet,list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
                                                             list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
                                                             dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
                                                             source_file=File.objects.get(filename=file))), file, exact_matches)
@@ -107,8 +107,9 @@ def execute(request):
                     pass
                 #otherwise check for csv
                 elif ".csv" in file:
+
                     data_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+file).read()))
-                    result = iterate_master_excel_data_csv(master_copy,data_copy,
+                    result = iterate_master_excel_data_csv(master_sheet,data_copy,
                                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
                                                   list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
                                                    dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
@@ -182,21 +183,28 @@ def iterate_master_excel_data_csv(master_copy,data_copy, master_search_columns, 
     found_count=0
 
     while master_copy_row <= master_copy.max_row:
-        for m in master_search_columns:
-            found = False
-            for d in data_search_columns:
-                data_copy = sorted(data_copy, key=lambda x: x[d-1], reverse=False)
-                results = basic_binary_search_with_searchkey(str(master_copy.cell(row=master_copy_row, column=m)), data_copy,d-1, exact_matches)
-                found = results['result']
+        try:
+            for m in master_search_columns:
+                found = False
+                # print "Processing row %s in file %s" % (master_copy.cell(row=master_copy_row, column=m).value, filname)
+                for d in data_search_columns:
+                    print "Processing row %s in file %s %s" % (master_copy.cell(row=master_copy_row, column=m).value, filname,d)
+                    data_copy = sorted(data_copy, key=lambda x: x[d-1], reverse=False)
+                    results = basic_binary_search_with_searchkey(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy,d-1, exact_matches)
+                    found = results['result']
+                    if found:
+                        found_count = found_count +1
+                        master_copy_row = master_copy_row + 1
+                        for x,y in column_mapping.iteritems():
+                            if data_copy[int(results['index'])][int(y)-1] != '' and data_copy[int(results['index'])][int(y)-1] != None:
+                                master_copy.cell(row=master_copy_row, column=int(x)).value=data_copy[int(results['index'])][int(y)-1]
+                        break
                 if found:
-                    found_count = found_count +1
-                    master_copy_row = master_copy_row + 1
-                    for x,y in column_mapping.iteritems():
-                        master_copy.cell(row=master_copy_row, column=int(x)).value=data_copy[int(results['index'])][int(y)-1]
                     break
-            if found:
-                break
-        master_copy_row = master_copy_row + 1
+            master_copy_row = master_copy_row + 1
+        except:
+            traceback.print_exc()
+            master_copy_row = master_copy_row + 1
     return {"data": master_copy, "message":"%s count %s" % (filname, found_count)}
 
 def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):

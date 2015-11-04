@@ -38,7 +38,7 @@ book2 = load_workbook(filename='data/11-2-2015 leah.xlsx')
 # print "loaded workbook"
 
 data_sheet = book2.get_sheet_by_name(book2.get_sheet_names()[0])
-master_book = load_workbook(filename='data/Copy of Combined File (2).xlsx')
+master_book = load_workbook(filename='results/updates5.xlsx')
 master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
 # data_sheet = BetterCSV().get_lists(BetterCSV().get_lines(open("data/forecast.csv").read()))
 # print "about to get data"
@@ -70,10 +70,17 @@ print master_sheet.cell(row=master_row, column=31).value
 master_sheet.cell(row=master_row, column=31).value = "Billet Diameter"
 print data_sheet[0][3].value
 print master_sheet.cell(row=master_row, column=4).value
+empty_count = 0
+while master_row <= master_sheet.max_row:
+    if str(master_sheet.cell(row=master_row, column=30).value) == '':
+        empty_count = empty_count+1
+    master_row = master_row+1
 
+print empty_count
 # for d in data_sheet[0]:
 #     print "%s %s" % (counter,d.value)
-#     counter=counter+1
+#     counter=counter+1"""
+"""
 while master_row <= master_sheet.max_row:
 
     for m in master_search_columns:
@@ -83,7 +90,7 @@ while master_row <= master_sheet.max_row:
                 data_sheet= sorted(data_sheet, key=lambda x: x[d-1].value, reverse=False)
                 # res = basic_binary_search_with_searchkey(str(master_sheet.cell(row=master_row, column=m).value).encode('utf-8','ignore'), data, d, True)
                 # sorted_data = sorted(sorted_data, key=lambda x: x[d].value, reverse=False)
-                # print "processing part %s" % (master_sheet.cell(row=master_row, column=m ).value)
+                print "processing part %s" % (master_sheet.cell(row=master_row, column=m ).value)
                 res = excel_binary_search(str(master_sheet.cell(row=master_row, column=m).value), data_sheet, d-1, True)
                 if res['result'] == True:
                     # print "match found: %s == %s" % (master_sheet.cell(row=master_row, column=m).value, sorted_data[int(res['index'])][d].value)
@@ -94,8 +101,9 @@ while master_row <= master_sheet.max_row:
                         # if data_sheet[int(res['index'])][y-1] != '' and data_sheet[int(res['index'])][y-1] != None:
                             # print 'updating row %s %s %s: %s=>%s' %(master_row,master_sheet.cell(row=master_sheet.min_row,column=int(x)).value,data_sheet[0][y-1].value,master_sheet.cell(row=master_row,column=int(x)).value, data_sheet[int(res['index'])][y-1].value)
                             # master_sheet.cell(row=master_row,column=int(x)).value = data_sheet[int(res['index'])][int(y)-1].value
-                    master_sheet.cell(row=master_row, column=30).value = data_sheet[int(res['index'])][21].value
-                    master_sheet.cell(row=master_row, column=31).value = data_sheet[int(res['index'])][20].value
+                    if data_sheet[int(res['index'])][21].value != '' and data_sheet[int(res['index'])][21].value != None:
+                        master_sheet.cell(row=master_row, column=30).value = data_sheet[int(res['index'])][21].value
+                    # master_sheet.cell(row=master_row, column=31).value = data_sheet[int(res['index'])][20].value
                     break
 
 
@@ -110,14 +118,14 @@ while master_row <= master_sheet.max_row:
 
 try:
     master_book._add_sheet(master_sheet)
-    master_book.save('updates4.xlsx')
+    master_book.save('updates5.xlsx')
 except:
-    master_book.save('updates4.xlsx')
+    master_book.save('updates5.xlsx')
 #
 # # sorted_data = list(x for x in [data_sheet.cell(row=y, column=z) for y in range(data_sheet.min_row, data_sheet.max_row) for z in range(data_sheet.min_column, data_sheet.max_column)])
 # # sorted_data = list x for x in [data_sheet.cell()]
 print found_count
-
+"""
 
 # t1 = threading.Thread(target=t)
 # t1.start()

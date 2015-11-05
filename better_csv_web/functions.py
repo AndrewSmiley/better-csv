@@ -82,12 +82,16 @@ def execute(request):
                                                                 list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
                                                                 dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
                                                                 source_file=File.objects.get(filename=file))), file, exact_matches)
+                        master_copy = result['data']
+                        messages.append(result['message'])
                     except:
                         traceback.print_exc()
-                    master_copy = result['data']
-                    messages.append(result['message'])
 
-                write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
+                try:
+                    write_csv(str(BASE_DIR+MASTERS_DIR+master.split(".")[0]+"_"+str(time.strftime("%d%m%Y"))+".csv"), master_copy)
+                except:
+                    traceback.print_exc()
+                    pass
         elif ".xls" in master or ".xlsx" in master:
             master_copy = load_workbook(filename = "data/%s" %(master))
             master_sheet = master_copy.get_sheet_by_name(master_copy.get_sheet_names()[0])
@@ -194,7 +198,7 @@ def iterate_master_excel_data_csv(master_copy,data_copy, master_search_columns, 
                 for d in data_search_columns:
                     print "Processing row %s in file %s %s" % (master_copy.cell(row=master_copy_row, column=m).value, filname,d)
                     data_copy = sorted(data_copy, key=lambda x: x[d-1], reverse=False)
-                    results = basic_binary_search_with_searchkey(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy,d-1, exact_matches)
+                    results = basic_binary_search_with_searchkey_excel_csv(str(master_copy.cell(row=master_copy_row, column=m).value), data_copy,d-1, exact_matches)
                     found = results['result']
                     if found:
                         found_count = found_count +1
@@ -224,14 +228,15 @@ def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, 
         for m in master_search_columns:
             for d in data_search_columns:
                 print "Searching for matches with %s" % (master_line[m-1])
-                results = basic_binary_search_with_searchkey(master_line[m-1],
+                results = basic_binary_search_with_searchkey_csv_excel(master_line[m-1],
                                                              sorted(data_copy,key=lambda x:x[d-1].value,reverse=False),
                                                             d-1, exact_matches)
                 found = results['result']
                 if found:
                     found_count = found_count+1
                     for x,y in column_mapping.iteritems():
-                        master_line[int(x)-1] = data_copy.cell(row=results['index'], column=int(y)).value
+                        # master_line[int(x)-1] = data_copy.cell(row=results['index'], column=int(y)).value
+                        master_line[int(x)-1] = str(data_copy[int(results['index'])][int(y)-1].value)
 
                     break
             if found:

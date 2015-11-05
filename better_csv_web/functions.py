@@ -76,10 +76,14 @@ def execute(request):
                     data_wb = load_workbook(filename = 'data/%s'%(file))
                     data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
 
-                    result = iterate_master_csv_data_excel(master_sheet,data_sheet,list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
-                                                            list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
-                                                            dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file))), file, exact_matches)
+                    try:
+                        result = iterate_master_csv_data_excel(master_copy,list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)]),
+                                                                list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                                                list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                                                dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                                source_file=File.objects.get(filename=file))), file, exact_matches)
+                    except:
+                        traceback.print_exc()
                     master_copy = result['data']
                     messages.append(result['message'])
 
@@ -208,7 +212,7 @@ def iterate_master_excel_data_csv(master_copy,data_copy, master_search_columns, 
     return {"data": master_copy, "message":"%s count %s" % (filname, found_count)}
 
 def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
-    data_copy_row = data_copy.min_row
+    # data_copy_row = data_copy.min_row
     #
     # while data_copy_row <= data_copy.max_row:
     #     for m in master_search_columns:
@@ -219,8 +223,9 @@ def iterate_master_csv_data_excel(master_copy,data_copy, master_search_columns, 
         found = False
         for m in master_search_columns:
             for d in data_search_columns:
-                results = basic_binary_search_with_searchkey(master_line[m],
-                                                             sorted(list(x for x in [[data_copy.cell(row=y, column=z)  for z in range(data_copy.min_column, data_copy.max_column)] for y in range(data_copy.min_row, data_copy.max_row)]),key=lambda x:[d-1].value,reverse=False),
+                print "Searching for matches with %s" % (master_line[m-1])
+                results = basic_binary_search_with_searchkey(master_line[m-1],
+                                                             sorted(data_copy,key=lambda x:x[d-1].value,reverse=False),
                                                             d-1, exact_matches)
                 found = results['result']
                 if found:

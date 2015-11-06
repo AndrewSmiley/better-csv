@@ -8,6 +8,7 @@ from os.path import isfile, join
 from parse_functions import *
 import time
 from openpyxl import *
+import codecs
 from excel_functions import load_excel_with_pandas,write_to_excel,write_to_excel_redux
 DATA_DIR = "/data/"
 MASTERS_DIR = "/results/"
@@ -130,15 +131,27 @@ def execute(request):
                 #otherwise check for csv
                 elif ".csv" in file:
 
-                    data_copy = BetterCSV().get_lists(BetterCSV().get_lines(open(BASE_DIR+DATA_DIR+file).read()))
-                    result = iterate_master_excel_data_csv(master_sheet,data_copy,
-                                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
-                                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
-                                                   dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file))),
-                                                  file,exact_matches)
-                    master_sheet = result['data']
-                    messages.append(result['message'])
+                    data_copy = BetterCSV().get_lists(BetterCSV().get_lines(codecs.open(BASE_DIR+DATA_DIR+file,encoding='utf-8').read()))
+                    try:
+                        print "Beginning search in file %s" % (file)
+                        result = iterate(master_copy, data_copy,
+                                         list(int(x.column_id)-1 for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                         list(int(x.column_id)-1 for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                         dict((str(int(x.master_column_id)-1), str(int(x.source_column_id)-1)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                                source_file=File.objects.get(filename=file))),
+                                         file,
+                                         exact_matches)
+                        master_copy = result['data']
+                        messages.append(result['message'])
+                    except:
+                        traceback.print_exc()
+                    # result = iterate_master_excel_data_csv(master_sheet,data_copy,
+                    #                               list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                    #                               list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                    #                                dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                    #                                         source_file=File.objects.get(filename=file))),
+                    #                               file,exact_matches)
+
 
 
                 #otherwise we want to just move to the next file cause something is fucky
@@ -180,7 +193,10 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
             print "Searching for match of %s in %s" %(line[m], filname)
             for d in data_search_columns:
                 data_copy = sorted(data_copy, key=lambda x: x[d], reverse=False)
-                results = binary_search(line, data_copy,m, d,exact_matches)
+                try:
+                    results = binary_search(line, data_copy,m, d,exact_matches)
+                except UnicodeError:
+                    pass
                 found = results["result"]
                 if found:
                     line = update_row(line, data_copy[results["index"]], column_mapping)

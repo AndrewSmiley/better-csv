@@ -1,6 +1,8 @@
 __author__ = 'pridemai'
 import string
-
+import sys;
+reload(sys);
+sys.setdefaultencoding("ascii")
 def basic_binary_search_with_searchkey_csv_excel(search_term, array,search_key, exact_matches=False):
     lower_bound = 0
     upper_bound = len(array) - 1

@@ -55,7 +55,10 @@ def ajax_handler(request,action):
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x,x) for x in get_files_in_folder(("%s/%s/" % (BASE_DIR,request.GET['folder']))))))
 
     elif action == u'run_batch':
-        results = execute(request)
+        try:
+            results = execute(request)
+        except:
+            traceback.print_exc()
         messages = results['messages']
         messages.append("Total Time: "+str(results['runtime'])+" Seconds")
         return HttpResponse(''.join(list("<p>%s</p>" % (x) for x in messages)))

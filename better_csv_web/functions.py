@@ -8,6 +8,7 @@ from os.path import isfile, join
 from parse_functions import *
 import time
 from openpyxl import *
+from excel_functions import load_excel_with_pandas,write_to_excel,write_to_excel_redux
 DATA_DIR = "/data/"
 MASTERS_DIR = "/results/"
 
@@ -93,22 +94,35 @@ def execute(request):
                     traceback.print_exc()
                     pass
         elif ".xls" in master or ".xlsx" in master:
-            master_copy = load_workbook(filename = "data/%s" %(master))
-            master_sheet = master_copy.get_sheet_by_name(master_copy.get_sheet_names()[0])
+            master_copy = load_excel_with_pandas('data/%s'%(master))
+            # master_copy = load_workbook(filename = "data/%s" %(master))
+            # master_sheet = master_copy.get_sheet_by_name(master_copy.get_sheet_names()[0])
             #iterate over the source files
             for file in request.POST.getlist('source_files[]'):
                 #check if it's excel or not
                 if ".xls" in file or ".xlsx" in file:
-                    data_wb = load_workbook(filename = 'data/%s'%(file))
-                    data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
-                    dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file)))
-                    result = iterate_excel(master_sheet,list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)]),
-                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
-                                  list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
-                                  dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
-                                                            source_file=File.objects.get(filename=file))), file, exact_matches)
-                    master_sheet = result['data']
+                    data_file = load_excel_with_pandas('data/%s'%(file))
+                    # data_wb = load_workbook(filename = 'data/%s'%(file))
+                    # data_sheet = data_wb.get_sheet_by_name(data_wb.get_sheet_names()[0])
+                    # dict((x.master_column_id, x.source_column_id) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                    #                                         source_file=File.objects.get(filename=file)))
+                    try:
+                        print "Beginning search in file %s" % (file)
+                        result = iterate(master_copy, data_file,
+                                         list(int(x.column_id)-1 for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                                         list(int(x.column_id)-1 for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                                         dict((str(int(x.master_column_id)-1), str(int(x.source_column_id)-1)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                                                                source_file=File.objects.get(filename=file))),
+                                         file,
+                                         exact_matches)
+                    except:
+                        traceback.print_exc()
+                    # result = iterate_excel(master_sheet,list(x for x in [[data_sheet.cell(row=y, column=z)  for z in range(data_sheet.min_column, data_sheet.max_column)] for y in range(data_sheet.min_row, data_sheet.max_row)]),
+                    #               list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=master))),
+                    #               list(x.column_id for x in SearchColumn.objects.filter(file=File.objects.get(filename=file))),
+                    #               dict((str(x.master_column_id), str(x.source_column_id)) for x in ColumnMapping.objects.filter(master_file=File.objects.get(filename=master),
+                    #                                         source_file=File.objects.get(filename=file))), file, exact_matches)
+                    master_copy = result['data']
 
                     messages.append(result['message'])
                     #ok so if it's an excel file use the iterate function that we had before
@@ -131,12 +145,16 @@ def execute(request):
                 else:
                     continue
             try:
-                master_copy._add_sheet(master_sheet)
-                master_copy.save("results/"+master)
-
+                write_to_excel(master_copy,master)
             except:
-                print "saving file"
-                master_copy.save("results/"+master)
+                traceback.print_exc()
+            # try:
+            #     master_copy._add_sheet(master_sheet)
+            #     master_copy.save("results/"+master)
+            #
+            # except:
+            #     print "saving file"
+            #     master_copy.save("results/"+master)
 
         else:
             continue
@@ -148,7 +166,7 @@ def execute(request):
 def update_row(master_row, data_row, column_mapping):
     for key,value in column_mapping.iteritems():
 
-        master_row[key]=data_row[value] if len(data_row[value]) > 0 and data_row[value] != "0" else master_row[key]
+        master_row[int(key)]=data_row[int(value)] if len(data_row[int(value)]) > 0 and data_row[int(value)] != "0" else master_row[int(key)]
     return master_row
 
 def iterate(master_copy,data_copy, master_search_columns, data_search_columns, column_mapping, filname="N/A",exact_matches=False):
@@ -159,6 +177,7 @@ def iterate(master_copy,data_copy, master_search_columns, data_search_columns, c
     for line in master_copy:
         for m in master_search_columns:
             found = False
+            print "Searching for match of %s in %s" %(line[m], filname)
             for d in data_search_columns:
                 data_copy = sorted(data_copy, key=lambda x: x[d], reverse=False)
                 results = binary_search(line, data_copy,m, d,exact_matches)

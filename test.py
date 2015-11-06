@@ -6,8 +6,17 @@ import sys;
 reload(sys);
 sys.setdefaultencoding("utf8")
 
-for x,y in {'22':'22', '23':'35'}.iteritems():
-    print "%s %s" % (x,y)
+w = Workbook()
+s = w.create_sheet()
+for x in range(1,100):
+    for y in range(1,100):
+        s.cell(row=x,column=y).value='hello'
+
+w.save("results/fuck.xlsx")
+
+
+# for x,y in {'22':'22', '23':'35'}.iteritems():
+#     print "%s %s" % (x,y)
 # master_book = load_workbook(filename='data/Copy of leah_22102015 colorcodedweightbd.xlsx')
 # master_sheet = master_book.get_sheet_by_name(master_book.get_sheet_names()[0])
 # new_sheet = master_sheet
@@ -21,24 +30,24 @@ for x,y in {'22':'22', '23':'35'}.iteritems():
 # names =["Finish Machine Supplier","Supplier Code","Identify if current or newly awarded part","GE Ordered Part Number  ie; Finish Machine Part #/Kit # Assembly#","Engine Program,"If Kit/Assembly,  Finish Part # that goes into Kit",# of Parts per Kit,Raw Material Part Number,Raw Material Source,Plant, 2016 Raw Material Price on a per unit part basis , 2016 Total price paid to R/M Source ie; sleeve price ,Yield (sleeve to unit ratio),"R/M Classification IE; Closed Die Forging, Seamless Ring, Flash Welded Ring","Material Type; IN718, Titanium, Rene,",Dimensions of Part ordered from Forger or reference sketch #,"State any operations performed by forger ie; Heat Treat, Parting, Machining, etc.",,QPA,QPE,Billet Diameter,Weight ,Weight Type,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,,,,,,,,,,,,,]
 
 # data = pd.read_csv("data/forecast.csv", names=names)
-import pandas as pd
-data = pd.read_excel('data/Sunny_Forecast_2015-2024.xlsx')
-print "loaded data"
-# Output the number of rows
-indexer = 0
-data_list = []
-names = data.keys()
-while indexer < len (data[names[0]]):
-    print "Wokring row %s" % (indexer)
-    _new = []
-    for n in names:
-        _new.append(str(data[n][indexer]).encode('utf-8','ignore'))
-
-    data_list.append(_new)
-    indexer = indexer+1
-data = data_list
-
-((print x) for x in data)
+# import pandas as pd
+# data = pd.read_excel('data/Sunny_Forecast_2015-2024.xlsx')
+# print "loaded data"
+# # Output the number of rows
+# indexer = 0
+# data_list = []
+# names = data.keys()
+# while indexer < len (data[names[0]]):
+#     print "Wokring row %s" % (indexer)
+#     _new = []
+#     for n in names:
+#         _new.append(str(data[n][indexer]).encode('utf-8','ignore'))
+#
+#     data_list.append(_new)
+#     indexer = indexer+1
+# data = data_list
+#
+# ((print x) for x in data)
 # print("Total rows: {0}".format(len(data)))
 
 print "hello"
